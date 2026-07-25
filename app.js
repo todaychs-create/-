@@ -241,16 +241,32 @@
     v.muted = true; v.playsInline = true; v.loop = true; v.src = URL.createObjectURL(f);
     v.onloadeddata = () => { bgVideo = v; renderFrame(0); };
   });
+  function setUrlStatus(m) { const s = $("urlStatus"); if (s) s.textContent = m; }
+  function loadVideoFromUrl(url) {
+    if (!url) return;
+    bgImage = null; setUrlStatus("불러오는 중...");
+    let triedPlain = false;
+    function attempt(useCors) {
+      const v = document.createElement("video");
+      v.muted = true; v.playsInline = true; v.loop = true;
+      if (useCors) v.crossOrigin = "anonymous";
+      v.addEventListener("loadeddata", () => {
+        bgVideo = v; renderFrame(0);
+        setUrlStatus(useCors
+          ? "✅ 영상 로드 완료 — 녹화 가능합니다."
+          : "⚠️ 영상은 표시됨. 단, 이 서버는 교차출처를 막아 녹화 시 오류가 날 수 있어요. 오류 나면 파일을 직접 업로드하세요.");
+      });
+      v.addEventListener("error", () => {
+        if (useCors && !triedPlain) { triedPlain = true; attempt(false); }
+        else setUrlStatus("❌ 영상을 불러오지 못했어요. 링크를 확인하거나 파일을 직접 업로드하세요.");
+      });
+      v.src = url; v.load();
+      v.play().then(() => v.pause()).catch(() => {});
+    }
+    attempt(true);
+  }
   const urlBtn = $("loadUrlBtn");
-  if (urlBtn) urlBtn.addEventListener("click", () => {
-    const url = $("videoUrl").value.trim(); if (!url) return;
-    bgImage = null;
-    const v = document.createElement("video");
-    v.muted = true; v.playsInline = true; v.loop = true; v.crossOrigin = "anonymous";
-    v.onloadeddata = () => { bgVideo = v; renderFrame(0); };
-    v.onerror = () => alert("영상을 불러오지 못했어요. 링크를 확인하거나, 파일을 직접 업로드해 주세요.");
-    v.src = url;
-  });
+  if (urlBtn) urlBtn.addEventListener("click", () => loadVideoFromUrl($("videoUrl").value.trim()));
   $("avatarInput").addEventListener("change", (e) => {
     const f = e.target.files && e.target.files[0]; if (!f) return;
     const img = new Image(); img.onload = () => { avatarImage = img; renderFrame(0); }; img.src = URL.createObjectURL(f);
