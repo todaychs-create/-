@@ -241,6 +241,16 @@
     v.muted = true; v.playsInline = true; v.loop = true; v.src = URL.createObjectURL(f);
     v.onloadeddata = () => { bgVideo = v; renderFrame(0); };
   });
+  const urlBtn = $("loadUrlBtn");
+  if (urlBtn) urlBtn.addEventListener("click", () => {
+    const url = $("videoUrl").value.trim(); if (!url) return;
+    bgImage = null;
+    const v = document.createElement("video");
+    v.muted = true; v.playsInline = true; v.loop = true; v.crossOrigin = "anonymous";
+    v.onloadeddata = () => { bgVideo = v; renderFrame(0); };
+    v.onerror = () => alert("영상을 불러오지 못했어요. 링크를 확인하거나, 파일을 직접 업로드해 주세요.");
+    v.src = url;
+  });
   $("avatarInput").addEventListener("change", (e) => {
     const f = e.target.files && e.target.files[0]; if (!f) return;
     const img = new Image(); img.onload = () => { avatarImage = img; renderFrame(0); }; img.src = URL.createObjectURL(f);
