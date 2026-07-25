@@ -1,84 +1,275 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>숏폼 생성기 · Shortform Generator</title>
-  <link rel="stylesheet" href="./style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>썰 슬라이드 숏폼 생성기</title>
+<style>
+  :root {
+    --bg:#f4f5f7; --panel:#fff; --border:#e2e4e9; --text:#1a1c22; --muted:#6b7280;
+    --accent:#f0b400; --accent-ink:#1a1c22; --info:#2f7fe0; --input-bg:#fbfbfc;
+  }
+  @media (prefers-color-scheme: dark){:root{
+    --bg:#0e0f13; --panel:#191b21; --border:#2a2e38; --text:#e8eaed; --muted:#9aa0aa;
+    --accent:#ffd400; --accent-ink:#14161b; --info:#4da3ff; --input-bg:#101319;}}
+  :root[data-theme="light"]{--bg:#f4f5f7;--panel:#fff;--border:#e2e4e9;--text:#1a1c22;--muted:#6b7280;--accent:#f0b400;--accent-ink:#1a1c22;--info:#2f7fe0;--input-bg:#fbfbfc;}
+  :root[data-theme="dark"]{--bg:#0e0f13;--panel:#191b21;--border:#2a2e38;--text:#e8eaed;--muted:#9aa0aa;--accent:#ffd400;--accent-ink:#14161b;--info:#4da3ff;--input-bg:#101319;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.5;}
+  .wrap{max-width:1120px;margin:0 auto;padding:26px 22px 56px;}
+  header h1{margin:0;font-size:22px;}
+  header p{margin:6px 0 0;color:var(--muted);font-size:14px;}
+  .layout{display:grid;grid-template-columns:400px 1fr;gap:24px;margin-top:20px;align-items:start;}
+  @media (max-width:860px){.layout{grid-template-columns:1fr;}}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;}
+  fieldset{border:1px solid var(--border);border-radius:10px;margin:0 0 14px;padding:12px 14px 4px;}
+  legend{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:0 6px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px;}
+  input[type="text"],input[type="file"],textarea{width:100%;padding:9px 11px;border-radius:9px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:14px;font-family:inherit;resize:vertical;}
+  input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .slide{border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;background:var(--input-bg);}
+  .slide .shead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .slide .shead b{font-size:13px;}
+  .slide .del{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:3px 9px;cursor:pointer;font-size:12px;}
+  .btns{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+  .btns button{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;}
+  .btns .primary{background:var(--accent);color:var(--accent-ink);}
+  .btns .secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
+  .btns .secondary:hover{border-color:var(--accent);}
+  .btns button:disabled{opacity:.5;cursor:default;}
+  .addbtn{width:100%;padding:10px;border:1px dashed var(--border);background:transparent;color:var(--text);border-radius:10px;cursor:pointer;font-family:inherit;font-size:14px;margin-bottom:12px;}
+  .preview{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #canvas{width:100%;max-width:360px;aspect-ratio:9/16;height:auto;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.28);background:#000;}
+  .nav{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:13px;}
+  .nav button{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;cursor:pointer;}
+  .hint{font-size:12px;color:var(--muted);margin:4px 2px 0;}
+</style>
 </head>
 <body>
-  <header class="app-header">
-    <h1>숏폼 생성기 <span class="sub">Shortform Generator</span></h1>
-    <p class="tagline">유튜브 쇼츠형 9:16 · 자막/댓글이 시간대별로 바뀌는 영상(webm)까지 출력.</p>
+
+<div class="wrap">
+  <header>
+    <h1>썰 슬라이드 숏폼 생성기</h1>
+    <p>상단 노란 제목 바 + 본문/일러스트 슬라이드 + 채널 바. 슬라이드를 순서대로 재생·녹화(webm)합니다.</p>
   </header>
-
-  <main class="layout">
-    <section class="panel" aria-label="편집">
+  <div class="layout">
+    <section class="panel">
       <fieldset>
-        <legend>배경 / 채널</legend>
-        <div class="field"><label for="imageInput">배경 이미지</label><input type="file" id="imageInput" accept="image/*" /></div>
-        <div class="field"><label for="videoInput">배경 영상 (선택 · 영상 출력용)</label><input type="file" id="videoInput" accept="video/*" /></div>
-        <div class="field"><label for="videoUrl">또는 영상 URL 붙여넣기</label><input type="text" id="videoUrl" value="https://d8j0ntlcm91z4.cloudfront.net/clipify/user_3GGxhx3yZPT98lExXt1zuaqZTRm/oQnwGnGYc78/a7e7d013-5f92-4ce3-96c6-d1ac332e8ecc/clips/clip_01.mp4" /><button type="button" id="loadUrlBtn" class="secondary" style="width:100%;margin-top:8px">URL에서 영상 불러오기</button><div id="urlStatus" style="font-size:12px;color:#9aa0aa;margin-top:6px"></div></div>
+        <legend>상단 제목 바</legend>
+        <div class="field"><label for="titleLine1">1줄 (흰색)</label><input type="text" id="titleLine1" value="아빠가 월600" /></div>
+        <div class="field"><label for="titleLine2">2줄 (노란 강조)</label><input type="text" id="titleLine2" value="벌어도 가난한 이유" /></div>
+      </fieldset>
+      <fieldset>
+        <legend>슬라이드 (이미지 나열)</legend>
+        <div id="slides"></div>
+        <button type="button" class="addbtn" id="addSlide">＋ 슬라이드 추가</button>
+      </fieldset>
+      <fieldset>
+        <legend>하단 채널 바</legend>
         <div class="field"><label for="avatarInput">채널 로고 (선택)</label><input type="file" id="avatarInput" accept="image/*" /></div>
-        <div class="field"><label for="handle">채널 ID</label><input type="text" id="handle" value="@todays_econ" /></div>
-        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="오늘의경제학" /></div>
-        <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="overlayHeader" style="width:auto" /> 헤더로 원본 상단 덮기 (예능바다 가리기)</label></div>
-        <div class="field"><label for="headerHeight">헤더 높이(px) — 덮기 조절용</label><input type="text" id="headerHeight" value="150" /></div>
+        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="@풀네임" /></div>
+        <div class="field"><label for="footerTitle">하단 제목</label><input type="text" id="footerTitle" value="아빠가 월 600 벌어도 가난한 이유" /></div>
+        <div class="field"><label for="playCaption">재생 캡션 (▶)</label><input type="text" id="playCaption" value="회사 경리한테 비타500 받은 사람" /></div>
       </fieldset>
-
-      <fieldset>
-        <legend>상단 제목 (상시)</legend>
-        <div class="field"><label for="titleLine1">1줄</label><input type="text" id="titleLine1" value="" placeholder="(비워두면 헤더가 작아집니다)" /></div>
-        <div class="field"><label for="titleLine2">2줄</label><input type="text" id="titleLine2" value="" /></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>상단 라벨 (타임드)</legend>
-        <div class="field"><label for="labelHi">빨강 강조</label><input type="text" id="labelHi" value="" /></div>
-        <div class="field"><label for="labelRest">나머지</label><input type="text" id="labelRest" value="" /></div>
-        <div class="row">
-          <div class="field"><label for="labelStart">시작(초)</label><input type="text" id="labelStart" value="0.5" /></div>
-          <div class="field"><label for="labelEnd">끝(초)</label><input type="text" id="labelEnd" value="8" /></div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>자막 큐 (시작,끝,문구 · 줄바꿈 구분)</legend>
-        <div class="field">
-          <textarea id="subtitleCues" rows="4" placeholder="클립에 이미 자막이 있으면 비워두세요. 예) 0,3,첫 자막"></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>댓글 카드 (타임드)</legend>
-        <div class="field"><label for="commentUser">유저</label><input type="text" id="commentUser" value="" /></div>
-        <div class="field"><label for="commentTime">시간</label><input type="text" id="commentTime" value="7개월 전" /></div>
-        <div class="field"><label for="commentText">댓글 내용</label><input type="text" id="commentText" value="" placeholder="(비워두면 댓글 카드 숨김)" /></div>
-        <div class="field"><label for="commentLikes">좋아요 수</label><input type="text" id="commentLikes" value="2만" /></div>
-        <div class="row">
-          <div class="field"><label for="commentStart">시작(초)</label><input type="text" id="commentStart" value="4" /></div>
-          <div class="field"><label for="commentEnd">끝(초)</label><input type="text" id="commentEnd" value="8" /></div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>출처 / 길이</legend>
-        <div class="field"><label for="source">출처 캡션 (상시)</label><input type="text" id="source" value="" placeholder="(선택) 출처 표기" /></div>
-        <div class="field"><label for="duration">영상 길이(초)</label><input type="text" id="duration" value="8" /></div>
-      </fieldset>
-
-      <div class="actions">
-        <button id="playBtn" type="button" class="secondary">▶ 재생 미리보기</button>
-        <button id="recordBtn" type="button" class="secondary">● 영상 녹화 (webm)</button>
-        <button id="downloadBtn" type="button">PNG 내보내기</button>
+      <div class="btns">
+        <button type="button" class="secondary" id="playBtn">▶ 재생 미리보기</button>
+        <button type="button" class="secondary" id="recordBtn">● 영상 녹화 (webm)</button>
+        <button type="button" class="primary" id="pngBtn">현재 슬라이드 PNG</button>
+      </div>
+      <p class="hint">녹화는 전체 슬라이드 길이만큼 실시간 진행됩니다.</p>
+    </section>
+    <section class="preview">
+      <canvas id="canvas" width="1080" height="1920"></canvas>
+      <div class="nav">
+        <button type="button" id="prev">◀</button>
+        <span id="navLabel">슬라이드 1</span>
+        <button type="button" id="next">▶</button>
       </div>
     </section>
+  </div>
+</div>
 
-    <section class="preview" aria-label="미리보기">
-      <canvas id="canvas" width="1080" height="1920"></canvas>
-    </section>
-  </main>
+<script>
+(function(){
+  "use strict";
+  var W=1080,H=1920,TOP=250,BOT=300,MIDBOT=H-BOT;
+  var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
+  var $=function(id){return document.getElementById(id);};
+  var slides=[], previewIdx=0, avatarImage=null, playing=false;
 
-  <script src="./app.js"></script>
+  function num(el,d){var v=parseFloat(el.value);return isNaN(v)?d:v;}
+  function wrap(text,maxW){
+    var out=[]; (text||"").split("\n").forEach(function(para){
+      var words=para.split(/(\s+)/),cur="";
+      for(var i=0;i<words.length;i++){var t=cur+words[i];
+        if(ctx.measureText(t).width>maxW&&cur.trim()!==""){out.push(cur.trimEnd());cur=words[i].replace(/^\s+/,"");}
+        else cur=t;}
+      out.push(cur.trimEnd());
+    }); return out;
+  }
+  function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function drawContain(img,bx,by,bw,bh){
+    var iw=img.width,ih=img.height; if(!iw||!ih)return;
+    var r=Math.min(bw/iw,bh/ih), w=iw*r, h=ih*r;
+    ctx.drawImage(img,bx+(bw-w)/2,by+(bh-h)/2,w,h);
+  }
+  // 노란 강조 텍스트(중앙)
+  function highlight(text,cy,fontPx){
+    if(!text)return;
+    ctx.font="800 "+fontPx+"px system-ui, sans-serif"; ctx.textAlign="center";
+    var tw=ctx.measureText(text).width, padX=22, padY=12;
+    var bw=tw+padX*2, bh=fontPx+padY*2, bx=(W-bw)/2, by=cy-bh/2;
+    ctx.fillStyle="#ffe000"; roundRect(bx,by,bw,bh,10); ctx.fill();
+    ctx.fillStyle="#111"; ctx.fillText(text,W/2,cy+fontPx*0.35);
+  }
+
+  function renderSlide(s){
+    // 배경 흰색
+    ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,W,H);
+
+    // 상단 검정 제목 바
+    ctx.fillStyle="#000000"; ctx.fillRect(0,0,W,TOP);
+    var t1=$("titleLine1").value.trim(), t2=$("titleLine2").value.trim();
+    ctx.textAlign="center"; ctx.font="800 78px system-ui, sans-serif";
+    ctx.fillStyle="#ffffff"; if(t1) ctx.fillText(t1,W/2,104);
+    if(t2){
+      ctx.font="800 78px system-ui, sans-serif";
+      var tw=ctx.measureText(t2).width, bw=tw+44, bx=(W-bw)/2;
+      ctx.fillStyle="#ffe000"; roundRect(bx,150,bw,88,10); ctx.fill();
+      ctx.fillStyle="#111"; ctx.fillText(t2,W/2,212);
+    }
+
+    // 중앙: 본문 + 이미지 + 캡션
+    var body = s? s.body().trim():"";
+    var caption = s? s.caption().trim():"";
+    var yBody=TOP+80;
+    if(body){
+      ctx.textAlign="left"; ctx.font="600 46px system-ui, sans-serif"; ctx.fillStyle="#2a2a2a";
+      var lines=wrap(body,W-140);
+      for(var i=0;i<lines.length;i++){ ctx.fillText(lines[i],70,yBody); yBody+=62; }
+    }
+    var capY=MIDBOT-70;
+    var imgTop=yBody+20, imgBot=capY-90;
+    if(s&&s.img&&imgBot-imgTop>120){ drawContain(s.img,70,imgTop,W-140,imgBot-imgTop); }
+    else if(!(s&&s.img)){
+      ctx.textAlign="center"; ctx.fillStyle="#c8ccd2"; ctx.font="500 34px system-ui, sans-serif";
+      ctx.fillText("이 슬라이드에 이미지를 추가하세요",W/2,(imgTop+imgBot)/2);
+    }
+    highlight(caption,capY,54);
+
+    // 하단 검정 채널 바
+    ctx.fillStyle="#000000"; ctx.fillRect(0,MIDBOT,W,BOT);
+    var avX=44,avY=MIDBOT+34,avD=64;
+    ctx.save();ctx.beginPath();ctx.arc(avX+avD/2,avY+avD/2,avD/2,0,Math.PI*2);ctx.closePath();ctx.clip();
+    if(avatarImage){drawContain(avatarImage,avX,avY,avD,avD);}
+    else{var ag=ctx.createLinearGradient(avX,avY,avX+avD,avY+avD);ag.addColorStop(0,"#6bd36b");ag.addColorStop(1,"#2f9e2f");ctx.fillStyle=ag;ctx.fillRect(avX,avY,avD,avD);}
+    ctx.restore();
+    ctx.textAlign="left"; ctx.fillStyle="#fff"; ctx.font="700 34px system-ui, sans-serif";
+    var cn=$("channelName").value.trim(); ctx.fillText(cn,avX+avD+18,MIDBOT+78);
+    var cnw=ctx.measureText(cn).width;
+    var bx=avX+avD+18+cnw+22, bw=110, bh=52, by=MIDBOT+40;
+    ctx.fillStyle="#3a86ff"; roundRect(bx,by,bw,bh,26); ctx.fill();
+    ctx.fillStyle="#fff"; ctx.font="700 28px system-ui, sans-serif"; ctx.textAlign="center";
+    ctx.fillText("가입",bx+bw/2,by+36);
+    ctx.textAlign="left"; ctx.fillStyle="#e6e6e6"; ctx.font="400 30px system-ui, sans-serif";
+    ctx.fillText($("footerTitle").value.trim(),44,MIDBOT+160);
+    ctx.strokeStyle="rgba(255,255,255,.15)"; ctx.beginPath();ctx.moveTo(44,MIDBOT+195);ctx.lineTo(W-44,MIDBOT+195);ctx.stroke();
+    ctx.fillStyle="#fff"; ctx.font="600 32px system-ui, sans-serif";
+    ctx.fillText("▶ "+$("playCaption").value.trim(),44,MIDBOT+250);
+  }
+
+  function renderPreview(){
+    if(!slides.length){renderSlide(null);$("navLabel").textContent="슬라이드 0";return;}
+    if(previewIdx>=slides.length)previewIdx=slides.length-1;
+    if(previewIdx<0)previewIdx=0;
+    renderSlide(slides[previewIdx]);
+    $("navLabel").textContent="슬라이드 "+(previewIdx+1)+" / "+slides.length;
+  }
+
+  // 슬라이드 DOM 생성
+  function addSlide(pre){
+    pre=pre||{};
+    var idx=slides.length;
+    var wrapEl=document.createElement("div"); wrapEl.className="slide";
+    wrapEl.innerHTML=
+      '<div class="shead"><b>슬라이드 '+(idx+1)+'</b><button type="button" class="del">삭제</button></div>'+
+      '<div class="field"><label>이미지</label><input type="file" accept="image/*" class="s-img"></div>'+
+      '<div class="field"><label>본문 (줄바꿈 가능)</label><textarea rows="2" class="s-body">'+(pre.body||"")+'</textarea></div>'+
+      '<div class="row"><div class="field"><label>강조 캡션</label><input type="text" class="s-cap" value="'+(pre.cap||"")+'"></div>'+
+      '<div class="field"><label>길이(초)</label><input type="text" class="s-dur" value="'+(pre.dur||"2.5")+'"></div></div>';
+    $("slides").appendChild(wrapEl);
+    var obj={
+      el:wrapEl, img:null,
+      body:function(){return wrapEl.querySelector(".s-body").value;},
+      caption:function(){return wrapEl.querySelector(".s-cap").value;},
+      dur:function(){return num(wrapEl.querySelector(".s-dur"),2.5);}
+    };
+    wrapEl.querySelector(".s-img").addEventListener("change",function(e){
+      var f=e.target.files&&e.target.files[0]; if(!f)return;
+      var im=new Image(); im.onload=function(){obj.img=im;renderPreview();}; im.src=URL.createObjectURL(f);
+    });
+    wrapEl.querySelector(".s-body").addEventListener("input",renderPreview);
+    wrapEl.querySelector(".s-cap").addEventListener("input",renderPreview);
+    wrapEl.querySelector(".del").addEventListener("click",function(){
+      var i=slides.indexOf(obj); if(i>=0)slides.splice(i,1);
+      wrapEl.remove(); renumber(); renderPreview();
+    });
+    slides.push(obj);
+    renumber();
+    previewIdx=slides.length-1;
+    renderPreview();
+  }
+  function renumber(){
+    var els=$("slides").querySelectorAll(".slide");
+    for(var i=0;i<els.length;i++){ els[i].querySelector("b").textContent="슬라이드 "+(i+1); }
+  }
+
+  // 재생 / 녹화
+  function run(record){
+    if(playing||!slides.length)return; playing=true;
+    var rb=$("recordBtn"),pb=$("playBtn"); rb.disabled=true; pb.disabled=true;
+    var recorder=null,chunks=[];
+    if(record){
+      var stream=canvas.captureStream(30);
+      var mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9")?"video/webm;codecs=vp9":"video/webm";
+      recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8000000});
+      recorder.ondataavailable=function(e){if(e.data.size)chunks.push(e.data);};
+      recorder.onstop=function(){var blob=new Blob(chunks,{type:"video/webm"});var a=document.createElement("a");a.download="ssul-short.webm";a.href=URL.createObjectURL(blob);a.click();};
+      recorder.start();
+    }
+    var idx=0, start=performance.now();
+    function loop(now){
+      if(idx>=slides.length){ if(recorder)recorder.stop(); playing=false; rb.disabled=false; pb.disabled=false; renderPreview(); return; }
+      renderSlide(slides[idx]);
+      if((now-start)/1000>=slides[idx].dur()){ idx++; start=now; }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // 상단/하단 입력 변경 → 미리보기
+  ["titleLine1","titleLine2","channelName","footerTitle","playCaption"].forEach(function(id){
+    $(id).addEventListener("input",renderPreview);
+  });
+  $("avatarInput").addEventListener("change",function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f)return;
+    var im=new Image(); im.onload=function(){avatarImage=im;renderPreview();}; im.src=URL.createObjectURL(f);
+  });
+  $("addSlide").addEventListener("click",function(){addSlide({});});
+  $("prev").addEventListener("click",function(){previewIdx--;renderPreview();});
+  $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
+  $("playBtn").addEventListener("click",function(){run(false);});
+  $("recordBtn").addEventListener("click",function(){run(true);});
+  $("pngBtn").addEventListener("click",function(){renderPreview();var a=document.createElement("a");a.download="slide.png";a.href=canvas.toDataURL("image/png");a.click();});
+
+  // 초기 예시 슬라이드
+  addSlide({body:"아빠 월급이 600인데 왜 우리집이\n가난한지 이제알았다",cap:"이제 알게 됐다는 글쓴이",dur:"2.5"});
+  addSlide({body:"매달 카드값만 500이 나간다고 한다",cap:"충격받은 글쓴이",dur:"2.5"});
+  previewIdx=0; renderPreview();
+})();
+</script>
+
 </body>
 </html>
