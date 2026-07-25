@@ -21,6 +21,7 @@
     commentText: $("commentText"), commentLikes: $("commentLikes"),
     commentStart: $("commentStart"), commentEnd: $("commentEnd"),
     source: $("source"), duration: $("duration"),
+    overlayHeader: $("overlayHeader"), headerHeight: $("headerHeight"),
   };
 
   // ---------- 유틸 ----------
@@ -82,24 +83,28 @@
     if (t1) titleLines.push(...wrapText(t1, W - 100));
     if (t2) titleLines.push(...wrapText(t2, W - 100));
     const tLineH = 96;
-    const headH = titleLines.length ? 150 + titleLines.length * tLineH + 40 : 150;
+    const baseH = num(F.headerHeight, 150);
+    const headH = titleLines.length ? baseH + titleLines.length * tLineH + 40 : baseH;
+    // 덮기 모드: 영상을 0부터 그려 헤더가 원본 상단 로고를 덮음 / 기본: 헤더 아래에 영상
+    const overlay = F.overlayHeader && F.overlayHeader.checked;
+    const mediaTop = overlay ? 0 : headH;
 
-    // 1) 미디어 (헤더 아래)
+    // 1) 미디어
     if (bgVideo && bgVideo.readyState >= 2) {
-      ctx.fillStyle = "#000"; ctx.fillRect(0, headH, W, H - headH);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, headH, W, H - headH); ctx.clip();
-      drawCover(bgVideo, 0, headH, W, H - headH); ctx.restore();
+      ctx.fillStyle = "#000"; ctx.fillRect(0, mediaTop, W, H - mediaTop);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, mediaTop, W, H - mediaTop); ctx.clip();
+      drawCover(bgVideo, 0, mediaTop, W, H - mediaTop); ctx.restore();
     } else if (bgImage) {
-      ctx.fillStyle = "#000"; ctx.fillRect(0, headH, W, H - headH);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, headH, W, H - headH); ctx.clip();
-      drawCover(bgImage, 0, headH, W, H - headH); ctx.restore();
+      ctx.fillStyle = "#000"; ctx.fillRect(0, mediaTop, W, H - mediaTop);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, mediaTop, W, H - mediaTop); ctx.clip();
+      drawCover(bgImage, 0, mediaTop, W, H - mediaTop); ctx.restore();
     } else {
-      const g = ctx.createLinearGradient(0, headH, 0, H);
+      const g = ctx.createLinearGradient(0, mediaTop, 0, H);
       g.addColorStop(0, "#5a5f6b"); g.addColorStop(1, "#23262e");
-      ctx.fillStyle = g; ctx.fillRect(0, headH, W, H - headH);
+      ctx.fillStyle = g; ctx.fillRect(0, mediaTop, W, H - mediaTop);
       ctx.fillStyle = "rgba(255,255,255,0.4)"; ctx.textAlign = "center";
       ctx.font = "600 40px system-ui, sans-serif";
-      ctx.fillText("배경 이미지/영상을 업로드하세요", W / 2, headH + (H - headH) / 2);
+      ctx.fillText("배경 이미지/영상을 업로드하세요", W / 2, mediaTop + (H - mediaTop) / 2);
     }
 
     // 2) 흰색 헤더
