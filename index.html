@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숏폼 생성기 · Shortform Generator</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>숏폼 생성기 <span class="sub">Shortform Generator</span></h1>
+    <p class="tagline">명언·감동 스타일 9:16 썸네일을 만들고 PNG로 내보내세요.</p>
+  </header>
+
+  <main class="layout">
+    <!-- 편집 패널 -->
+    <section class="panel" aria-label="편집">
+      <div class="field">
+        <label for="imageInput">배경 이미지</label>
+        <input type="file" id="imageInput" accept="image/*" />
+      </div>
+
+      <fieldset>
+        <legend>상단 제목</legend>
+        <div class="field">
+          <label for="titleLine1">1줄</label>
+          <input type="text" id="titleLine1" value="후배를 위해서" />
+        </div>
+        <div class="field">
+          <label for="titleLine2">2줄 (노란색 강조)</label>
+          <input type="text" id="titleLine2" value="대신 분노하는 추성훈" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>하단 자막</legend>
+        <div class="field">
+          <label for="caption">자막 문구</label>
+          <input type="text" id="caption" value="챔피언 타이틀 방어전 때문에" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>메타 정보</legend>
+        <div class="field">
+          <label for="location">위치 📍</label>
+          <input type="text" id="location" value="대한민국" />
+        </div>
+        <div class="field">
+          <label for="handle">채널 핸들</label>
+          <input type="text" id="handle" value="@짧은명언AWAKE" />
+        </div>
+        <div class="field">
+          <label for="footer">하단 캡션</label>
+          <input type="text" id="footer" value="역대급 분노하는 추성훈 #동기부여 #감동" />
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button id="downloadBtn" type="button">PNG 내보내기</button>
+      </div>
+    </section>
+
+    <!-- 미리보기 -->
+    <section class="preview" aria-label="미리보기">
+      <canvas id="canvas" width="1080" height="1920"></canvas>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
