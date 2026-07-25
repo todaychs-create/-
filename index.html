@@ -9,51 +9,66 @@
 <body>
   <header class="app-header">
     <h1>숏폼 생성기 <span class="sub">Shortform Generator</span></h1>
-    <p class="tagline">유튜브 쇼츠형 9:16 썸네일을 만들고 PNG로 내보내세요.</p>
+    <p class="tagline">유튜브 쇼츠형 9:16 · 자막/댓글이 시간대별로 바뀌는 영상(webm)까지 출력.</p>
   </header>
 
   <main class="layout">
     <section class="panel" aria-label="편집">
       <fieldset>
-        <legend>채널</legend>
+        <legend>배경 / 채널</legend>
         <div class="field"><label for="imageInput">배경 이미지</label><input type="file" id="imageInput" accept="image/*" /></div>
+        <div class="field"><label for="videoInput">배경 영상 (선택 · 영상 출력용)</label><input type="file" id="videoInput" accept="video/*" /></div>
         <div class="field"><label for="avatarInput">채널 로고 (선택)</label><input type="file" id="avatarInput" accept="image/*" /></div>
         <div class="field"><label for="handle">채널 ID</label><input type="text" id="handle" value="ent_bada" /></div>
         <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="예능바다" /></div>
       </fieldset>
 
       <fieldset>
-        <legend>상단 제목 (흰 배경, 검정)</legend>
+        <legend>상단 제목 (상시)</legend>
         <div class="field"><label for="titleLine1">1줄</label><input type="text" id="titleLine1" value="내 딸이 만약" /></div>
         <div class="field"><label for="titleLine2">2줄</label><input type="text" id="titleLine2" value="극J 성향이라면?" /></div>
       </fieldset>
 
       <fieldset>
-        <legend>상단 라벨</legend>
+        <legend>상단 라벨 (타임드)</legend>
         <div class="field"><label for="labelHi">빨강 강조</label><input type="text" id="labelHi" value="매운맛" /></div>
         <div class="field"><label for="labelRest">나머지</label><input type="text" id="labelRest" value="VS 행복맛" /></div>
+        <div class="row">
+          <div class="field"><label for="labelStart">시작(초)</label><input type="text" id="labelStart" value="0.5" /></div>
+          <div class="field"><label for="labelEnd">끝(초)</label><input type="text" id="labelEnd" value="8" /></div>
+        </div>
       </fieldset>
 
       <fieldset>
-        <legend>중앙 자막</legend>
-        <div class="field"><label for="subtitle">자막</label><input type="text" id="subtitle" value="저희 딸이" /></div>
+        <legend>자막 큐 (시작,끝,문구 · 줄바꿈 구분)</legend>
+        <div class="field">
+          <textarea id="subtitleCues" rows="4">0.5,3.5,저희 딸이
+3.5,7,이름부터 J래요</textarea>
+        </div>
       </fieldset>
 
       <fieldset>
-        <legend>댓글 카드</legend>
+        <legend>댓글 카드 (타임드)</legend>
         <div class="field"><label for="commentUser">유저</label><input type="text" id="commentUser" value="@user_name" /></div>
         <div class="field"><label for="commentTime">시간</label><input type="text" id="commentTime" value="7개월 전" /></div>
         <div class="field"><label for="commentText">댓글 내용</label><input type="text" id="commentText" value="이름부터가 제이인데..." /></div>
         <div class="field"><label for="commentLikes">좋아요 수</label><input type="text" id="commentLikes" value="2만" /></div>
+        <div class="row">
+          <div class="field"><label for="commentStart">시작(초)</label><input type="text" id="commentStart" value="4" /></div>
+          <div class="field"><label for="commentEnd">끝(초)</label><input type="text" id="commentEnd" value="8" /></div>
+        </div>
       </fieldset>
 
       <fieldset>
-        <legend>출처</legend>
-        <div class="field"><label for="source">출처 캡션</label><input type="text" id="source" value="출처- 자유부인 한가인" /></div>
+        <legend>출처 / 길이</legend>
+        <div class="field"><label for="source">출처 캡션 (상시)</label><input type="text" id="source" value="출처- 자유부인 한가인" /></div>
+        <div class="field"><label for="duration">영상 길이(초)</label><input type="text" id="duration" value="8" /></div>
       </fieldset>
 
       <div class="actions">
-        <button id="downloadBtn" type="button">PNG 내보내기 (1080×1920)</button>
+        <button id="playBtn" type="button" class="secondary">▶ 재생 미리보기</button>
+        <button id="recordBtn" type="button" class="secondary">● 영상 녹화 (webm)</button>
+        <button id="downloadBtn" type="button">PNG 내보내기</button>
       </div>
     </section>
 
