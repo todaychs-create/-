@@ -25,14 +25,14 @@
 
       <fieldset>
         <legend>상단 제목 (상시)</legend>
-        <div class="field"><label for="titleLine1">1줄</label><input type="text" id="titleLine1" value="내 딸이 만약" /></div>
-        <div class="field"><label for="titleLine2">2줄</label><input type="text" id="titleLine2" value="극J 성향이라면?" /></div>
+        <div class="field"><label for="titleLine1">1줄</label><input type="text" id="titleLine1" value="" placeholder="(비워두면 헤더가 작아집니다)" /></div>
+        <div class="field"><label for="titleLine2">2줄</label><input type="text" id="titleLine2" value="" /></div>
       </fieldset>
 
       <fieldset>
         <legend>상단 라벨 (타임드)</legend>
-        <div class="field"><label for="labelHi">빨강 강조</label><input type="text" id="labelHi" value="매운맛" /></div>
-        <div class="field"><label for="labelRest">나머지</label><input type="text" id="labelRest" value="VS 행복맛" /></div>
+        <div class="field"><label for="labelHi">빨강 강조</label><input type="text" id="labelHi" value="" /></div>
+        <div class="field"><label for="labelRest">나머지</label><input type="text" id="labelRest" value="" /></div>
         <div class="row">
           <div class="field"><label for="labelStart">시작(초)</label><input type="text" id="labelStart" value="0.5" /></div>
           <div class="field"><label for="labelEnd">끝(초)</label><input type="text" id="labelEnd" value="8" /></div>
@@ -42,16 +42,15 @@
       <fieldset>
         <legend>자막 큐 (시작,끝,문구 · 줄바꿈 구분)</legend>
         <div class="field">
-          <textarea id="subtitleCues" rows="4">0.5,3.5,저희 딸이
-3.5,7,이름부터 J래요</textarea>
+          <textarea id="subtitleCues" rows="4" placeholder="클립에 이미 자막이 있으면 비워두세요. 예) 0,3,첫 자막"></textarea>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>댓글 카드 (타임드)</legend>
-        <div class="field"><label for="commentUser">유저</label><input type="text" id="commentUser" value="@user_name" /></div>
+        <div class="field"><label for="commentUser">유저</label><input type="text" id="commentUser" value="" /></div>
         <div class="field"><label for="commentTime">시간</label><input type="text" id="commentTime" value="7개월 전" /></div>
-        <div class="field"><label for="commentText">댓글 내용</label><input type="text" id="commentText" value="이름부터가 제이인데..." /></div>
+        <div class="field"><label for="commentText">댓글 내용</label><input type="text" id="commentText" value="" placeholder="(비워두면 댓글 카드 숨김)" /></div>
         <div class="field"><label for="commentLikes">좋아요 수</label><input type="text" id="commentLikes" value="2만" /></div>
         <div class="row">
           <div class="field"><label for="commentStart">시작(초)</label><input type="text" id="commentStart" value="4" /></div>
@@ -61,7 +60,7 @@
 
       <fieldset>
         <legend>출처 / 길이</legend>
-        <div class="field"><label for="source">출처 캡션 (상시)</label><input type="text" id="source" value="출처- 자유부인 한가인" /></div>
+        <div class="field"><label for="source">출처 캡션 (상시)</label><input type="text" id="source" value="" placeholder="(선택) 출처 표기" /></div>
         <div class="field"><label for="duration">영상 길이(초)</label><input type="text" id="duration" value="8" /></div>
       </fieldset>
 

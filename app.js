@@ -75,26 +75,35 @@
     ctx.globalAlpha = 1;
     ctx.clearRect(0, 0, W, H);
 
-    // 1) 미디어
+    // 제목 라인 계산 → 헤더 높이 자동 결정 (제목 없으면 채널명만 담는 컴팩트 헤더)
+    const t1 = F.titleLine1.value.trim(), t2 = F.titleLine2.value.trim();
+    ctx.font = "800 82px system-ui, 'Apple SD Gothic Neo', sans-serif";
+    const titleLines = [];
+    if (t1) titleLines.push(...wrapText(t1, W - 100));
+    if (t2) titleLines.push(...wrapText(t2, W - 100));
+    const tLineH = 96;
+    const headH = titleLines.length ? 150 + titleLines.length * tLineH + 40 : 150;
+
+    // 1) 미디어 (헤더 아래)
     if (bgVideo && bgVideo.readyState >= 2) {
-      ctx.fillStyle = "#000"; ctx.fillRect(0, HEADER, W, H - HEADER);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, HEADER, W, H - HEADER); ctx.clip();
-      drawCover(bgVideo, 0, HEADER, W, H - HEADER); ctx.restore();
+      ctx.fillStyle = "#000"; ctx.fillRect(0, headH, W, H - headH);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, headH, W, H - headH); ctx.clip();
+      drawCover(bgVideo, 0, headH, W, H - headH); ctx.restore();
     } else if (bgImage) {
-      ctx.fillStyle = "#000"; ctx.fillRect(0, HEADER, W, H - HEADER);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, HEADER, W, H - HEADER); ctx.clip();
-      drawCover(bgImage, 0, HEADER, W, H - HEADER); ctx.restore();
+      ctx.fillStyle = "#000"; ctx.fillRect(0, headH, W, H - headH);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, headH, W, H - headH); ctx.clip();
+      drawCover(bgImage, 0, headH, W, H - headH); ctx.restore();
     } else {
-      const g = ctx.createLinearGradient(0, HEADER, 0, H);
+      const g = ctx.createLinearGradient(0, headH, 0, H);
       g.addColorStop(0, "#5a5f6b"); g.addColorStop(1, "#23262e");
-      ctx.fillStyle = g; ctx.fillRect(0, HEADER, W, H - HEADER);
+      ctx.fillStyle = g; ctx.fillRect(0, headH, W, H - headH);
       ctx.fillStyle = "rgba(255,255,255,0.4)"; ctx.textAlign = "center";
       ctx.font = "600 40px system-ui, sans-serif";
-      ctx.fillText("배경 이미지/영상을 업로드하세요", W / 2, HEADER + (H - HEADER) / 2);
+      ctx.fillText("배경 이미지/영상을 업로드하세요", W / 2, headH + (H - headH) / 2);
     }
 
-    // 2) 흰색 헤더 (상시)
-    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, HEADER);
+    // 2) 흰색 헤더
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, headH);
     const avX = 44, avY = 40, avD = 76;
     ctx.save(); ctx.beginPath(); ctx.arc(avX + avD / 2, avY + avD / 2, avD / 2, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
     if (avatarImage) { drawCover(avatarImage, avX, avY, avD, avD); }
@@ -106,14 +115,13 @@
     ctx.fillStyle = "#111"; ctx.font = "700 36px system-ui, sans-serif";
     ctx.fillText(F.channelName.value.trim(), avX + avD + 20, avY + 70);
 
-    // 제목 (상시)
-    const t1 = F.titleLine1.value.trim(), t2 = F.titleLine2.value.trim();
-    ctx.textAlign = "center"; ctx.font = "800 82px system-ui, 'Apple SD Gothic Neo', sans-serif";
-    const titleLines = [];
-    if (t1) titleLines.push(...wrapText(t1, W - 100));
-    if (t2) titleLines.push(...wrapText(t2, W - 100));
-    const tLineH = 96; let ty = 200 + (2 - Math.min(titleLines.length, 2)) * (tLineH / 2);
-    ctx.fillStyle = "#111"; for (const line of titleLines) { ctx.fillText(line, W / 2, ty); ty += tLineH; }
+    // 제목
+    if (titleLines.length) {
+      ctx.textAlign = "center"; ctx.font = "800 82px system-ui, 'Apple SD Gothic Neo', sans-serif";
+      ctx.fillStyle = "#111";
+      let ty = 150 + tLineH * 0.75;
+      for (const line of titleLines) { ctx.fillText(line, W / 2, ty); ty += tLineH; }
+    }
 
     // 3) 상단 라벨 (타임드)
     const la = alphaFor(num(F.labelStart, 0), num(F.labelEnd, 9999), t);
@@ -124,7 +132,7 @@
       const hiW = hi ? ctx.measureText(hi).width + padX * 2 : 0;
       const restW = rest ? ctx.measureText(" " + rest).width : 0;
       const totalW = hiW + (hi && rest ? gap : 0) + restW;
-      let lx = (W - totalW) / 2; const ly = HEADER + 90; ctx.textAlign = "left";
+      let lx = (W - totalW) / 2; const ly = headH + 90; ctx.textAlign = "left";
       if (hi) { ctx.fillStyle = "#e60023"; roundRect(lx, ly - 46, hiW, 62, 10); ctx.fill();
         ctx.fillStyle = "#fff"; ctx.fillText(hi, lx + padX, ly); lx += hiW + gap; }
       if (rest) { outlineText(rest, lx, ly, "#111", "#fff", 8); }
