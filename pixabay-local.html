@@ -110,7 +110,7 @@
 
       <fieldset>
         <legend>하단 채널 바</legend>
-        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="@오늘의경제학" /></div>
+        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="오늘의경제학" /></div>
       </fieldset>
 
       <fieldset>
@@ -140,7 +140,7 @@
 <script>
 (function(){
   "use strict";
-  var W=1080,H=1920,TOP=250,BOT=290,MIDBOT=H-BOT;
+  var W=1080,H=1920,TOP=360,BOT=300,MIDBOT=H-BOT;
   var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
   var $=function(id){return document.getElementById(id);};
   var slides=[], previewIdx=0, playing=false;
@@ -183,17 +183,17 @@
     ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,W,H);
     ctx.fillStyle="#000000"; ctx.fillRect(0,0,W,TOP);
     var t1=$("titleLine1").value.trim(), t2=$("titleLine2").value.trim();
-    ctx.textAlign="center"; ctx.font="800 78px system-ui, sans-serif";
-    ctx.fillStyle="#ffffff"; if(t1) ctx.fillText(t1,W/2,104);
+    ctx.textAlign="center"; ctx.font="800 80px system-ui, sans-serif";
+    ctx.fillStyle="#ffffff"; if(t1) ctx.fillText(t1,W/2,224);
     if(t2){ var tw=ctx.measureText(t2).width, bw=tw+44, bx=(W-bw)/2;
-      ctx.fillStyle="#ffe000"; roundRect(bx,150,bw,88,10); ctx.fill();
-      ctx.fillStyle="#111"; ctx.fillText(t2,W/2,212); }
+      ctx.fillStyle="#ffe000"; roundRect(bx,258,bw,92,12); ctx.fill();
+      ctx.fillStyle="#111"; ctx.fillText(t2,W/2,324); }
 
     var body=s?s.body().trim():"", caption=s?s.caption().trim():"";
     var yBody=TOP+80;
     if(body){ ctx.textAlign="left"; ctx.font="600 46px system-ui, sans-serif"; ctx.fillStyle="#2a2a2a";
       var lines=wrap(body,W-140); for(var i=0;i<lines.length;i++){ctx.fillText(lines[i],70,yBody);yBody+=62;} }
-    var imgTop=yBody+20, imgBot=MIDBOT-20;
+    var imgTop=body?yBody+20:TOP+20, imgBot=MIDBOT-20;
     if(s&&s.img&&imgBot-imgTop>120){ drawContain(s.img,70,imgTop,W-140,imgBot-imgTop); }
     else if(!(s&&s.img)){ ctx.textAlign="center"; ctx.fillStyle="#c8ccd2"; ctx.font="500 34px system-ui, sans-serif";
       ctx.fillText("이미지 자동 가져오기를 누르세요",W/2,(imgTop+imgBot)/2); }
@@ -201,15 +201,8 @@
     captionBar(caption, MIDBOT-30);
 
     ctx.fillStyle="#000000"; ctx.fillRect(0,MIDBOT,W,BOT);
-    var avX=44,avY=MIDBOT+34,avD=64;
-    var ag=ctx.createLinearGradient(avX,avY,avX+avD,avY+avD);ag.addColorStop(0,"#6bd36b");ag.addColorStop(1,"#2f9e2f");
-    ctx.save();ctx.beginPath();ctx.arc(avX+avD/2,avY+avD/2,avD/2,0,Math.PI*2);ctx.closePath();ctx.clip();
-    ctx.fillStyle=ag;ctx.fillRect(avX,avY,avD,avD);ctx.restore();
-    ctx.textAlign="left"; ctx.fillStyle="#fff"; ctx.font="700 34px system-ui, sans-serif";
-    var cn=$("channelName").value.trim(); ctx.fillText(cn,avX+avD+18,MIDBOT+78);
-    var cnw=ctx.measureText(cn).width, bx=avX+avD+18+cnw+22, bw=110, bh=52, by=MIDBOT+40;
-    ctx.fillStyle="#3a86ff"; roundRect(bx,by,bw,bh,26); ctx.fill();
-    ctx.fillStyle="#fff"; ctx.font="700 28px system-ui, sans-serif"; ctx.textAlign="center"; ctx.fillText("가입",bx+bw/2,by+36);
+    ctx.textAlign="left"; ctx.fillStyle="#ffffff"; ctx.font="700 44px system-ui, sans-serif";
+    ctx.fillText($("channelName").value.trim(), 44, MIDBOT+76);
   }
   function renderPreview(){
     if(!slides.length){renderSlide(null);$("navLabel").textContent="슬라이드 0";return;}
