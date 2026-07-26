@@ -93,6 +93,13 @@
         <div class="field"><label for="playCaption">재생 캡션 (▶)</label><input type="text" id="playCaption" value="회사 경리한테 비타500 받은 사람" /></div>
       </fieldset>
 
+      <fieldset>
+        <legend>음성 / 길이</legend>
+        <div class="field"><label for="audioInput">나레이션 음성 (mp3 · 선택)</label><input type="file" id="audioInput" accept="audio/*" /></div>
+        <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="syncAudio" checked style="width:auto" /> 오디오 길이에 맞춰 슬라이드 자동 분배</label></div>
+        <div id="audioInfo" class="hint">음성을 넣으면 슬라이드가 음성 길이에 맞춰 자동으로 나뉘고, 녹화 영상에 소리도 함께 들어갑니다.</div>
+      </fieldset>
+
       <div class="btns">
         <button type="button" class="secondary" id="playBtn">▶ 재생 미리보기</button>
         <button type="button" class="secondary" id="recordBtn">● 영상 녹화 (webm)</button>
@@ -117,6 +124,7 @@
   var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
   var $=function(id){return document.getElementById(id);};
   var slides=[], previewIdx=0, playing=false;
+  var audioEl=null, actx=null;
 
   // API 키 저장/복원
   try{ var saved=localStorage.getItem("pixKey"); if(saved)$("pixKey").value=saved; }catch(e){}
@@ -258,30 +266,68 @@
     if(!lines.length){status("대본이 비어있어요.");return;}
     $("slides").innerHTML=""; slides=[];
     lines.forEach(function(l){ addSlide({body:l,dur:"2.5"}); });
-    previewIdx=0; renderPreview(); status(lines.length+"개 슬라이드 생성 — 이제 '전체 이미지 자동 가져오기'를 누르세요.");
+    previewIdx=0; renderPreview(); updateAudioInfo(); status(lines.length+"개 슬라이드 생성 — 이제 '전체 이미지 자동 가져오기'를 누르세요.");
+  }
+
+  // 오디오
+  function fmt(s){s=Math.round(s);return Math.floor(s/60)+"분 "+(s%60)+"초";}
+  function updateAudioInfo(){
+    if(audioEl&&isFinite(audioEl.duration)){
+      var per=slides.length?audioEl.duration/slides.length:0;
+      $("audioInfo").textContent="음성 길이 "+fmt(audioEl.duration)+" · 슬라이드 "+slides.length+"개 → 컷당 약 "+per.toFixed(1)+"초 (자동 분배)";
+    }
+  }
+  $("audioInput").addEventListener("change",function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f)return;
+    audioEl=new Audio(); audioEl.src=URL.createObjectURL(f); audioEl._wired=false;
+    audioEl.addEventListener("loadedmetadata",updateAudioInfo);
+  });
+  // 오디오를 캔버스 녹화 스트림에 연결 (소리 포함 + 스피커 출력)
+  function wireAudio(){
+    if(!audioEl)return null;
+    if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==="suspended")actx.resume();
+    if(!audioEl._wired){
+      var src=actx.createMediaElementSource(audioEl);
+      audioEl._dest=actx.createMediaStreamDestination();
+      src.connect(audioEl._dest); src.connect(actx.destination);
+      audioEl._wired=true;
+    }
+    return audioEl._dest.stream.getAudioTracks()[0];
   }
 
   // 재생/녹화
   function run(record){
     if(playing||!slides.length)return; playing=true;
     var rb=$("recordBtn"),pb=$("playBtn"); rb.disabled=true; pb.disabled=true;
+    var useAudio = audioEl && isFinite(audioEl.duration) && audioEl.duration>0;
+    var sync = useAudio && $("syncAudio").checked;
+    var perSlide = sync ? audioEl.duration/slides.length : 0;
+
     var recorder=null,chunks=[];
     if(record){
       try{
-        var stream=canvas.captureStream(30);
-        var mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9")?"video/webm;codecs=vp9":"video/webm";
+        var vstream=canvas.captureStream(30);
+        var tracks=vstream.getVideoTracks();
+        if(useAudio){ var at=wireAudio(); if(at)tracks.push(at); }
+        var stream=new MediaStream(tracks);
+        var mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")?"video/webm;codecs=vp9,opus":"video/webm";
         recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8000000});
         recorder.ondataavailable=function(e){if(e.data.size)chunks.push(e.data);};
         recorder.onstop=function(){var blob=new Blob(chunks,{type:"video/webm"});var a=document.createElement("a");a.download="ssul-short.webm";a.href=URL.createObjectURL(blob);a.click();};
         recorder.start();
       }catch(err){status("녹화 시작 실패: "+err.message);}
-    }
+    } else if(useAudio){ wireAudio(); }
+
+    if(useAudio){ try{audioEl.currentTime=0; audioEl.play();}catch(e){} }
     var idx=0,start=performance.now();
+    function stop(){ if(recorder)try{recorder.stop();}catch(e){} if(useAudio)try{audioEl.pause();}catch(e){} playing=false;rb.disabled=false;pb.disabled=false;renderPreview(); }
     function loop(now){
-      if(idx>=slides.length){ if(recorder)try{recorder.stop();}catch(e){} playing=false;rb.disabled=false;pb.disabled=false;renderPreview();return; }
+      if(idx>=slides.length || (useAudio && audioEl.ended)){ stop(); return; }
       try{ renderSlide(slides[idx]); }
       catch(err){ status("녹화 중 오류(이미지 보안 문제일 수 있음): "+err.message); }
-      if((now-start)/1000>=slides[idx].dur()){idx++;start=now;}
+      var d = sync ? perSlide : slides[idx].dur();
+      if((now-start)/1000>=d){idx++;start=now;}
       requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
