@@ -110,9 +110,7 @@
 
       <fieldset>
         <legend>하단 채널 바</legend>
-        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="@풀네임" /></div>
-        <div class="field"><label for="footerTitle">하단 제목</label><input type="text" id="footerTitle" value="아빠가 월 600 벌어도 가난한 이유" /></div>
-        <div class="field"><label for="playCaption">재생 캡션 (▶)</label><input type="text" id="playCaption" value="회사 경리한테 비타500 받은 사람" /></div>
+        <div class="field"><label for="channelName">채널명</label><input type="text" id="channelName" value="@오늘의경제학" /></div>
       </fieldset>
 
       <fieldset>
@@ -124,8 +122,8 @@
 
       <div class="btns">
         <button type="button" class="secondary" id="playBtn">▶ 재생 미리보기</button>
-        <button type="button" class="secondary" id="recordBtn">● 영상 녹화 (webm)</button>
-        <button type="button" class="primary" id="pngBtn">현재 슬라이드 PNG</button>
+        <button type="button" class="primary" id="recordBtn">💾 영상 저장</button>
+        <button type="button" class="secondary" id="pngBtn">현재 슬라이드 이미지 저장 (PNG)</button>
       </div>
     </section>
     <section class="preview">
@@ -142,7 +140,7 @@
 <script>
 (function(){
   "use strict";
-  var W=1080,H=1920,TOP=250,BOT=300,MIDBOT=H-BOT;
+  var W=1080,H=1920,TOP=250,BOT=150,MIDBOT=H-BOT;
   var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
   var $=function(id){return document.getElementById(id);};
   var slides=[], previewIdx=0, playing=false;
@@ -212,10 +210,6 @@
     var cnw=ctx.measureText(cn).width, bx=avX+avD+18+cnw+22, bw=110, bh=52, by=MIDBOT+40;
     ctx.fillStyle="#3a86ff"; roundRect(bx,by,bw,bh,26); ctx.fill();
     ctx.fillStyle="#fff"; ctx.font="700 28px system-ui, sans-serif"; ctx.textAlign="center"; ctx.fillText("가입",bx+bw/2,by+36);
-    ctx.textAlign="left"; ctx.fillStyle="#e6e6e6"; ctx.font="400 30px system-ui, sans-serif";
-    ctx.fillText($("footerTitle").value.trim(),44,MIDBOT+160);
-    ctx.strokeStyle="rgba(255,255,255,.15)"; ctx.beginPath();ctx.moveTo(44,MIDBOT+195);ctx.lineTo(W-44,MIDBOT+195);ctx.stroke();
-    ctx.fillStyle="#fff"; ctx.font="600 32px system-ui, sans-serif"; ctx.fillText("▶ "+$("playCaption").value.trim(),44,MIDBOT+250);
   }
   function renderPreview(){
     if(!slides.length){renderSlide(null);$("navLabel").textContent="슬라이드 0";return;}
@@ -361,7 +355,7 @@
     requestAnimationFrame(loop);
   }
 
-  ["titleLine1","titleLine2","channelName","footerTitle","playCaption"].forEach(function(id){$(id).addEventListener("input",renderPreview);});
+  ["titleLine1","titleLine2","channelName"].forEach(function(id){$(id).addEventListener("input",renderPreview);});
   $("buildFromScript").addEventListener("click",buildFromScript);
   $("fetchAll").addEventListener("click",fetchAll);
   $("autoAll").addEventListener("click",function(){ buildFromScript(); setTimeout(fetchAll,200); });
