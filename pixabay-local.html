@@ -143,7 +143,7 @@
   var W=1080,H=1920,TOP=360,BOT=300,MIDBOT=H-BOT;
   var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
   var $=function(id){return document.getElementById(id);};
-  var slides=[], previewIdx=0, playing=false;
+  var slides=[], previewIdx=0, playing=false, exporting=false;
   var audioEl=null, actx=null;
 
   // API 키 저장/복원
@@ -195,8 +195,8 @@
       var lines=wrap(body,W-140); for(var i=0;i<lines.length;i++){ctx.fillText(lines[i],70,yBody);yBody+=62;} }
     var imgTop=body?yBody+20:TOP+20, imgBot=MIDBOT-20;
     if(s&&s.img&&imgBot-imgTop>120){ drawContain(s.img,70,imgTop,W-140,imgBot-imgTop); }
-    else if(!(s&&s.img)){ ctx.textAlign="center"; ctx.fillStyle="#c8ccd2"; ctx.font="500 34px system-ui, sans-serif";
-      ctx.fillText("이미지 자동 가져오기를 누르세요",W/2,(imgTop+imgBot)/2); }
+    else if(!(s&&s.img)&&!exporting){ ctx.textAlign="center"; ctx.fillStyle="#e3e6ea"; ctx.font="500 34px system-ui, sans-serif";
+      ctx.fillText("(이미지 없음 · 다운로드 가능)",W/2,(imgTop+imgBot)/2); }
     // 자막을 이미지 하단에 얹기 (검은 바탕 · 노란 글씨)
     captionBar(caption, MIDBOT-30);
 
@@ -313,7 +313,7 @@
 
   // 재생/녹화
   function run(record){
-    if(playing||!slides.length)return; playing=true;
+    if(playing||!slides.length)return; playing=true; exporting=true;
     var rb=$("recordBtn"),pb=$("playBtn"); rb.disabled=true; pb.disabled=true;
     var useAudio = audioEl && isFinite(audioEl.duration) && audioEl.duration>0;
     var sync = useAudio && $("syncAudio").checked;
@@ -336,7 +336,7 @@
 
     if(useAudio){ try{audioEl.currentTime=0; audioEl.play();}catch(e){} }
     var idx=0,start=performance.now();
-    function stop(){ if(recorder)try{recorder.stop();}catch(e){} if(useAudio)try{audioEl.pause();}catch(e){} playing=false;rb.disabled=false;pb.disabled=false;renderPreview(); }
+    function stop(){ if(recorder)try{recorder.stop();}catch(e){} if(useAudio)try{audioEl.pause();}catch(e){} playing=false;exporting=false;rb.disabled=false;pb.disabled=false;renderPreview(); }
     function loop(now){
       if(idx>=slides.length || (useAudio && audioEl.ended)){ stop(); return; }
       try{ renderSlide(slides[idx]); }
@@ -388,7 +388,12 @@
   $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
   $("playBtn").addEventListener("click",function(){run(false);});
   $("recordBtn").addEventListener("click",function(){run(true);});
-  $("pngBtn").addEventListener("click",function(){renderPreview();try{var a=document.createElement("a");a.download="slide.png";a.href=canvas.toDataURL("image/png");a.click();}catch(e){status("PNG 저장 실패(이미지 보안 문제): "+e.message);}});
+  $("pngBtn").addEventListener("click",function(){
+    exporting=true; renderPreview();
+    try{var a=document.createElement("a");a.download="slide.png";a.href=canvas.toDataURL("image/png");a.click();status("이미지 저장 완료 ✅");}
+    catch(e){status("PNG 저장 실패(이미지 보안 문제): "+e.message);}
+    exporting=false; renderPreview();
+  });
 
   buildFromScript(); calcN();
 })();
