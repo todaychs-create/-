@@ -59,9 +59,12 @@
       <fieldset>
         <legend>음성 &amp; 자동 자막</legend>
         <div class="field"><label for="audioInput">나레이션 음성 (mp3 등)</label><input type="file" id="audioInput" accept="audio/*" /></div>
-        <button type="button" class="fetchbtn" id="transcribeBtn">🎙️ 음성에서 자막 자동 생성 (AI)</button>
-        <p class="hint">말한 내용을 인식해 <b>빠른 1줄 자막 + 타이밍</b>을 자동 생성합니다. 처음 1회만 AI 모델(약 150MB) 다운로드. (인터넷·크롬 권장)</p>
-        <div class="field" style="margin-top:10px"><label for="subsBox">자막 (한 줄 = 자막 하나 · 오타는 여기서 수정)</label><textarea id="subsBox" rows="5" placeholder="음성에서 자동 생성됩니다"></textarea></div>
+        <button type="button" class="fetchbtn" id="transcribeBtn">🎙️ ① 음성에서 자막 자동 생성 (AI · 타이밍 추출)</button>
+        <p class="hint">말한 내용을 인식해 <b>타이밍</b>을 잡습니다. 처음 1회만 AI 모델(약 150MB) 다운로드. (인터넷·크롬 권장)</p>
+        <div class="field" style="margin-top:10px"><label for="scriptBox">② 정확한 대본 붙여넣기 (오타 없는 원본)</label><textarea id="scriptBox" rows="4" placeholder="여기에 정확한 대본 전체를 붙여넣으세요"></textarea></div>
+        <button type="button" class="fetchbtn" id="applyScript" style="background:transparent;border:1px solid var(--accent);color:var(--accent)">📝 ③ 대본으로 자막 맞추기 (음성 타이밍 유지)</button>
+        <p class="hint">Whisper의 타이밍은 그대로 두고, 글자만 내 대본으로 바꿔 오타를 없앱니다.</p>
+        <div class="field" style="margin-top:10px"><label for="subsBox">자막 결과 (한 줄 = 자막 하나 · 직접 수정 가능)</label><textarea id="subsBox" rows="5" placeholder="①→③ 하면 여기에 채워집니다"></textarea></div>
         <div id="subsInfo" class="hint"></div>
       </fieldset>
 
@@ -114,7 +117,7 @@
   var $=function(id){return document.getElementById(id);};
   var subs=[];         // [{start,end,text}]
   var imgSlots=[];     // [{el,img,query()}]
-  var audioEl=null, actx=null, audioFile=null;
+  var audioEl=null, actx=null, audioFile=null, rawChunks=[];
   var previewIdx=0, playing=false, exporting=false;
 
   try{var k=localStorage.getItem("pixKey"); if(k)$("pixKey").value=k;}catch(e){}
@@ -230,19 +233,45 @@
   function updateInfo(){ if(imgSlots.length){var sd=totalDur()/imgSlots.length;$("slotInfo").textContent="이미지 "+imgSlots.length+"칸 · 각 약 "+sd.toFixed(1)+"초 (총 "+Math.round(totalDur())+"초)";} }
   $("audioInput").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;audioFile=f;audioEl=new Audio();audioEl.src=URL.createObjectURL(f);audioEl._wired=false;audioEl.addEventListener("loadedmetadata",function(){updateInfo();renderPreview();});});
 
+  function splitPieces(text,max){
+    var words=text.split(" "),groups=[],cur="";
+    words.forEach(function(w){ if((cur+" "+w).trim().length>max&&cur){groups.push(cur.trim());cur=w;} else cur=(cur+" "+w).trim(); });
+    if(cur)groups.push(cur.trim());
+    return groups.length?groups:[text];
+  }
   function buildSubs(out){
     var raw=out.chunks||[], res=[], max=12;
     raw.forEach(function(c){
       var s=(c.timestamp&&c.timestamp[0])||0, e=(c.timestamp&&c.timestamp[1])||(s+1.2);
       var txt=(c.text||"").replace(/\s+/g," ").trim(); if(!txt)return;
-      if(txt.length<=max){res.push({start:s,end:e,text:txt});return;}
-      var words=txt.split(" "),groups=[],cur="";
-      words.forEach(function(w){ if((cur+" "+w).trim().length>max&&cur){groups.push(cur.trim());cur=w;} else cur=(cur+" "+w).trim(); });
-      if(cur)groups.push(cur.trim());
-      var d=(e-s)/groups.length;
+      var groups=splitPieces(txt,max), d=(e-s)/groups.length;
       groups.forEach(function(g,i){res.push({start:s+i*d,end:s+(i+1)*d,text:g});});
     });
     return res;
+  }
+  // 정확한 대본을 Whisper 타이밍에 맞춰 배치 (오타 제거, 타이밍 유지)
+  function applyScript(){
+    if(!rawChunks.length){status("먼저 ① 음성에서 자막 생성을 눌러 타이밍을 만드세요.");return;}
+    var correct=$("scriptBox").value.replace(/\s+/g," ").trim();
+    if(!correct){status("② 정확한 대본을 붙여넣으세요.");return;}
+    var words=correct.split(" "), totalW=words.length;
+    var R=rawChunks.reduce(function(a,c){return a+(((c.text||"").replace(/\s+/g,"").length)||1);},0);
+    var out=[], wi=0;
+    for(var i=0;i<rawChunks.length;i++){
+      var c=rawChunks[i];
+      var s=(c.timestamp&&c.timestamp[0])||0, e=(c.timestamp&&c.timestamp[1])||(s+1.2);
+      var frac=(((c.text||"").replace(/\s+/g,"").length)||1)/R;
+      var wc=(i===rawChunks.length-1)?(totalW-wi):Math.round(totalW*frac);
+      wc=Math.min(Math.max(0,wc),Math.max(0,totalW-wi));
+      var slice=words.slice(wi,wi+wc).join(" ").trim(); wi+=wc;
+      if(!slice)continue;
+      var pieces=splitPieces(slice,12), d=(e-s)/pieces.length;
+      pieces.forEach(function(g,k){out.push({start:s+k*d,end:s+(k+1)*d,text:g});});
+    }
+    if(wi<totalW&&out.length)out[out.length-1].text+=" "+words.slice(wi).join(" ");
+    if(!out.length){status("배치 실패 — 대본/음성을 확인하세요.");return;}
+    subs=out; subsToBox(); renderPreview();
+    status("✅ 대본으로 자막 교체 완료! (음성 타이밍 유지, 오타 없음)");
   }
   function subsToBox(){ $("subsBox").value=subs.map(function(x){return x.text;}).join("\n"); $("subsInfo").textContent="자막 "+subs.length+"개 · 총 "+fmt(totalDur()); }
   $("subsBox").addEventListener("input",function(){ var lines=$("subsBox").value.split("\n"); for(var i=0;i<subs.length&&i<lines.length;i++){subs[i].text=lines[i].trim();} renderPreview(); });
@@ -261,6 +290,7 @@
       var data=dec.getChannelData(0);
       status("자막 추출중... (음성 길이에 따라 걸립니다)");
       var out=await transcriber(data,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:"korean",task:"transcribe"});
+      rawChunks=out.chunks||[];
       subs=buildSubs(out);
       if(!subs.length){status("자막을 못 뽑았어요. 음성이 또렷한지 확인하세요.");btn.disabled=false;return;}
       subsToBox();
@@ -306,6 +336,7 @@
 
   ["titleLine1","titleLine2","channelName"].forEach(function(id){$(id).addEventListener("input",renderPreview);});
   $("transcribeBtn").addEventListener("click",transcribeAudio);
+  $("applyScript").addEventListener("click",applyScript);
   $("buildSlots").addEventListener("click",buildSlots);
   $("applyUrls").addEventListener("click",applyUrls);
   $("fetchAll").addEventListener("click",fetchAll);
