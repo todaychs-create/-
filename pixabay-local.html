@@ -69,8 +69,9 @@
 매달 카드값만 500이 나간다
 알고 보니 아빠가 주식으로 다 날렸다</textarea>
         </div>
-        <button type="button" class="addbtn" id="buildFromScript">대본으로 슬라이드 만들기</button>
-        <button type="button" class="fetchbtn" id="fetchAll">🔍 전체 이미지 자동 가져오기</button>
+        <button type="button" class="primary" id="autoAll" style="width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;font-size:15px;margin-bottom:10px">🚀 대본으로 자동 완성 (슬라이드 + 이미지)</button>
+        <button type="button" class="addbtn" id="buildFromScript">슬라이드만 만들기</button>
+        <button type="button" class="fetchbtn" id="fetchAll">🔍 전체 이미지 다시 가져오기</button>
         <div id="status"></div>
       </fieldset>
 
@@ -147,13 +148,16 @@
     var r=Math.min(bw/iw,bh/ih), w=iw*r, h=ih*r;
     ctx.drawImage(img,bx+(bw-w)/2,by+(bh-h)/2,w,h);
   }
-  function highlight(text,cy,fontPx){
+  // 자막: 검은 바탕 + 노란 텍스트, bottomY를 바닥 기준으로 위로 쌓음 (여러 줄 지원)
+  function captionBar(text,bottomY){
     if(!text)return;
-    ctx.font="800 "+fontPx+"px system-ui, sans-serif"; ctx.textAlign="center";
-    var tw=ctx.measureText(text).width, padX=22, padY=12;
-    var bw=tw+padX*2, bh=fontPx+padY*2, bx=(W-bw)/2, by=cy-bh/2;
-    ctx.fillStyle="#ffe000"; roundRect(bx,by,bw,bh,10); ctx.fill();
-    ctx.fillStyle="#111"; ctx.fillText(text,W/2,cy+fontPx*0.35);
+    ctx.font="800 52px system-ui, sans-serif"; ctx.textAlign="center";
+    var lines=wrap(text,W-160), lh=64, padX=26, padY=14, maxw=0;
+    lines.forEach(function(l){maxw=Math.max(maxw,ctx.measureText(l).width);});
+    var bw=maxw+padX*2, bh=lines.length*lh+padY*2, bx=(W-bw)/2, by=bottomY-bh;
+    ctx.fillStyle="rgba(0,0,0,0.85)"; roundRect(bx,by,bw,bh,12); ctx.fill();
+    ctx.fillStyle="#ffe000"; var ty=by+padY+lh*0.72;
+    lines.forEach(function(l){ctx.fillText(l,W/2,ty);ty+=lh;});
   }
 
   function renderSlide(s){
@@ -170,11 +174,12 @@
     var yBody=TOP+80;
     if(body){ ctx.textAlign="left"; ctx.font="600 46px system-ui, sans-serif"; ctx.fillStyle="#2a2a2a";
       var lines=wrap(body,W-140); for(var i=0;i<lines.length;i++){ctx.fillText(lines[i],70,yBody);yBody+=62;} }
-    var capY=MIDBOT-70, imgTop=yBody+20, imgBot=capY-90;
+    var imgTop=yBody+20, imgBot=MIDBOT-20;
     if(s&&s.img&&imgBot-imgTop>120){ drawContain(s.img,70,imgTop,W-140,imgBot-imgTop); }
     else if(!(s&&s.img)){ ctx.textAlign="center"; ctx.fillStyle="#c8ccd2"; ctx.font="500 34px system-ui, sans-serif";
       ctx.fillText("이미지 자동 가져오기를 누르세요",W/2,(imgTop+imgBot)/2); }
-    highlight(caption,capY,54);
+    // 자막을 이미지 하단에 얹기 (검은 바탕 · 노란 글씨)
+    captionBar(caption, MIDBOT-30);
 
     ctx.fillStyle="#000000"; ctx.fillRect(0,MIDBOT,W,BOT);
     var avX=44,avY=MIDBOT+34,avD=64;
@@ -205,7 +210,7 @@
       '<img class="thumb" />'+
       '<div class="field"><label>본문</label><textarea rows="2" class="s-body">'+(pre.body||"")+'</textarea></div>'+
       '<div class="field"><label>검색어 (비우면 본문으로 검색 · 영어가 더 잘 나와요)</label><input type="text" class="s-q" value="'+(pre.q||"")+'"></div>'+
-      '<div class="row"><div class="field"><label>강조 캡션</label><input type="text" class="s-cap" value="'+(pre.cap||"")+'"></div>'+
+      '<div class="row"><div class="field"><label>자막 (하단·검정/노랑)</label><input type="text" class="s-cap" value="'+(pre.cap||"")+'"></div>'+
       '<div class="field"><label>길이(초)</label><input type="text" class="s-dur" value="'+(pre.dur||"2.5")+'"></div></div>'+
       '<button type="button" class="sfetch">이 슬라이드 이미지 가져오기</button>';
     $("slides").appendChild(el);
@@ -228,7 +233,7 @@
   function pixabaySearch(q){
     var key=$("pixKey").value.trim();
     if(!key) return Promise.reject(new Error("NO_KEY"));
-    var url="https://pixabay.com/api/?key="+encodeURIComponent(key)+"&q="+encodeURIComponent(q)+"&image_type=photo&orientation=vertical&per_page=5&safesearch=true&lang=ko";
+    var url="https://pixabay.com/api/?key="+encodeURIComponent(key)+"&q="+encodeURIComponent(q)+"&image_type=photo&orientation=vertical&per_page=8&safesearch=true&order=popular&lang=ko";
     return fetch(url).then(function(r){ if(!r.ok)throw new Error("API_"+r.status); return r.json(); })
       .then(function(j){ if(!j.hits||!j.hits.length)return null; return (j.hits[0].largeImageURL||j.hits[0].webformatURL); });
   }
@@ -241,7 +246,8 @@
     });
   }
   function fetchForSlide(obj){
-    var q=obj.query()|| (obj.body().split("\n")[0].split(" ").slice(0,3).join(" "));
+    var base=obj.query()||obj.caption()||obj.body();
+    var q=obj.query()|| base.split("\n")[0].split(" ").slice(0,3).join(" ");
     if(!q){status("검색어가 없습니다.");return Promise.resolve();}
     status("'"+q+"' 검색 중...");
     return pixabaySearch(q).then(function(url){
@@ -265,7 +271,7 @@
     var lines=$("script").value.split("\n").map(function(s){return s.trim();}).filter(Boolean);
     if(!lines.length){status("대본이 비어있어요.");return;}
     $("slides").innerHTML=""; slides=[];
-    lines.forEach(function(l){ addSlide({body:l,dur:"2.5"}); });
+    lines.forEach(function(l){ addSlide({cap:l,dur:"2.5"}); });
     previewIdx=0; renderPreview(); updateAudioInfo(); status(lines.length+"개 슬라이드 생성 — 이제 '전체 이미지 자동 가져오기'를 누르세요.");
   }
 
@@ -336,6 +342,7 @@
   ["titleLine1","titleLine2","channelName","footerTitle","playCaption"].forEach(function(id){$(id).addEventListener("input",renderPreview);});
   $("buildFromScript").addEventListener("click",buildFromScript);
   $("fetchAll").addEventListener("click",fetchAll);
+  $("autoAll").addEventListener("click",function(){ buildFromScript(); setTimeout(fetchAll,200); });
   $("addSlide").addEventListener("click",function(){addSlide({});});
   $("prev").addEventListener("click",function(){previewIdx--;renderPreview();});
   $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
