@@ -116,8 +116,10 @@
       <fieldset>
         <legend>음성 / 길이</legend>
         <div class="field"><label for="audioInput">나레이션 음성 (mp3 · 선택)</label><input type="file" id="audioInput" accept="audio/*" /></div>
-        <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="syncAudio" checked style="width:auto" /> 오디오 길이에 맞춰 슬라이드 자동 분배</label></div>
-        <div id="audioInfo" class="hint">음성을 넣으면 슬라이드가 음성 길이에 맞춰 자동으로 나뉘고, 녹화 영상에 소리도 함께 들어갑니다.</div>
+        <button type="button" class="fetchbtn" id="transcribeBtn">🎙️ 음성에서 자막 자동 생성 (AI 음성인식)</button>
+        <p class="hint">음성을 넣고 누르면 말한 내용을 인식해 <b>자막 + 타이밍을 자동으로</b> 만듭니다. 처음 1회만 AI 모델(약 150MB)을 받느라 시간이 걸려요. (인터넷 필요 · 브라우저는 크롬 권장 · 이후엔 오프라인)</p>
+        <div class="field" style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="syncAudio" checked style="width:auto" /> 오디오 길이에 맞춰 슬라이드 자동 분배</label></div>
+        <div id="audioInfo" class="hint">음성을 넣으면 슬라이드가 음성 길이에 맞춰 자동으로 나뉘고, 저장 영상에 소리도 함께 들어갑니다.</div>
       </fieldset>
 
       <div class="btns">
@@ -144,7 +146,7 @@
   var canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d");
   var $=function(id){return document.getElementById(id);};
   var slides=[], previewIdx=0, playing=false, exporting=false;
-  var audioEl=null, actx=null;
+  var audioEl=null, actx=null, audioFile=null;
 
   // API 키 저장/복원
   try{ var saved=localStorage.getItem("pixKey"); if(saved)$("pixKey").value=saved; }catch(e){}
@@ -294,9 +296,44 @@
   }
   $("audioInput").addEventListener("change",function(e){
     var f=e.target.files&&e.target.files[0]; if(!f)return;
+    audioFile=f;
     audioEl=new Audio(); audioEl.src=URL.createObjectURL(f); audioEl._wired=false;
     audioEl.addEventListener("loadedmetadata",updateAudioInfo);
   });
+
+  // AI 음성인식(Whisper)으로 자막+타이밍 자동 생성 — 브라우저 안에서 실행(무료)
+  async function transcribeAudio(){
+    if(!audioFile){status("먼저 음성 파일을 넣으세요.");return;}
+    var btn=$("transcribeBtn"); btn.disabled=true;
+    try{
+      status("AI 자막 엔진 로딩중... (처음 1회는 모델 다운로드로 시간이 걸려요)");
+      var mod=await import("https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3");
+      var transcriber=await mod.pipeline("automatic-speech-recognition","Xenova/whisper-base",{
+        progress_callback:function(p){ if(p&&p.status==="progress"&&p.file){ status("모델 다운로드 "+(p.progress?Math.round(p.progress):0)+"% · "+p.file); } }
+      });
+      status("음성 디코딩중...");
+      var buf=await audioFile.arrayBuffer();
+      var ac=new (window.AudioContext||window.webkitAudioContext)({sampleRate:16000});
+      var dec=await ac.decodeAudioData(buf);
+      var data=dec.getChannelData(0);
+      status("자막 추출중... (음성 길이에 따라 걸립니다)");
+      var out=await transcriber(data,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:"korean",task:"transcribe"});
+      var chunks=out.chunks||[];
+      if(!chunks.length){ status("자막을 못 뽑았어요. 음성이 또렷한지 확인하세요."); btn.disabled=false; return; }
+      $("slides").innerHTML=""; slides=[];
+      chunks.forEach(function(c){
+        var st=(c.timestamp&&c.timestamp[0])||0, en=(c.timestamp&&c.timestamp[1])||(st+2);
+        var d=Math.max(0.6,en-st);
+        addSlide({cap:(c.text||"").trim(),dur:d.toFixed(1)});
+      });
+      $("syncAudio").checked=false; // 인식된 타임스탬프를 그대로 사용
+      previewIdx=0; renderPreview(); updateAudioInfo();
+      status("✅ 자막 "+chunks.length+"개 자동 생성 완료! 이제 이미지만 채우면 됩니다.");
+    }catch(err){
+      status("자막 생성 실패: "+err.message+" (인터넷 연결과 브라우저(크롬 권장)를 확인하세요)");
+    }
+    btn.disabled=false;
+  }
   // 오디오를 캔버스 녹화 스트림에 연결 (소리 포함 + 스피커 출력)
   function wireAudio(){
     if(!audioEl)return null;
@@ -383,6 +420,7 @@
   $("vidLen").addEventListener("input",calcN);
   $("perCut").addEventListener("input",calcN);
   $("buildN").addEventListener("click",buildN);
+  $("transcribeBtn").addEventListener("click",transcribeAudio);
   $("addSlide").addEventListener("click",function(){addSlide({});});
   $("prev").addEventListener("click",function(){previewIdx--;renderPreview();});
   $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
