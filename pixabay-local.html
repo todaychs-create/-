@@ -296,7 +296,11 @@
       subsToBox();
       if(!imgSlots.length)buildSlots(); else updateInfo();
       renderPreview();
-      status("✅ 자막 "+subs.length+"개 자동 생성! 이제 이미지 개수만 정하고 채우면 됩니다.");
+      if($("scriptBox").value.trim()){
+        applyScript(); // 대본이 이미 있으면 바로 오타 없는 자막으로 교체
+      } else {
+        status("✅ 타이밍 추출 완료! 이제 ②에 정확한 대본을 붙여넣고 ③을 누르면 오타가 사라집니다.");
+      }
     }catch(err){ status("자막 생성 실패: "+err.message+" (인터넷/크롬 확인)"); }
     btn.disabled=false;
   }
