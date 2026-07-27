@@ -87,6 +87,7 @@
         <div class="field"><label for="imgUrls">또는 나노바나나 이미지 URL — 한 줄에 하나</label><textarea id="imgUrls" rows="2" placeholder="Claude가 준 이미지 URL"></textarea></div>
         <button type="button" class="fetchbtn" id="applyUrls" style="background:transparent;border:1px solid var(--info);color:var(--info)">🖼️ URL 목록으로 채우기</button>
         <div class="field" style="margin-top:8px"><label for="pixKey">또는 픽사베이 API 키 (<a href="https://pixabay.com/api/docs/" target="_blank">발급</a>)</label><input type="password" id="pixKey" placeholder="픽사베이 검색용 키" /></div>
+        <button type="button" class="fetchbtn" id="autoQuery" style="background:transparent;border:1px solid var(--info);color:var(--info)">🌐 검색어 자동 채우기 (대본→영어)</button>
         <button type="button" class="fetchbtn" id="fetchAll" style="background:transparent;border:1px solid var(--info);color:var(--info)">🔍 픽사베이로 전체 채우기</button>
       </fieldset>
 
@@ -226,6 +227,22 @@
   function genAll(){
     if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
     var i=0;(function next(){ if(i>=imgSlots.length){status("AI 전체 생성 완료 ✅");return;} status("🎨 ("+(i+1)+"/"+imgSlots.length+") AI 생성중..."); genForSlot(imgSlots[i]).then(function(){i++;setTimeout(next,500);}); })();
+  }
+
+  // ---- 대본→영어 검색어 자동 (MyMemory 무료 번역) ----
+  function translateKoEn(text){
+    return fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(text)+"&langpair=ko|en")
+      .then(function(r){return r.json();}).then(function(j){return (j.responseData&&j.responseData.translatedText)||"";});
+  }
+  function autoFillQueries(){
+    if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
+    var i=0;(function next(){
+      if(i>=imgSlots.length){status("검색어 자동 채우기 완료 ✅");return;}
+      var base=imgSlots[i].prompt(); if(!base){i++;setTimeout(next,10);return;}
+      status("🌐 ("+(i+1)+"/"+imgSlots.length+") 대본→영어 번역중...");
+      translateKoEn(base).then(function(en){ if(en)imgSlots[i].el.querySelector(".s-q").value=en; i++; setTimeout(next,350); })
+        .catch(function(){ i++; setTimeout(next,350); });
+    })();
   }
 
   // ---- 픽사베이 ----
@@ -371,6 +388,7 @@
   $("applyUrls").addEventListener("click",applyUrls);
   $("fetchAll").addEventListener("click",fetchAll);
   $("genAll").addEventListener("click",genAll);
+  $("autoQuery").addEventListener("click",autoFillQueries);
   $("prev").addEventListener("click",function(){previewIdx--;renderPreview();});
   $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
   $("playBtn").addEventListener("click",function(){run(false);});
