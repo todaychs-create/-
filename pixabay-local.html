@@ -80,9 +80,13 @@
 
       <fieldset>
         <legend>이미지 채우기</legend>
-        <div class="field"><label for="imgUrls">AI 생성 이미지 URL — 한 줄에 하나 (순서대로)</label><textarea id="imgUrls" rows="3" placeholder="Claude가 준 나노바나나 이미지 URL"></textarea></div>
-        <button type="button" class="fetchbtn" id="applyUrls">🖼️ URL 목록으로 이미지 채우기</button>
-        <div class="field" style="margin-top:8px"><label for="pixKey">또는 픽사베이 API 키 (<a href="https://pixabay.com/api/docs/" target="_blank">발급</a>)</label><input type="password" id="pixKey" placeholder="픽사베이로 자동 검색하려면 키 입력" /></div>
+        <div class="field"><label for="aiStyle">AI 화풍(스타일)</label><input type="text" id="aiStyle" value="clean minimal flat illustration, muted calm colors, soft lighting, no text" /></div>
+        <button type="button" class="fetchbtn" id="genAll" style="background:var(--accent);color:var(--accent-ink)">🎨 프로그램에서 AI 이미지 전체 생성 (무료)</button>
+        <p class="hint">자막을 바탕으로 각 칸 프롬프트가 자동으로 채워져요. 칸별로 프롬프트를 고치고 개별 생성도 가능. (Pollinations · 무료 · 키 불필요)</p>
+        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0" />
+        <div class="field"><label for="imgUrls">또는 나노바나나 이미지 URL — 한 줄에 하나</label><textarea id="imgUrls" rows="2" placeholder="Claude가 준 이미지 URL"></textarea></div>
+        <button type="button" class="fetchbtn" id="applyUrls" style="background:transparent;border:1px solid var(--info);color:var(--info)">🖼️ URL 목록으로 채우기</button>
+        <div class="field" style="margin-top:8px"><label for="pixKey">또는 픽사베이 API 키 (<a href="https://pixabay.com/api/docs/" target="_blank">발급</a>)</label><input type="password" id="pixKey" placeholder="픽사베이 검색용 키" /></div>
         <button type="button" class="fetchbtn" id="fetchAll" style="background:transparent;border:1px solid var(--info);color:var(--info)">🔍 픽사베이로 전체 채우기</button>
       </fieldset>
 
@@ -182,6 +186,8 @@
     $("slots").innerHTML=""; imgSlots=[];
     for(var i=0;i<N;i++){ addSlot(old[i]||null); }
     var sd=(totalDur()/N);
+    // 자막이 있으면 각 칸 시간대의 자막으로 프롬프트 자동 채움
+    if(subs.length){ imgSlots.forEach(function(s,i){ var txt=subsInRange(i*sd,(i+1)*sd); if(txt)s.el.querySelector(".s-p").value=txt; }); }
     $("slotInfo").textContent="이미지 "+N+"칸 · 각 약 "+sd.toFixed(1)+"초씩 (총 "+Math.round(totalDur())+"초)";
     previewIdx=0; renderPreview();
   }
@@ -190,16 +196,36 @@
     var el=document.createElement("div"); el.className="slot";
     el.innerHTML='<div class="shead"><b>이미지 '+(idx+1)+'</b></div>'+
       '<img class="thumb" />'+
+      '<div class="field"><input type="text" class="s-p" placeholder="AI 프롬프트(장면 설명)"></div>'+
+      '<button type="button" class="aibtn" style="background:var(--accent);color:var(--accent-ink);border:none;border-radius:7px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:6px">🎨 이 칸 AI 생성</button>'+
       '<div class="field"><input type="file" accept="image/*" class="s-img"></div>'+
-      '<div class="field"><input type="text" class="s-q" placeholder="검색어(픽사베이용·영어 권장)"></div>'+
+      '<div class="field"><input type="text" class="s-q" placeholder="픽사베이 검색어(영어 권장)"></div>'+
       '<button type="button" class="sbtn">이 칸만 픽사베이 검색</button>';
     $("slots").appendChild(el);
-    var obj={el:el,img:existingImg||null,query:function(){return el.querySelector(".s-q").value.trim();},
+    var obj={el:el,img:existingImg||null,query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},
       setImg:function(im){obj.img=im;var th=el.querySelector(".thumb");th.src=im.src;th.style.display="block";renderPreview();}};
     if(existingImg){var th=el.querySelector(".thumb");th.src=existingImg.src;th.style.display="block";}
     el.querySelector(".s-img").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var im=new Image();im.onload=function(){obj.setImg(im);};im.src=URL.createObjectURL(f);});
     el.querySelector(".sbtn").addEventListener("click",function(){fetchForSlot(obj);});
+    el.querySelector(".aibtn").addEventListener("click",function(){genForSlot(obj);});
     imgSlots.push(obj);
+  }
+
+  function subsInRange(a,b){ return subs.filter(function(s){return s.start<b&&s.end>a;}).map(function(s){return s.text;}).join(" ").trim(); }
+
+  // ---- 프로그램 내 AI 생성 (Pollinations · 무료 · 키 불필요) ----
+  function genForSlot(obj){
+    var pr=obj.prompt(); if(!pr){status("이 칸의 프롬프트(장면 설명)를 입력하세요.");return Promise.resolve();}
+    var style=$("aiStyle").value.trim();
+    var full=(pr+(style?", "+style:"")).trim();
+    var seed=Math.floor(Math.random()*100000);
+    var url="https://image.pollinations.ai/prompt/"+encodeURIComponent(full)+"?width=768&height=1344&nologo=true&seed="+seed;
+    status("AI 이미지 생성중... (몇 초 걸려요)");
+    return loadImage(url).then(function(im){obj.setImg(im);status("생성 완료");}).catch(function(e){status("생성 실패: "+e.message);});
+  }
+  function genAll(){
+    if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
+    var i=0;(function next(){ if(i>=imgSlots.length){status("AI 전체 생성 완료 ✅");return;} status("🎨 ("+(i+1)+"/"+imgSlots.length+") AI 생성중..."); genForSlot(imgSlots[i]).then(function(){i++;setTimeout(next,500);}); })();
   }
 
   // ---- 픽사베이 ----
@@ -344,6 +370,7 @@
   $("buildSlots").addEventListener("click",buildSlots);
   $("applyUrls").addEventListener("click",applyUrls);
   $("fetchAll").addEventListener("click",fetchAll);
+  $("genAll").addEventListener("click",genAll);
   $("prev").addEventListener("click",function(){previewIdx--;renderPreview();});
   $("next").addEventListener("click",function(){previewIdx++;renderPreview();});
   $("playBtn").addEventListener("click",function(){run(false);});
