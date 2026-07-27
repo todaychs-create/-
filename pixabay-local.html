@@ -241,26 +241,39 @@
   }
 
   // ---- 대본→영어 검색어 자동 (MyMemory 무료 번역) ----
+  function fetchJson(u,ms){ return Promise.race([ fetch(u).then(function(r){return r.json();}), new Promise(function(_,rej){setTimeout(function(){rej(new Error("timeout"));},ms||6000);}) ]); }
   function translateKoEn(text){
     var u="https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=en&dt=t&q="+encodeURIComponent(text);
-    return fetch(u).then(function(r){return r.json();}).then(function(j){
+    return fetchJson(u,6000).then(function(j){
       try{ return j[0].map(function(x){return x[0];}).join(""); }catch(e){ return ""; }
     }).catch(function(){
-      return fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(text)+"&langpair=ko|en")
-        .then(function(r){return r.json();}).then(function(j){return (j.responseData&&j.responseData.translatedText)||"";}).catch(function(){return "";});
+      return fetchJson("https://api.mymemory.translated.net/get?q="+encodeURIComponent(text)+"&langpair=ko|en",6000)
+        .then(function(j){return (j.responseData&&j.responseData.translatedText)||"";}).catch(function(){return "";});
     });
+  }
+  // N개 칸에 나눠 담을 소스 텍스트 만들기: 자막 우선, 없으면 대본을 N등분
+  function basesForSlots(){
+    var N=imgSlots.length, bases=[];
+    if(subs.length){ var sd=totalDur()/N; for(var i=0;i<N;i++)bases.push(subsInRange(i*sd,(i+1)*sd)); return bases; }
+    var script=$("scriptBox").value.replace(/\s+/g," ").trim();
+    if(!script)return null;
+    var sents=script.split(/(?:[.!?。]\s+)|\n+/).map(function(s){return s.trim();}).filter(Boolean);
+    if(sents.length>=N){ for(var i=0;i<N;i++){var a=Math.floor(i*sents.length/N),b=Math.floor((i+1)*sents.length/N);bases.push(sents.slice(a,b).join(" "));} }
+    else { var w=script.split(" "); for(var i=0;i<N;i++){var a=Math.floor(i*w.length/N),b=Math.floor((i+1)*w.length/N);bases.push(w.slice(a,b).join(" "));} }
+    return bases;
   }
   function autoFillQueries(){
     if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
+    var bases=basesForSlots();
+    if(!bases){status("먼저 ② 대본을 붙여넣거나 음성 자막을 생성하세요.");return;}
     var i=0;(function next(){
       if(i>=imgSlots.length){status("검색어 자동 채우기 완료 ✅");return;}
-      var sd=totalDur()/imgSlots.length;
-      var base=imgSlots[i].prompt()||subsInRange(i*sd,(i+1)*sd);
+      var base=(imgSlots[i].prompt()||bases[i]||"").trim();
       if(!base){i++;setTimeout(next,10);return;}
       status("🌐 ("+(i+1)+"/"+imgSlots.length+") 대본→영어 번역중...");
       (function(idx,txt){
-        translateKoEn(txt).then(function(en){ imgSlots[idx].el.querySelector(".s-q").value=(en&&en.trim())?en.trim():txt; i++; setTimeout(next,350); })
-          .catch(function(){ imgSlots[idx].el.querySelector(".s-q").value=txt; i++; setTimeout(next,350); });
+        translateKoEn(txt).then(function(en){ imgSlots[idx].el.querySelector(".s-q").value=(en&&en.trim())?en.trim():txt; i++; setTimeout(next,300); })
+          .catch(function(){ imgSlots[idx].el.querySelector(".s-q").value=txt; i++; setTimeout(next,300); });
       })(i,base);
     })();
   }
