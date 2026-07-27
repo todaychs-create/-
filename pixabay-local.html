@@ -80,9 +80,9 @@
 
       <fieldset>
         <legend>이미지 채우기</legend>
-        <div class="field"><label for="aiStyle">AI 화풍(스타일)</label><input type="text" id="aiStyle" value="clean minimal flat illustration, muted calm colors, soft lighting, no text" /></div>
+        <div class="field"><label for="aiStyle">추가 스타일(선택)</label><input type="text" id="aiStyle" value="" placeholder="예: muted colors, cinematic (비워도 됨)" /></div>
         <button type="button" class="fetchbtn" id="genAll" style="background:var(--accent);color:var(--accent-ink)">🎨 프로그램에서 AI 이미지 전체 생성 (무료)</button>
-        <p class="hint">자막을 바탕으로 각 칸 프롬프트가 자동으로 채워져요. 칸별로 프롬프트를 고치고 개별 생성도 가능. (Pollinations · 무료 · 키 불필요)</p>
+        <p class="hint">각 칸에서 <b>실사 사진풍 / 캐릭터 일러스트</b>를 골라 섞을 수 있어요. 자막 기반으로 프롬프트·검색어가 자동으로 채워집니다. (Pollinations · 무료)</p>
         <hr style="border:none;border-top:1px solid var(--border);margin:14px 0" />
         <div class="field"><label for="imgUrls">또는 나노바나나 이미지 URL — 한 줄에 하나</label><textarea id="imgUrls" rows="2" placeholder="Claude가 준 이미지 URL"></textarea></div>
         <button type="button" class="fetchbtn" id="applyUrls" style="background:transparent;border:1px solid var(--info);color:var(--info)">🖼️ URL 목록으로 채우기</button>
@@ -198,12 +198,13 @@
     el.innerHTML='<div class="shead"><b>이미지 '+(idx+1)+'</b></div>'+
       '<img class="thumb" />'+
       '<div class="field"><input type="text" class="s-p" placeholder="AI 프롬프트(장면 설명)"></div>'+
+      '<select class="s-style" style="width:100%;padding:6px;border-radius:7px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);margin-bottom:6px"><option value="real">실사 사진풍</option><option value="char">캐릭터 일러스트</option></select>'+
       '<button type="button" class="aibtn" style="background:var(--accent);color:var(--accent-ink);border:none;border-radius:7px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:6px">🎨 이 칸 AI 생성</button>'+
       '<div class="field"><input type="file" accept="image/*" class="s-img"></div>'+
       '<div class="field"><input type="text" class="s-q" placeholder="픽사베이 검색어(영어 권장)"></div>'+
       '<button type="button" class="sbtn">이 칸만 픽사베이 검색</button>';
     $("slots").appendChild(el);
-    var obj={el:el,img:existingImg||null,query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},
+    var obj={el:el,img:existingImg||null,query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},style:function(){return el.querySelector(".s-style").value;},
       setImg:function(im){obj.img=im;var th=el.querySelector(".thumb");th.src=im.src;th.style.display="block";renderPreview();}};
     if(existingImg){var th=el.querySelector(".thumb");th.src=existingImg.src;th.style.display="block";}
     el.querySelector(".s-img").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var im=new Image();im.onload=function(){obj.setImg(im);};im.src=URL.createObjectURL(f);});
@@ -227,8 +228,11 @@
     return translateKoEn(ko).then(function(en){
       en=(en&&en.trim())?en.trim():ko;
       obj.el.querySelector(".s-q").value=en;           // 영어 검색어칸도 채움
-      var style=$("aiStyle").value.trim();
-      var full=(en+(style?", "+style:"")).trim();
+      var styleSuffix = obj.style()==="char"
+        ? "cute simple flat cartoon character illustration, kawaii, clean, no text"
+        : "photorealistic cinematic photograph, realistic, high detail, no text";
+      var extra=$("aiStyle").value.trim();
+      var full=(en+", "+styleSuffix+(extra?", "+extra:"")).trim();
       var seed=Math.floor(Math.random()*100000);
       var url="https://image.pollinations.ai/prompt/"+encodeURIComponent(full)+"?width=768&height=1344&nologo=true&model=flux&seed="+seed;
       status("AI 이미지 생성중... (몇 초 걸려요)");
