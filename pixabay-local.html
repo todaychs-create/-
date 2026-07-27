@@ -216,14 +216,24 @@
   function refillPrompts(){ if(!subs.length||!imgSlots.length)return; var sd=totalDur()/imgSlots.length; imgSlots.forEach(function(s,i){ var txt=subsInRange(i*sd,(i+1)*sd); if(txt)s.el.querySelector(".s-p").value=txt; }); }
 
   // ---- 프로그램 내 AI 생성 (Pollinations · 무료 · 키 불필요) ----
+  function slotBase(obj){
+    var pr=obj.prompt(); if(pr)return pr;
+    var i=imgSlots.indexOf(obj); if(i<0||!subs.length)return "";
+    var sd=totalDur()/imgSlots.length; return subsInRange(i*sd,(i+1)*sd);
+  }
   function genForSlot(obj){
-    var pr=obj.prompt(); if(!pr){status("이 칸의 프롬프트(장면 설명)를 입력하세요.");return Promise.resolve();}
-    var style=$("aiStyle").value.trim();
-    var full=(pr+(style?", "+style:"")).trim();
-    var seed=Math.floor(Math.random()*100000);
-    var url="https://image.pollinations.ai/prompt/"+encodeURIComponent(full)+"?width=768&height=1344&nologo=true&seed="+seed;
-    status("AI 이미지 생성중... (몇 초 걸려요)");
-    return loadImage(url).then(function(im){obj.setImg(im);status("생성 완료");}).catch(function(e){status("생성 실패: "+e.message);});
+    var ko=slotBase(obj); if(!ko){status("이 칸의 프롬프트(장면 설명)를 입력하세요.");return Promise.resolve();}
+    status("영어 프롬프트로 번역중...");
+    return translateKoEn(ko).then(function(en){
+      en=(en&&en.trim())?en.trim():ko;
+      obj.el.querySelector(".s-q").value=en;           // 영어 검색어칸도 채움
+      var style=$("aiStyle").value.trim();
+      var full=(en+(style?", "+style:"")).trim();
+      var seed=Math.floor(Math.random()*100000);
+      var url="https://image.pollinations.ai/prompt/"+encodeURIComponent(full)+"?width=768&height=1344&nologo=true&model=flux&seed="+seed;
+      status("AI 이미지 생성중... (몇 초 걸려요)");
+      return loadImage(url).then(function(im){obj.setImg(im);status("생성 완료");});
+    }).catch(function(e){status("생성 실패: "+e.message);});
   }
   function genAll(){
     if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
@@ -232,8 +242,13 @@
 
   // ---- 대본→영어 검색어 자동 (MyMemory 무료 번역) ----
   function translateKoEn(text){
-    return fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(text)+"&langpair=ko|en")
-      .then(function(r){return r.json();}).then(function(j){return (j.responseData&&j.responseData.translatedText)||"";});
+    var u="https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=en&dt=t&q="+encodeURIComponent(text);
+    return fetch(u).then(function(r){return r.json();}).then(function(j){
+      try{ return j[0].map(function(x){return x[0];}).join(""); }catch(e){ return ""; }
+    }).catch(function(){
+      return fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(text)+"&langpair=ko|en")
+        .then(function(r){return r.json();}).then(function(j){return (j.responseData&&j.responseData.translatedText)||"";}).catch(function(){return "";});
+    });
   }
   function autoFillQueries(){
     if(!imgSlots.length){status("먼저 이미지 칸을 만드세요.");return;}
