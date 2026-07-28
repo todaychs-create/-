@@ -149,7 +149,7 @@
     return 60;
   }
   function activeSub(t){ for(var i=0;i<subs.length;i++){ if(t>=subs[i].start&&t<subs[i].end)return subs[i].text; } return ""; }
-  function activeImg(t){ var N=imgSlots.length; if(!N)return null; var sd=totalDur()/N; var idx=Math.floor(t/sd); if(idx<0)idx=0; if(idx>=N)idx=N-1; return imgSlots[idx].img; }
+  function activeImg(t){ if(!imgSlots.length)return null; for(var i=0;i<imgSlots.length;i++){ if(t>=imgSlots[i].t0&&t<imgSlots[i].t1)return imgSlots[i].img; } return imgSlots[imgSlots.length-1].img; }
 
   function renderAt(t){
     ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,W,H);
@@ -175,9 +175,9 @@
     var N=imgSlots.length;
     if(!N){ renderAt(0); $("navLabel").textContent="이미지 0 / 0"; return; }
     if(previewIdx>=N)previewIdx=N-1; if(previewIdx<0)previewIdx=0;
-    var sd=totalDur()/N, t=(previewIdx+0.5)*sd;
+    var s=imgSlots[previewIdx], t=(s.t0+s.t1)/2;
     renderAt(t);
-    $("navLabel").textContent="이미지 "+(previewIdx+1)+" / "+N;
+    $("navLabel").textContent="이미지 "+(previewIdx+1)+" / "+N+" ("+s.t0.toFixed(1)+"~"+s.t1.toFixed(1)+"초)";
   }
 
   // ---- 이미지 칸 ----
@@ -185,26 +185,25 @@
     var N=Math.max(1,Math.round(num($("imgCount"),8)));
     var old=imgSlots.map(function(s){return s.img;});
     $("slots").innerHTML=""; imgSlots=[];
-    for(var i=0;i<N;i++){ addSlot(old[i]||null); }
     var sd=(totalDur()/N);
-    // 자막이 있으면 각 칸 시간대의 자막으로 프롬프트 자동 채움
-    if(subs.length){ imgSlots.forEach(function(s,i){ var txt=subsInRange(i*sd,(i+1)*sd); if(txt)s.el.querySelector(".s-p").value=txt; }); }
+    for(var i=0;i<N;i++){ addSlot(old[i]||null, i*sd, (i+1)*sd); }
+    if(subs.length)refillPrompts();
     $("slotInfo").textContent="이미지 "+N+"칸 · 각 약 "+sd.toFixed(1)+"초씩 (총 "+Math.round(totalDur())+"초)";
     previewIdx=0; renderPreview();
   }
-  function addSlot(existingImg){
+  function addSlot(existingImg,t0,t1){
     var idx=imgSlots.length;
     var el=document.createElement("div"); el.className="slot";
     el.innerHTML='<div class="shead"><b>이미지 '+(idx+1)+'</b></div>'+
       '<img class="thumb" />'+
       '<div class="field"><input type="text" class="s-p" placeholder="AI 프롬프트(장면 설명)"></div>'+
-      '<select class="s-style" style="width:100%;padding:6px;border-radius:7px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);margin-bottom:6px"><option value="real">실사 사진풍</option><option value="char">캐릭터 일러스트</option></select>'+
+      '<select class="s-style" style="width:100%;padding:6px;border-radius:7px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);margin-bottom:6px"><option value="paint">그림판 졸라맨(기본)</option><option value="real">실사 사진풍</option></select>'+
       '<button type="button" class="aibtn" style="background:var(--accent);color:var(--accent-ink);border:none;border-radius:7px;padding:6px 10px;font-size:12px;font-weight:700;margin-bottom:6px">🎨 이 칸 AI 생성</button>'+
       '<div class="field"><input type="file" accept="image/*" class="s-img"></div>'+
       '<div class="field"><input type="text" class="s-q" placeholder="픽사베이 검색어(영어 권장)"></div>'+
       '<button type="button" class="sbtn">이 칸만 픽사베이 검색</button>';
     $("slots").appendChild(el);
-    var obj={el:el,img:existingImg||null,query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},style:function(){return el.querySelector(".s-style").value;},
+    var obj={el:el,img:existingImg||null,t0:(t0||0),t1:(t1||totalDur()),query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},style:function(){return el.querySelector(".s-style").value;},
       setImg:function(im){obj.img=im;var th=el.querySelector(".thumb");th.src=im.src;th.style.display="block";renderPreview();}};
     if(existingImg){var th=el.querySelector(".thumb");th.src=existingImg.src;th.style.display="block";}
     el.querySelector(".s-img").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var im=new Image();im.onload=function(){obj.setImg(im);};im.src=URL.createObjectURL(f);});
@@ -228,9 +227,9 @@
     return translateKoEn(ko).then(function(en){
       en=(en&&en.trim())?en.trim():ko;
       obj.el.querySelector(".s-q").value=en;           // 영어 검색어칸도 채움
-      var styleSuffix = obj.style()==="char"
-        ? "cute simple flat cartoon character illustration, kawaii, clean, no text"
-        : "photorealistic cinematic photograph, realistic, high detail, no text";
+      var styleSuffix = obj.style()==="real"
+        ? "photorealistic cinematic photograph, realistic, high detail, no text"
+        : "MS Paint style crude beginner doodle, extremely simple childlike drawing, white background, thick wobbly hand-drawn black outlines, stickman figures with round heads and dot eyes, flat colors used sparingly, red arrows or red question marks when helpful, no shadows, no 3D, no cinematic lighting, centered simple composition";
       var extra=$("aiStyle").value.trim();
       var full=(en+", "+styleSuffix+(extra?", "+extra:"")).trim();
       var seed=Math.floor(Math.random()*100000);
