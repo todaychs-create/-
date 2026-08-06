@@ -74,8 +74,10 @@ vercel dev               # http://localhost:3000
 
 ## 💡 자주 바꾸는 것들
 
-- **더 저렴하게 쓰고 싶다면**: `api/generate.js`의 `model: "claude-opus-5"` 를
-  `"claude-sonnet-5"` (더 저렴) 또는 `"claude-haiku-4-5"` (가장 저렴)로 바꾸세요.
+- **모델 선택은 화면에서**: "3단계 AI 모델 고르기" 드롭다운에서 오푸스/쏘넷/하이쿠를
+  매번 직접 고를 수 있어요. (비용을 아끼려면 쏘넷·하이쿠, 최고 품질은 오푸스)
+  기본값을 바꾸려면 `index.html`의 `<option ... selected>` 위치를 옮기면 됩니다.
+  고를 수 있는 모델 목록은 `api/generate.js`의 `ALLOWED_MODELS`에서 관리합니다.
 - **비밀번호 변경**: Vercel의 `SHARED_PASSWORD` 값을 바꾸고 재배포.
 - **글 스타일/구성 변경**: `api/generate.js`의 `systemPrompt()` 문구를 수정.
 

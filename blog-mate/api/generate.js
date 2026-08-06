@@ -6,6 +6,15 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic(); // ANTHROPIC_API_KEY 환경변수를 자동으로 읽음
 
+// 사용자가 화면에서 고를 수 있는 모델 목록 (서버가 이 목록만 허용)
+const ALLOWED_MODELS = new Set([
+  "claude-opus-5",   // 최고 품질 (기본)
+  "claude-opus-4-6", // 이전 오푸스
+  "claude-sonnet-5", // 균형 (더 저렴)
+  "claude-haiku-4-5", // 가장 빠르고 저렴
+]);
+const DEFAULT_MODEL = "claude-opus-5";
+
 // Claude가 반드시 이 형태(JSON)로만 답하도록 강제하는 스키마
 const SCHEMA = {
   type: "object",
@@ -78,14 +87,15 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "비밀번호가 올바르지 않습니다." });
   }
 
-  const { topic, tone, length } = req.body || {};
+  const { topic, tone, length, model } = req.body || {};
   if (!topic || !String(topic).trim()) {
     return res.status(400).json({ error: "주제를 입력해 주세요." });
   }
+  const chosenModel = ALLOWED_MODELS.has(model) ? model : DEFAULT_MODEL;
 
   try {
     const response = await client.messages.create({
-      model: "claude-opus-5",
+      model: chosenModel,
       max_tokens: 4000,
       thinking: { type: "adaptive" },
       output_config: {
