@@ -1,0 +1,207 @@
+<title>블로그 자동화 기획서</title>
+<style>
+  :root {
+    --bg: #f4f2ec; --surface: #ffffff; --surface-2: #faf8f3;
+    --ink: #22201a; --ink-soft: #59544a; --ink-faint: #8b8577;
+    --line: #e4dfd3; --accent: #1f6f5c; --accent-2: #14493c; --accent-soft: #e5efe9;
+    --warn-bg: #fdf3e3; --warn-line: #c98a3c; --warn-ink: #8a5a1a;
+    --ok: #1f8a5c; --no: #c0503f;
+    --radius: 16px; --maxw: 860px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140f; --surface: #201d17; --surface-2: #1a1712;
+      --ink: #ece8df; --ink-soft: #b4ad9f; --ink-faint: #857f72;
+      --line: #322e26; --accent: #6bbfa4; --accent-2: #4f9f86; --accent-soft: #212f2a;
+      --warn-bg: #2e2312; --warn-line: #b07f38; --warn-ink: #e3b878;
+      --ok: #63c295; --no: #e08672;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16140f; --surface: #201d17; --surface-2: #1a1712;
+    --ink: #ece8df; --ink-soft: #b4ad9f; --ink-faint: #857f72;
+    --line: #322e26; --accent: #6bbfa4; --accent-2: #4f9f86; --accent-soft: #212f2a;
+    --warn-bg: #2e2312; --warn-line: #b07f38; --warn-ink: #e3b878;
+    --ok: #63c295; --no: #e08672;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f2ec; --surface: #ffffff; --surface-2: #faf8f3;
+    --ink: #22201a; --ink-soft: #59544a; --ink-faint: #8b8577;
+    --line: #e4dfd3; --accent: #1f6f5c; --accent-2: #14493c; --accent-soft: #e5efe9;
+    --warn-bg: #fdf3e3; --warn-line: #c98a3c; --warn-ink: #8a5a1a;
+    --ok: #1f8a5c; --no: #c0503f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 100px; }
+
+  /* Hero */
+  header.hero {
+    padding: 72px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 8px;
+  }
+  .eyebrow { font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.15; margin: 14px 0 16px; letter-spacing: -.02em; text-wrap: balance; }
+  .lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 60ch; margin: 0; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 15px; font-size: .88rem; }
+  .fact b { color: var(--accent); }
+
+  section { padding: 44px 0 8px; }
+  h2 { font-size: 1.4rem; letter-spacing: -.01em; margin: 0 0 4px; display: flex; align-items: baseline; gap: 12px; }
+  h2 .n { font-size: .82rem; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: .05em; }
+  .sub { color: var(--ink-faint); margin: 0 0 22px; font-size: .95rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 620px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+
+  /* pipeline */
+  .pipe { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; }
+  .step { flex: 1 1 120px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px; position: relative; }
+  .step .k { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+  .step .v { font-weight: 600; margin-top: 3px; font-size: .96rem; }
+  .step.auto { border-color: var(--accent); background: var(--accent-soft); }
+  .step.user { border-style: dashed; }
+  .zone { display: flex; gap: 8px; align-items: center; margin: 18px 0 8px; font-size: .85rem; color: var(--ink-faint); }
+  .dot { width: 10px; height: 10px; border-radius: 3px; }
+  .dot.a { background: var(--accent); }
+  .dot.u { background: var(--ink-faint); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+  th { background: var(--surface-2); font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
+  .pill.ok { background: var(--accent-soft); color: var(--ok); }
+  .pill.no { background: #f6e3df; color: var(--no); }
+  @media (prefers-color-scheme: dark) { .pill.no { background: #3a221d; } }
+  :root[data-theme="dark"] .pill.no { background: #3a221d; }
+  .pill.mid { background: var(--warn-bg); color: var(--warn-ink); }
+
+  .callout { display: flex; gap: 12px; background: var(--warn-bg); border-left: 3px solid var(--warn-line); border-radius: 0 10px 10px 0; padding: 15px 18px; color: var(--warn-ink); font-size: .95rem; margin-top: 16px; }
+
+  ol.road { list-style: none; counter-reset: r; padding: 0; margin: 0; display: grid; gap: 12px; }
+  ol.road li { counter-increment: r; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px 16px 58px; position: relative; }
+  ol.road li::before { content: counter(r); position: absolute; left: 16px; top: 15px; width: 28px; height: 28px; border-radius: 8px; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .9rem; }
+  ol.road b { display: block; margin-bottom: 2px; }
+  ol.road span { color: var(--ink-soft); font-size: .93rem; }
+
+  .todo { display: grid; gap: 8px; margin-top: 4px; }
+  .todo label { display: flex; align-items: center; gap: 11px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 15px; cursor: pointer; font-size: .97rem; }
+  .todo input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .todo input:checked + span { opacity: .5; text-decoration: line-through; }
+
+  a.link { color: var(--accent); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  a.link:hover { border-bottom-color: var(--accent); }
+  code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; font-size: .85em; }
+  footer { margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: .85rem; }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">기획서 · v0.2</div>
+    <h1>네이버 블로그 콘텐츠 자동화</h1>
+    <p class="lede">주제만 정하면 초안·이미지가 자동으로 준비되고, 사용자는 검수 후 직접 발행한다. 개인 브랜딩을 위한 "꾸준함의 시스템".</p>
+    <div class="facts">
+      <div class="fact">목적 · <b>개인 브랜딩</b></div>
+      <div class="fact">플랫폼 · <b>네이버 블로그</b></div>
+      <div class="fact">발행 · <b>사용자 수동</b></div>
+      <div class="fact">산출물 · <b>웹 미리보기(B)</b></div>
+      <div class="fact">작성일 · 2026.08.06</div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="n">01</span> 무엇을 만드나</h2>
+    <p class="sub">프로그램은 "검수 가능한 완성 콘텐츠"까지 만든다. 검수와 발행은 사용자 몫.</p>
+    <div class="grid3">
+      <div class="card"><h3>✍️ AI 초안</h3><p>주제·키워드를 넣으면 사용자 문체를 반영한 제목·본문 초안을 생성.</p></div>
+      <div class="card"><h3>🖼️ 이미지 확보</h3><p>주제에 맞는 저작권 안전 이미지를 자동 수집하거나 AI로 생성.</p></div>
+      <div class="card"><h3>🔍 검수 화면</h3><p>발행 정보·체크리스트·본문을 한 화면에. 확인 후 복사해 발행.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">02</span> 왜 자동 발행은 안 하나</h2>
+    <p class="sub">네이버는 글쓰기 공식 API가 없다. 매크로 강제 업로드는 저품질·계정 제재 위험.</p>
+    <div class="card">
+      <p style="color:var(--ink)"><b>확정 방침 —</b> 프로그램은 네이버 계정에 접근하지 않는다. 콘텐츠 <b>생성은 자동</b>, <b>검수·발행은 사용자</b>가 직접. 개인 브랜딩이 목적이라 제재 = 브랜드 손상이므로, 안전이 최우선이다.</p>
+      <div class="callout"><span>💡</span><span>이 방식이 정책 안전 + 품질 확보 + 구현 단순화를 모두 잡는다. 네이버 로그인/업로드 코드가 통째로 빠진다.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">03</span> 전체 흐름</h2>
+    <p class="sub">경계 왼쪽은 프로그램이 자동으로, 오른쪽은 사용자가 직접.</p>
+    <div class="pipe">
+      <div class="step auto"><div class="k">자동 · 1</div><div class="v">주제 뱅크</div></div>
+      <div class="step auto"><div class="k">자동 · 2</div><div class="v">초안 생성</div></div>
+      <div class="step auto"><div class="k">자동 · 3</div><div class="v">이미지 확보</div></div>
+      <div class="step auto"><div class="k">자동 · 4</div><div class="v">미리보기 제공</div></div>
+      <div class="step user"><div class="k">사용자 · 5</div><div class="v">검수·수정</div></div>
+      <div class="step user"><div class="k">사용자 · 6</div><div class="v">네이버 발행</div></div>
+    </div>
+    <div class="zone"><span class="dot a"></span> 프로그램 자동 영역 &nbsp;&nbsp; <span class="dot u"></span> 사용자 직접 영역</div>
+  </section>
+
+  <section>
+    <h2><span class="n">04</span> 이미지 확보 전략 <span style="font-size:.8rem;color:var(--ink-faint);font-weight:400;">실검증 완료</span></h2>
+    <p class="sub">"국가 축의금" 주제로 실제 3단계를 돌려본 결과.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>순위</th><th>소스</th><th>테스트 결과</th><th>판정</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>정부 사이트 직접 다운로드</td><td>재정경제부·정책브리핑 <b>403 차단</b></td><td><span class="pill no">스크래핑 불가</span></td></tr>
+          <tr><td>1</td><td>공식 오픈API (정책브리핑·공공데이터포털)</td><td>무료 인증키 발급 시 이미지 URL 정상</td><td><span class="pill mid">키 필요</span></td></tr>
+          <tr><td>2</td><td>Pixabay 무료 스톡</td><td>사용자가 API 키 보유</td><td><span class="pill ok">즉시 연동</span></td></tr>
+          <tr><td>3</td><td>AI 생성 (nano-banana)</td><td>대표 이미지 실제 생성 성공</td><td><span class="pill ok">작동 확인</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><span>⚠️</span><span>정부 사이트 무단 스크래핑은 막혀 있고 저작권 위험도 있음 → <b>공식 API 경유</b>. AI 이미지의 한글 텍스트는 부정확하니 글자 없는 일러스트로. 최종 저작권 확인은 사용자 검수 항목.</span></div>
+  </section>
+
+  <section>
+    <h2><span class="n">05</span> 단계별 로드맵</h2>
+    <p class="sub">완벽한 문서보다, 한 바퀴 돌려보고 고치기.</p>
+    <ol class="road">
+      <li><b>1단계 · 수동으로 흐름 검증 (1~2주)</b><span>주제 5개·톤 정하고, AI 초안 → 손으로 발행까지 직접 해보며 가장 번거로운 단계 파악.</span></li>
+      <li><b>2단계 · 콘텐츠 생성 자동화 MVP (2~4주)</b><span>초안 + 이미지(Pixabay/AI) 자동화, 웹 미리보기(B) + 검수 체크리스트.</span></li>
+      <li><b>3단계 · 최적화·확산 (1~2개월)</b><span>SEO 키워드·해시태그 보조, SNS 확산 문구, 성과 기반 주제 뱅크 개선.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="n">06</span> 지금 할 일</h2>
+    <p class="sub">체크박스는 눌러서 표시할 수 있어요.</p>
+    <div class="todo">
+      <label><input type="checkbox"><span>다룰 주제 3~5개와 블로그 톤(말투) 정하기</span></label>
+      <label><input type="checkbox"><span>Pixabay API 키 준비 — <a class="link" href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">문서 열기 ↗</a> (로그인 시 상단에 키 표시)</span></label>
+      <label><input type="checkbox"><span>정책브리핑/공공데이터포털 오픈API 무료 키 신청</span></label>
+      <label><input type="checkbox"><span>샘플 글 1편을 초안 → 검수 → 수동 발행까지 끝까지 해보기</span></label>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">07</span> 참고 링크</h2>
+    <div class="grid2">
+      <div class="card"><h3>Pixabay API</h3><p><a class="link" href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">pixabay.com/api/docs ↗</a><br>요청 예: <code>?key=KEY&q=결혼&lang=ko&image_type=photo&safesearch=true</code> → 응답 <code>hits[].largeImageURL</code></p></div>
+      <div class="card"><h3>공공 오픈API</h3><p><a class="link" href="https://www.data.go.kr" target="_blank" rel="noopener">data.go.kr ↗</a> · <a class="link" href="https://www.korea.kr" target="_blank" rel="noopener">korea.kr ↗</a><br>정책 이미지·보도자료를 인증키로 안정적으로 수신.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    네이버 블로그 콘텐츠 자동화 기획서 · v0.2 · 2026.08.06<br>
+    상세 문서(마크다운)와 산출물 샘플은 저장소 <code>claude/blog-automation-planning-dflzwr</code> 브랜치에 포함.
+  </footer>
+</div>
