@@ -109,7 +109,7 @@
 
 <div class="wrap">
   <header class="hero">
-    <div class="eyebrow">기획서 · v0.2</div>
+    <div class="eyebrow">기획서 · v0.3</div>
     <h1>네이버 블로그 콘텐츠 자동화</h1>
     <p class="lede">주제만 정하면 초안·이미지가 자동으로 준비되고, 사용자는 검수 후 직접 발행한다. 개인 브랜딩을 위한 "꾸준함의 시스템".</p>
     <div class="facts">
@@ -172,28 +172,50 @@
   </section>
 
   <section>
-    <h2><span class="n">05</span> 단계별 로드맵</h2>
+    <h2><span class="n">05</span> 배포 전략 <span style="font-size:.8rem;color:var(--ink-faint);font-weight:400;">exe ❌ → 웹 서비스</span></h2>
+    <p class="sub">여러 사용자 + 개발자 PC를 꺼도 동작 → 클라우드 웹 서비스가 정답.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>방식</th><th>도는 위치</th><th>PC 꺼도</th><th>여러 사용자</th><th>판정</th></tr></thead>
+        <tbody>
+          <tr><td>exe (각 PC 설치)</td><td>사용자 PC</td><td>✅</td><td>△ 설치·업데이트</td><td><span class="pill mid">애매</span></td></tr>
+          <tr><td>exe (내 PC를 서버로)</td><td>개발자 PC</td><td>❌ 끄면 멈춤</td><td>❌</td><td><span class="pill no">탈락</span></td></tr>
+          <tr><td>클라우드 웹 서비스</td><td>클라우드 24h</td><td>✅</td><td>◎ URL 접속</td><td><span class="pill ok">채택</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><span>🔑</span><span>exe는 OS별 빌드·보안경고·업데이트 지옥, 무엇보다 <b>API 키가 추출돼 도용</b>됨. 웹 서비스는 설치 0, 키는 서버에만 보관, 업데이트 즉시 반영. 소규모는 <b>Vercel 하나</b>로 프론트+백엔드를 함께 올리는 게 가장 단순.</span></div>
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card"><h3>① 지금 목표</h3><p><b>나 혼자 쓰는 웹 앱</b>을 클라우드에 올려 완성. 로그인·결제 없이 핵심 기능만. PC와 무관하게 24시간 동작.</p></div>
+      <div class="card"><h3>② 소수 공유</h3><p>잘 되면 간단한 로그인을 붙여 지인·소수에게 오픈.</p></div>
+      <div class="card"><h3>③ 정식 서비스</h3><p>수요 확인 후 사용자별 사용량·비용·결제·개인정보 처리 추가.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">06</span> 단계별 로드맵</h2>
     <p class="sub">완벽한 문서보다, 한 바퀴 돌려보고 고치기.</p>
     <ol class="road">
       <li><b>1단계 · 수동으로 흐름 검증 (1~2주)</b><span>주제 5개·톤 정하고, AI 초안 → 손으로 발행까지 직접 해보며 가장 번거로운 단계 파악.</span></li>
-      <li><b>2단계 · 콘텐츠 생성 자동화 MVP (2~4주)</b><span>초안 + 이미지(Pixabay/AI) 자동화, 웹 미리보기(B) + 검수 체크리스트.</span></li>
-      <li><b>3단계 · 최적화·확산 (1~2개월)</b><span>SEO 키워드·해시태그 보조, SNS 확산 문구, 성과 기반 주제 뱅크 개선.</span></li>
+      <li><b>2단계 · 콘텐츠 생성 자동화 MVP (2~4주)</b><span>초안 + 이미지(Pixabay/AI) 자동화, 웹 미리보기(B) + 검수 체크리스트. 나 혼자 쓰는 웹 앱으로 클라우드 배포.</span></li>
+      <li><b>3단계 · 최적화·확산 (1~2개월)</b><span>SEO 키워드·해시태그 보조, SNS 확산 문구, 성과 기반 주제 뱅크 개선. 이후 소수 공유 → 정식 서비스.</span></li>
     </ol>
   </section>
 
   <section>
-    <h2><span class="n">06</span> 지금 할 일</h2>
+    <h2><span class="n">07</span> 지금 할 일</h2>
     <p class="sub">체크박스는 눌러서 표시할 수 있어요.</p>
     <div class="todo">
       <label><input type="checkbox"><span>다룰 주제 3~5개와 블로그 톤(말투) 정하기</span></label>
       <label><input type="checkbox"><span>Pixabay API 키 준비 — <a class="link" href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">문서 열기 ↗</a> (로그인 시 상단에 키 표시)</span></label>
       <label><input type="checkbox"><span>정책브리핑/공공데이터포털 오픈API 무료 키 신청</span></label>
       <label><input type="checkbox"><span>샘플 글 1편을 초안 → 검수 → 수동 발행까지 끝까지 해보기</span></label>
+      <label><input type="checkbox"><span>배포 목표를 "나 혼자 쓰는 웹 앱(클라우드)"으로 확정 — Vercel 계정 만들기</span></label>
     </div>
   </section>
 
   <section>
-    <h2><span class="n">07</span> 참고 링크</h2>
+    <h2><span class="n">08</span> 참고 링크</h2>
     <div class="grid2">
       <div class="card"><h3>Pixabay API</h3><p><a class="link" href="https://pixabay.com/api/docs/" target="_blank" rel="noopener">pixabay.com/api/docs ↗</a><br>요청 예: <code>?key=KEY&q=결혼&lang=ko&image_type=photo&safesearch=true</code> → 응답 <code>hits[].largeImageURL</code></p></div>
       <div class="card"><h3>공공 오픈API</h3><p><a class="link" href="https://www.data.go.kr" target="_blank" rel="noopener">data.go.kr ↗</a> · <a class="link" href="https://www.korea.kr" target="_blank" rel="noopener">korea.kr ↗</a><br>정책 이미지·보도자료를 인증키로 안정적으로 수신.</p></div>
