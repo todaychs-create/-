@@ -1,0 +1,147 @@
+<title>지금 최고금리 예금 가입하기 (실전편)</title>
+<style>
+  :root{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#b8860b; --accent-2:#8a6408; --accent-soft:#f6edd6; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f7f1e2; --box-accent:#a9760a; --box-soft:#ecdfc4;
+    --q:#eef3f6; --q-accent:#2f6db3; --q-soft:#d8e6ef; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14120c; --surface:#1e1b14; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#e6b84e; --accent-2:#f0cf7a; --accent-soft:#2a2313; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#221d10; --box-accent:#e6b84e; --box-soft:#342c18;
+    --q:#161f2b; --q-accent:#6ea8e0; --q-soft:#233042; }}
+  :root[data-theme="dark"]{
+    --bg:#14120c; --surface:#1e1b14; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#e6b84e; --accent-2:#f0cf7a; --accent-soft:#2a2313; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#221d10; --box-accent:#e6b84e; --box-soft:#342c18;
+    --q:#161f2b; --q-accent:#6ea8e0; --q-soft:#233042; }
+  :root[data-theme="light"]{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#b8860b; --accent-2:#8a6408; --accent-soft:#f6edd6; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f7f1e2; --box-accent:#a9760a; --box-soft:#ecdfc4;
+    --q:#eef3f6; --q-accent:#2f6db3; --q-soft:#d8e6ef; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.15rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.55rem;margin:36px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 19px}
+  ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 52px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center;font-size:1rem}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:1.12rem}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td strong{color:var(--accent)}
+  .tnote{font-size:.98rem;color:var(--ink-faint);margin:0 0 20px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .linkbox{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 20px}
+  .linkbox a{color:var(--box-accent);font-weight:800;text-decoration:none}
+  .linkbox p{margin:6px 0;font-size:1.12rem}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .edit{background:#fff6d6;border:1px dashed var(--warn-line);border-radius:10px;padding:12px 16px;margin:0 0 20px;color:#7a5a12;font-size:1.02rem}
+  @media(prefers-color-scheme:dark){.edit{background:#2e2610;color:#e3c877}}
+  :root[data-theme="dark"] .edit{background:#2e2610;color:#e3c877}
+</style>
+
+<div class="wrap">
+  <p class="cap">지금 최고금리 예금 가입하기 · 실전편 · 검수 후 발행</p>
+  <article class="post">
+    <h1>지금 금리 제일 높은 예금은 어디? 최고금리 찾아 바로 가입하기</h1>
+    <p class="byline">오늘의 지식 · 고금리 예금 실전</p>
+
+    <p class="lead">"이왕 예금 넣을 거면 <span class="hi">제일 금리 높은 데</span> 넣고 싶은데, 그게 대체 어디야?" 이 생각으로 이 글 들어오셨죠? ㅎㅎ 결론부터 말하면, 최고금리는 <strong>매일 바뀌기 때문에</strong> "오늘의 1등"을 직접 확인하고 바로 가입하는 게 정답이에요. 그 방법을 아주 쉽게 알려드릴게요. 이 글 하나면 오늘 당장 가입할 수 있어요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/interest%20rate/" target="_blank" rel="noopener">"interest rate" ↗</a>
+      <a href="https://pixabay.com/images/search/money%20growth/" target="_blank" rel="noopener">"money growth" ↗</a>
+    </div>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) 아래 '유형별 금리' 표의 숫자는 <b>발행일 기준</b>으로 한 번 확인해 업데이트하고, 원하면 그날의 실제 1위 은행·상품명을 추가하세요. 금리는 매일 바뀌어요.</div>
+
+    <h2>지금 금리, 대략 이 정도예요 (2026년 8월 기준)</h2>
+    <p>먼저 감을 잡아볼게요. 유형별로 최고 수준이 이래요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>유형</th><th>정기예금 최고 수준</th><th>특징</th></tr></thead>
+        <tbody>
+          <tr><td>시중은행</td><td><strong>연 2.9~3.2%</strong></td><td>안정적, 접근성 좋음</td></tr>
+          <tr><td>인터넷·특수은행</td><td><strong>연 3%대</strong></td><td>비대면 간편 가입</td></tr>
+          <tr><td>저축은행</td><td><strong>연 3.4~3.6%</strong></td><td>금리 높음(보호 한도 내 이용)</td></tr>
+          <tr><td>특판(한정)</td><td><strong>연 4% 이상도</strong></td><td>조기 마감 주의 ⏰</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">※ 금리는 매일 변동돼요. 정확한 '오늘의 1위'는 아래 공식 포털에서 확인하세요.</p>
+
+    <h2>오늘의 '최고금리 1위' 확인하는 곳 (공식·무료)</h2>
+    <p>여기가 핵심이에요. 아래 세 곳이면 전국 예금 금리를 실시간 순위로 볼 수 있어요.</p>
+    <div class="linkbox">
+      <p>🏦 <a href="https://finlife.fss.or.kr" target="_blank" rel="noopener">금융감독원 '금융상품 한눈에'</a> — 은행·저축은행 통합 비교</p>
+      <p>🏦 <a href="https://portal.kfb.or.kr" target="_blank" rel="noopener">은행연합회 소비자포털</a> — 시중은행 정기예금 비교</p>
+      <p>🏦 <a href="https://www.fsb.or.kr" target="_blank" rel="noopener">저축은행중앙회 소비자포털</a> — 저축은행 정기예금 비교</p>
+    </div>
+    <p>여기서 '정기예금'을 고르고 금리 <strong>높은 순으로 정렬</strong>하면, 오늘 기준 1위부터 쭉 나와요. 기간(6개월·12개월)도 골라볼 수 있고요.</p>
+
+    <h2>그럼 지금 바로 가입하는 순서</h2>
+    <ol class="steps">
+      <li>위 포털에서 <strong>오늘 최고금리 상품</strong> 확인 (기간도 선택)</li>
+      <li>그 상품의 <strong>우대조건</strong>(급여이체·앱·첫거래 등) 채울 수 있는지 체크</li>
+      <li><strong>예금자보호</strong> 되는 상품인지, 한 은행당 <strong>1억 한도</strong> 내인지 확인</li>
+      <li>해당 은행 <strong>앱 설치·계좌 개설</strong> (비대면이면 10분이면 돼요)</li>
+      <li>정기예금 메뉴에서 <strong>금액·기간 입력 후 가입</strong> 완료!</li>
+    </ol>
+    <div class="callout"><span>💡</span><span>특판은 <span class="hi">순식간에 마감</span>돼요. 앱과 계좌를 미리 만들어두면, 좋은 상품 떴을 때 바로 가입할 수 있어요.</span></div>
+
+    <h2>가입 전 꼭 확인할 3가지</h2>
+    <ul>
+      <li><strong>기본금리 vs 최고금리</strong> — 광고 최고금리는 우대 다 채워야 나와요</li>
+      <li><strong>예금자보호 1억</strong> — 은행당 원금+이자 합쳐 1억까지</li>
+      <li><strong>세후 이자</strong> — 이자소득세 15.4% 떼고 들어와요</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">최고금리 예금은 <strong>"발품이 곧 이자"</strong>예요. 딱 10분만 포털에서 비교하면 남들보다 이자를 더 받거든요. 저는 예금 만기 돌아올 때마다 습관처럼 오늘의 1위를 확인하고 갈아타요. 어차피 넣을 돈, 0.3%라도 더 받으면 그게 다 내 돈이잖아요!</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>최고금리는 <strong>매일 바뀜</strong> → '오늘의 1위'를 직접 확인</li>
+        <li>확인처: <strong>금융상품 한눈에·은행연합회·저축은행중앙회</strong></li>
+        <li>가입: 상품확인 → 우대조건 → 보호한도 → 앱개설 → 가입</li>
+        <li>체크 3종: <strong>기본금리·예금자보호(1억)·세후</strong></li>
+      </ul>
+    </div>
+    <p>오늘 딱 10분만 투자해서, 지금 제일 높은 금리로 갈아타 보세요. 챙기는 만큼 이자가 늘어나요!</p>
+    <p class="tags">#최고금리예금 #예금금리비교 #고금리예금 #정기예금가입 #금융상품한눈에</p>
+  </article>
+</div>
