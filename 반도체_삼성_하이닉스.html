@@ -1,0 +1,160 @@
+<title>삼성전자·SK하이닉스 시황 정리 2편</title>
+<style>
+  :root{
+    --bg:#eef1f4; --surface:#fff; --ink:#1a1f26; --ink-soft:#495260; --ink-faint:#828b98;
+    --line:#dde2e8; --accent:#2f6db3; --accent-2:#1e4a7d; --accent-soft:#e5eef7; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef4f9; --box-accent:#2f6db3; --box-soft:#d5e6f4; --up:#c0392b; --dn:#1f6db3; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#0f1319; --surface:#181d24; --ink:#e7ecf2; --ink-soft:#aab4c0; --ink-faint:#7c8695;
+    --line:#28303a; --accent:#5b9be0; --accent-2:#7db4ea; --accent-soft:#16283a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#141f2b; --box-accent:#5b9be0; --box-soft:#213247; --up:#e8786b; --dn:#5b9be0; }}
+  :root[data-theme="dark"]{
+    --bg:#0f1319; --surface:#181d24; --ink:#e7ecf2; --ink-soft:#aab4c0; --ink-faint:#7c8695;
+    --line:#28303a; --accent:#5b9be0; --accent-2:#7db4ea; --accent-soft:#16283a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#141f2b; --box-accent:#5b9be0; --box-soft:#213247; --up:#e8786b; --dn:#5b9be0; }
+  :root[data-theme="light"]{
+    --bg:#eef1f4; --surface:#fff; --ink:#1a1f26; --ink-soft:#495260; --ink-faint:#828b98;
+    --line:#dde2e8; --accent:#2f6db3; --accent-2:#1e4a7d; --accent-soft:#e5eef7; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef4f9; --box-accent:#2f6db3; --box-soft:#d5e6f4; --up:#c0392b; --dn:#1f6db3; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;margin-bottom:34px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  .num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:2.1rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.5rem;margin:34px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:1.14rem}
+  th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent);white-space:nowrap}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .note{margin-top:12px;color:var(--ink-faint);font-size:1rem;font-style:italic}
+  .edit{background:#fff6d6;border:1px dashed var(--warn-line);border-radius:10px;padding:12px 16px;margin:0 0 20px;color:#7a5a12;font-size:1.02rem}
+  :root[data-theme="dark"] .edit{background:#2e2610;color:#e3c877}
+  @media(prefers-color-scheme:dark){.edit{background:#2e2610;color:#e3c877}}
+</style>
+
+<div class="wrap">
+  <p class="cap">삼성전자·SK하이닉스 시황 정리 2편 · 정보 참고용 · 검수 후 발행</p>
+
+  <!-- ===== 글 1 : 삼성전자 ===== -->
+  <article class="post">
+    <span class="num">글 1</span>
+    <h1>삼성전자, 반등 신호 켜지나? HBM·파운드리 지금 상황 정리</h1>
+    <p class="byline">오늘의 지식 · 반도체 시황</p>
+    <p class="lead">요즘 코스피가 반도체 힘으로 크게 올랐잖아요(8월 초 <span class="hi">6,598p, +3.76%</span>). 그 중심에 삼성전자가 있어요. "삼전 이제 좀 살아나나?" 궁금해하는 분들 많죠. 오늘은 매수·매도 얘기 말고, <strong>지금 삼성전자에 무슨 일이 일어나고 있는지</strong> 팩트 위주로 정리했어요.</p>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) 주가·지수는 실시간 변동. 발행일에 당일 종가·최신 기사만 한 번 확인하세요.</div>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/semiconductor%20chip/" target="_blank" rel="noopener">"semiconductor chip" ↗</a>
+      <a href="https://pixabay.com/images/search/stock%20market/" target="_blank" rel="noopener">"stock market" ↗</a>
+    </div>
+
+    <h2>핵심 1) HBM 성장 전망이 확 좋아졌어요</h2>
+    <p>AI 반도체의 핵심 부품이 <strong>HBM(고대역폭 메모리)</strong>인데요, 시장에선 <span class="em">2026년 삼성전자의 HBM 매출 성장률을 약 105%</span>로 전망하고 있어요. 차세대 <strong>HBM4</strong>에서 삼성전자의 점유율은 30% 수준으로 예상되고요. 그동안 이 분야에서 뒤처졌다는 평가가 많았는데, 반등 기대가 커지는 대목이에요.</p>
+
+    <h2>핵심 2) 실적도 반등 전망</h2>
+    <p>올해 연간 영업이익 전망(8월 기준)이 <span class="hi">약 28.8조원</span>으로, 3개월 연속 하락하던 흐름을 끊고 반등할 것으로 예상돼요. 여기에 그동안 부진했던 <strong>파운드리(위탁생산)</strong>에서도 글로벌 빅테크 대형 수주가 이어지며 개선 기대가 나와요.</p>
+    <div class="callout"><span>💡</span><span>정리하면 <span class="hi">"HBM 반등 + 파운드리 수주 + 실적 개선 전망"</span> 세 박자가 맞물리는 구간이에요.</span></div>
+
+    <h2>앞으로 뭘 지켜봐야 할까?</h2>
+    <ul>
+      <li><strong>HBM4 실제 공급·점유율</strong>이 전망만큼 나오는지</li>
+      <li>파운드리 <strong>수주가 실적으로</strong> 이어지는지</li>
+      <li>글로벌 반도체 업황·환율·외국인 수급</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">전망은 좋아졌지만, <strong>'전망'과 '실제 실적'은 다를 수 있어요.</strong> HBM4 점유율이 진짜 30%까지 오르는지, 파운드리 수주가 숫자로 찍히는지를 확인하며 보는 게 중요해 보여요. 저는 뉴스에 일희일비하기보단 분기 실적으로 확인하는 편이에요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>2026년 HBM 매출 성장률 전망 <strong>약 105%</strong>, HBM4 점유율 ~30% 예상</li>
+        <li>연 영업익 전망 <strong>28.8조</strong>로 반등 기대</li>
+        <li>파운드리 <strong>빅테크 수주</strong>로 개선 기대</li>
+        <li>관전 포인트: HBM4 실제 점유율·파운드리 실적화</li>
+      </ul>
+    </div>
+    <p class="tags">#삼성전자 #반도체 #HBM #코스피 #주식시황</p>
+    <p class="note">※ 본 글은 공개된 시황·전망을 정리한 정보 참고용이며, 투자 권유가 아니에요. 투자 판단과 책임은 본인에게 있어요.</p>
+  </article>
+
+  <!-- ===== 글 2 : SK하이닉스 ===== -->
+  <article class="post">
+    <span class="num">글 2</span>
+    <h1>SK하이닉스, 역대급 실적인데 주가는 왜? HBM4가 열쇠</h1>
+    <p class="byline">오늘의 지식 · 반도체 시황</p>
+    <p class="lead">SK하이닉스가 <span class="hi">사상 최대 실적</span>을 냈다는 뉴스, 보셨어요? 숫자가 진짜 어마어마해요. 근데 신기하게도 주가는 그만큼 확 오르진 않았어요. "실적 대박인데 왜 주가는 잠잠하지?" 이 궁금증, 오늘 풀어드릴게요.</p>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) 주가·지수는 실시간 변동. 발행일에 당일 종가·최신 기사만 한 번 확인하세요.</div>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/memory%20chip/" target="_blank" rel="noopener">"memory chip" ↗</a>
+      <a href="https://pixabay.com/images/search/ai%20technology/" target="_blank" rel="noopener">"ai technology" ↗</a>
+    </div>
+
+    <h2>2분기 실적, 얼마나 대단했냐면</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>항목</th><th>2분기</th><th>증가</th></tr></thead>
+        <tbody>
+          <tr><td>매출</td><td class="v">79.3조원</td><td>전분기 +51%</td></tr>
+          <tr><td>영업이익</td><td class="v">60.5조원</td><td>전년比 +257%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>말 그대로 <strong>역대급</strong>이에요. AI 열풍으로 <span class="em">HBM 수요가 폭발</span>한 덕을 제대로 봤어요.</p>
+
+    <h2>HBM4 양산 시작 — 하반기 열쇠</h2>
+    <p>SK하이닉스는 2분기부터 주요 고객사에 <strong>HBM4 양산 공급을 시작</strong>했어요. 수율·품질도 안정 단계에 근접했고, 하반기엔 공급을 본격 확대할 계획이래요. 출하량과 평균판매가격(ASP)이 함께 오를 거란 전망이고요.</p>
+
+    <h2>그런데 왜 주가는 잠잠할까?</h2>
+    <div class="callout"><span>🤔</span><span>사상 최대 실적에도 주가는 <span class="hi">"소폭 등락"에 그쳤어요.</span> 이미 좋은 실적이 주가에 상당 부분 반영됐다는 해석이 나와요.</span></div>
+    <p>주식은 <span class="em">'현재'보다 '미래'를 보는</span> 경향이 있어요. 그래서 "지금 실적이 좋다"보다 "앞으로 더 좋아지느냐"가 주가를 움직이죠. 다만 증권가에선 목표주가를 <strong>기존 200만원 → 280만원으로 상향</strong>하는 등 기대는 이어지고 있어요.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0"><strong>"실적 = 주가"가 아니라는 걸</strong> 잘 보여주는 사례예요. 좋은 실적이 이미 기대에 반영돼 있으면, 실제 발표 때는 오히려 잠잠할 수 있거든요. 그래서 뉴스 헤드라인만 보고 판단하기보단, "앞으로의 전망"까지 함께 보는 습관이 필요한 것 같아요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>2분기 매출 <strong>79.3조</strong>·영업익 <strong>60.5조</strong> (역대급)</li>
+        <li><strong>HBM4 양산 시작</strong>, 하반기 공급 확대 계획</li>
+        <li>실적 대비 <strong>주가는 잠잠</strong> (기대 선반영 해석)</li>
+        <li>증권가 목표주가 <strong>200만 → 280만원</strong> 상향 사례</li>
+      </ul>
+    </div>
+    <p class="tags">#SK하이닉스 #HBM4 #반도체 #AI반도체 #주식시황</p>
+    <p class="note">※ 본 글은 공개된 시황·전망을 정리한 정보 참고용이며, 투자 권유가 아니에요. 투자 판단과 책임은 본인에게 있어요.</p>
+  </article>
+</div>
