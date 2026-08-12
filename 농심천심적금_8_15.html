@@ -1,0 +1,124 @@
+<title>연 8.15% NH농심천심 적금 완전정리</title>
+<style>
+  :root{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#0a7d3b; --accent-2:#075f2c; --accent-soft:#e2f2e8; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f0; --box-accent:#0a7d3b; --box-soft:#d3ecdd; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#0f130f; --surface:#191d17; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#2a302a; --accent:#3fbf6e; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fbf6e; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#0f130f; --surface:#191d17; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#2a302a; --accent:#3fbf6e; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fbf6e; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#0a7d3b; --accent-2:#075f2c; --accent-soft:#e2f2e8; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f0; --box-accent:#0a7d3b; --box-soft:#d3ecdd; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.15rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.55rem;margin:36px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:1.14rem}
+  th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent);white-space:nowrap}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .note{margin-top:12px;color:var(--ink-faint);font-size:1rem;font-style:italic}
+  .edit{background:#fff6d6;border:1px dashed var(--warn-line);border-radius:10px;padding:12px 16px;margin:0 0 20px;color:#7a5a12;font-size:1.02rem}
+  :root[data-theme="dark"] .edit{background:#2e2610;color:#e3c877}
+  @media(prefers-color-scheme:dark){.edit{background:#2e2610;color:#e3c877}}
+</style>
+
+<div class="wrap">
+  <p class="cap">연 8.15% NH농심천심 적금 · 검수 후 발행</p>
+  <article class="post">
+    <h1>연 8.15% 적금이 실화? NH농협 '농심천심 적금' 완전정리</h1>
+    <p class="byline">오늘의 지식 · 고금리 특판</p>
+    <p class="lead">"연 8.15% 적금? 요즘 이런 금리가 어딨어, 사기 아냐?" 싶으셨죠? ㅎㅎ 결론부터 <span class="hi">진짜예요.</span> NH농협은행이 창립기념일(8월 15일)을 맞아 내놓은 특판 적금이거든요. 근데 이 "8.15%"에는 꼭 알아야 할 조건이 숨어 있어요. 좋은 것만 말고 냉정하게 다 정리해드릴게요.</p>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) 특판은 조기 마감·조건 변경될 수 있어요. 발행일에 NH농협은행 공식·NH올원뱅크에서 판매 여부와 조건을 다시 확인하세요.</div>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/saving%20money/" target="_blank" rel="noopener">"saving money" ↗</a>
+      <a href="https://pixabay.com/images/search/piggy%20bank/" target="_blank" rel="noopener">"piggy bank" ↗</a>
+    </div>
+
+    <h2>어떤 상품이에요?</h2>
+    <p>NH농협은행이 <strong>창립기념일 8월 15일</strong>을 기념해 내놓은 <span class="em">'NH농심천심 적금'</span>이에요. 이름처럼 광복절·창립을 상징하는 <strong>연 최고 8.15%</strong> 금리가 포인트고요. 예금 버전도 같이 나왔어요. <span class="hi">1만좌 한정</span>이라 관심 있으면 서둘러야 해요.</p>
+
+    <h2>진짜 8.15% 받으려면? (금리 구조)</h2>
+    <p>여기가 핵심이에요. 8.15%가 그냥 주어지는 게 아니에요.</p>
+    <div class="tablewrap">
+      <table>
+        <tbody>
+          <tr><td>기본금리</td><td class="v">연 2.30%</td></tr>
+          <tr><td>우대금리(최대)</td><td class="v">+5.85%p</td></tr>
+          <tr><td>최고금리</td><td class="v">연 8.15%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="font-style:normal">즉 <strong>우대조건을 다 채워야</strong> 8.15%, 하나도 안 채우면 기본 2.30%예요.</p>
+
+    <h2>우대조건 (이걸 다 해야 8.15%)</h2>
+    <ul>
+      <li><strong>농심천심 국민참여단</strong> 가입</li>
+      <li><strong>NH올원뱅크</strong>에 농심천심 응원 메시지 남기기</li>
+      <li>NH농협카드로 <strong>'NH싱싱몰' 결제</strong></li>
+      <li>특화카드 <strong>'올바른이음카드'</strong> 이용</li>
+    </ul>
+    <div class="callout"><span>⚠️</span><span>카드 발급·사용 조건이 있어서, <span class="hi">"금리만 받고 끝"이 아니에요.</span> 내가 실제로 채울 수 있는 조건인지 따져봐야 해요.</span></div>
+
+    <h2>그래서 이자 얼마 받아요? (냉정하게)</h2>
+    <p>적금은 <strong>월 최대 30만원</strong>까지만 넣을 수 있어요. 그리고 적금 특성상 <span class="em">매달 넣은 돈마다 예치 기간이 달라서</span>, 표시금리 8.15%가 원금 전체에 붙는 게 아니에요.</p>
+    <p>대략 계산하면, 월 30만원씩 1년(원금 360만원) 넣고 최고금리 8.15%를 다 받아도 <strong>세전 이자는 약 16만원, 세후(15.4% 공제) 약 13만원 안팎</strong>이에요. 8.15%라는 숫자에 비하면 "어? 생각보단 적네?" 할 수 있어요.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">그래도 <strong>시중 어떤 적금보다 금리가 높은 건 사실</strong>이라, 조건을 부담 없이 채울 수 있는 분이면 챙길 만해요. 특히 이미 NH 카드를 쓰거나 소액 저축을 원하는 분께 좋고요. 다만 "8.15%!"만 보고 큰 이자를 기대하면 실망할 수 있으니, <span class="hi">'소액 보너스 적금'</span> 정도로 생각하면 딱이에요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>NH농협 창립기념 특판, <strong>최고 연 8.15%</strong> (실화 ⭕), 1만좌 한정</li>
+        <li>기본 2.30% + <strong>우대 최대 5.85%p</strong> (조건 다 채워야 8.15%)</li>
+        <li>우대조건: 국민참여단·응원메시지·NH싱싱몰 결제·올바른이음카드</li>
+        <li>월 30만원 한도 → 실제 이자 <strong>세후 약 13만원 안팎</strong> (소액 보너스 개념)</li>
+      </ul>
+    </div>
+    <p>조건 채울 수 있는 분은 <strong>한정 수량 마감 전에</strong> 챙겨보세요. NH올원뱅크·농협은행에서 확인하면 돼요!</p>
+    <p class="tags">#농심천심적금 #NH농협 #연8_15퍼센트 #고금리적금 #특판적금</p>
+    <p class="note">※ 상품 조건·판매 여부는 변경/마감될 수 있어요. 가입 전 NH농협은행 공식 안내를 꼭 확인하세요.</p>
+  </article>
+</div>
