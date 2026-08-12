@@ -1,0 +1,116 @@
+<title>토스 물개 키우기 5천원 받기</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#fff; --ink:#1a1f2b; --ink-soft:#4a5262; --ink-faint:#828b9b;
+    --line:#dde2ea; --accent:#2b6ef2; --accent-2:#1a4fc0; --accent-soft:#e5eefc; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eaf1fe; --box-accent:#2b6ef2; --box-soft:#d3e2fc; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#0e1118; --surface:#171c26; --ink:#e6ebf3; --ink-soft:#a8b2c2; --ink-faint:#7b8598;
+    --line:#262d3a; --accent:#5b8ef5; --accent-2:#7ba6f8; --accent-soft:#132239; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#132038; --box-accent:#5b8ef5; --box-soft:#20304d; }}
+  :root[data-theme="dark"]{
+    --bg:#0e1118; --surface:#171c26; --ink:#e6ebf3; --ink-soft:#a8b2c2; --ink-faint:#7b8598;
+    --line:#262d3a; --accent:#5b8ef5; --accent-2:#7ba6f8; --accent-soft:#132239; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#132038; --box-accent:#5b8ef5; --box-soft:#20304d; }
+  :root[data-theme="light"]{
+    --bg:#eef1f6; --surface:#fff; --ink:#1a1f2b; --ink-soft:#4a5262; --ink-faint:#828b9b;
+    --line:#dde2ea; --accent:#2b6ef2; --accent-2:#1a4fc0; --accent-soft:#e5eefc; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eaf1fe; --box-accent:#2b6ef2; --box-soft:#d3e2fc; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.15rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.55rem;margin:36px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 19px}
+  ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 52px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center;font-size:1rem}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .note{margin-top:12px;color:var(--ink-faint);font-size:1rem;font-style:italic}
+  .edit{background:#fff6d6;border:1px dashed var(--warn-line);border-radius:10px;padding:12px 16px;margin:0 0 20px;color:#7a5a12;font-size:1.02rem}
+  :root[data-theme="dark"] .edit{background:#2e2610;color:#e3c877}
+  @media(prefers-color-scheme:dark){.edit{background:#2e2610;color:#e3c877}}
+</style>
+
+<div class="wrap">
+  <p class="cap">토스 물개 키우기 · 공짜돈 앱테크 · 검수 후 발행</p>
+  <article class="post">
+    <h1>토스에서 물개 키우면 진짜 5천원 준다고? (앱테크 방법 정리)</h1>
+    <p class="byline">오늘의 지식 · 공짜돈 앱테크</p>
+    <p class="lead">토스 켰다가 <span class="hi">귀여운 물개 키우기</span> 이벤트 보신 적 있으세요? "이거 키우면 진짜 돈 준대"라는 말에 반신반의하셨죠? ㅎㅎ 결론은 <strong>진짜예요.</strong> 며칠 물 주고 미션 하면서 물개를 다 키우면 <span class="em">토스포인트(현금처럼 쓰는 포인트)</span>를 받을 수 있어요. 오늘 그 방법을 싹 정리했어요.</p>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) '물개' 이벤트의 정확한 보상 금액·기간·미션은 토스 앱 이벤트 화면에서 확인해 숫자를 맞추세요. (토스 키우기 이벤트는 상시로 종류가 바뀌어요.)</div>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/seal%20cute/" target="_blank" rel="noopener">"seal cute" ↗</a>
+      <a href="https://pixabay.com/images/search/mobile%20reward/" target="_blank" rel="noopener">"mobile reward" ↗</a>
+    </div>
+
+    <h2>이게 뭐예요? (토스 키우기 이벤트)</h2>
+    <p>토스에는 캐릭터를 <strong>며칠 동안 키우면 보상을 주는</strong> '키우기' 이벤트가 있어요. 예전엔 채소 키우기 같은 게 있었고, 지금은 <span class="em">물개 버전</span>인 거죠. 물 주고, 미션 하고, 광고 보면서 성장 게이지를 채우면 <span class="hi">다 키웠을 때 토스포인트</span>를 줘요. 이 포인트는 1P = 1원처럼 현금같이 쓸 수 있어요.</p>
+
+    <h2>물개 키우는 법 (단계별)</h2>
+    <ol class="steps">
+      <li>토스 앱에서 <strong>물개 키우기 이벤트</strong> 페이지 들어가기</li>
+      <li>하루 여러 번 <strong>'물 주기'</strong>로 성장 게이지 채우기</li>
+      <li><strong>미션·광고 보기</strong>로 물이나 성장 포인트 추가로 받기</li>
+      <li><strong>친구 초대</strong>하면 성장이 빨라지는 경우도 있음</li>
+      <li>게이지 다 채워 <strong>완성하면 토스포인트 지급!</strong></li>
+    </ol>
+    <div class="callout"><span>⏰</span><span>보통 <span class="hi">며칠(약 7~10일)</span> 걸려요. 하루 2~3번 꾸준히 물 주고 미션 하면 기간이 확 줄어요.</span></div>
+
+    <h2>빨리 키우는 팁</h2>
+    <ul>
+      <li>알림 켜두고 <strong>하루 여러 번 접속</strong>해서 물 주기</li>
+      <li><strong>광고 시청 미션</strong>은 귀찮아도 성장 효율이 좋음</li>
+      <li>초대 가능한 <strong>친구가 있으면</strong> 활용</li>
+    </ul>
+
+    <h2>받은 포인트, 어디 써요?</h2>
+    <p>토스포인트는 <span class="em">토스에서 송금·결제에 현금처럼</span> 쓸 수 있어요. 소액이지만 "며칠 놀면서 모은 공짜돈"이라 쏠쏠하죠.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">이런 앱테크는 <strong>"큰 돈 버는 것"이 아니라 "심심할 때 소소하게"</strong>가 맞아요. 광고 보는 시간 대비 금액이 크진 않으니까요. 근데 어차피 토스 자주 켜는 분이면, 물 주는 김에 공짜 포인트 챙기는 거라 안 할 이유는 없어요. 저는 알림 켜두고 화장실 갈 때(?) 툭툭 눌러요ㅋㅋ</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>토스 <strong>물개 키우기 = 완성하면 토스포인트</strong> 지급 (현금처럼 사용)</li>
+        <li>방법: <strong>물 주기 + 미션·광고 + 친구초대</strong>로 게이지 채우기</li>
+        <li>보통 며칠 소요, 꾸준히 하면 단축</li>
+        <li>큰 돈은 아니지만 <strong>소소한 공짜 앱테크</strong>로 딱</li>
+      </ul>
+    </div>
+    <p>토스 자주 쓰신다면, 물 주는 김에 물개 키워서 공짜 포인트 챙겨보세요!</p>
+    <p class="tags">#토스 #토스물개 #앱테크 #토스포인트 #공짜돈</p>
+    <p class="note">※ 이벤트 보상·기간·미션은 시점마다 달라지고 조기 종료될 수 있어요. 가입·참여 전 토스 앱 이벤트 화면에서 최신 내용을 확인하세요.</p>
+  </article>
+</div>
