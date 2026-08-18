@@ -1,0 +1,125 @@
+<title>원달러 환율 급락, 지금 환전해도 될까</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.2rem;margin:0 0 17px}
+  .lead{font-size:1.28rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.05rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.08rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.2rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.15rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.15rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.12rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">원달러 환율 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>환율 1560원 찍고 왜 갑자기 떨어졌을까? 지금 환전해도 되는지 정리</h1>
+    <p class="byline">오늘의 지식 · 환율·경제</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>환율이 어떻게 움직였는지 (1560원 → 1410원)</li>
+        <li>왜 이렇게 빠르게 떨어졌는지</li>
+        <li>앞으로 전망은 어떤지</li>
+        <li>지금 환전해도 되는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">환율에 크게 관심 없던 분들도 요즘은 "환율이 왜 이렇게 널뛰기해?"라는 얘기 한 번쯤 들어보셨을 거예요. 올해 6월엔 1560원을 넘기더니, 두 달 만에 1410원대까지 <span class="hi">150원 가까이 뚝 떨어졌거든요.</span> 여행이나 해외직구 계획이 있으신 분이라면 특히 궁금하실 텐데, 오늘 그 배경과 앞으로 전망까지 정리해드릴게요.</p>
+
+    <h2>환율이 어떻게 움직였나요?</h2>
+    <p>먼저 최근 흐름부터 짚고 갈게요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>시점</th><th>원달러 환율</th></tr></thead>
+        <tbody>
+          <tr><td>2026년 6월 8일</td><td class="v">1,561.5원 (장중)</td></tr>
+          <tr><td>2026년 8월</td><td class="v">1,410원대</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>6월의 1,561.5원은 <strong>2009년 3월 글로벌 금융위기 이후 17년 3개월 만에 가장 높은 수준</strong>이었어요. 그런데 7월부터 하락세로 돌아서더니, 8월엔 <span class="em">10개월 만에 가장 낮은 수준</span>인 1,410원대까지 내려왔어요. 이렇게 짧은 기간에 크게 출렁인 건 흔한 일이 아니에요.</p>
+
+    <h2>왜 이렇게 빠르게 떨어졌나요?</h2>
+    <p>몇 가지 요인이 겹쳤어요.</p>
+    <ul class="plain">
+      <li><strong>SK하이닉스 ADR 상장</strong> — 미국 시장에 상장하면서 달러가 국내로 지속 유입됐어요</li>
+      <li><strong>수출기업의 달러 매도(네고 물량)</strong> — 수출기업들이 보유 달러를 시장에 내놓는 물량이 늘었어요</li>
+      <li><strong>중동 지역 긴장 완화</strong> — 국제유가가 안정되면서 원화에 우호적인 환경이 만들어졌어요</li>
+      <li><strong>엔화 강세 동조</strong> — 미·일 외환시장 공조 경계감으로 엔화가 강세를 보이며 원화에도 영향을 줬어요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>정리하면 <span class="hi">"달러가 들어올 요인은 늘고, 나갈 요인은 줄어든"</span> 상황이 겹치면서 환율이 빠르게 내려온 거예요.</span></div>
+
+    <h2>앞으로 더 떨어질까요?</h2>
+    <p>블룸버그 컨센서스 기준으로는 <strong>2026년 12월 1,400원, 2027년 말 1,350원</strong> 수준을 전망하고 있어요. 일부에서는 1,300원대 후반까지 갈 수 있다는 의견도 나오지만, <span class="em">"추세 전환이라기보단 일시적 조정"</span>이라는 신중한 시각도 함께 있어요. 1,410원 부근에서는 달러 저가 매수나 수입업체 결제 수요가 들어오면서 하단을 지지할 가능성도 거론되고 있고요.</p>
+
+    <h2>그래서 지금 환전해도 되나요?</h2>
+    <p>이건 개인 상황에 따라 다르게 접근하시는 게 좋아요.</p>
+    <ul class="plain">
+      <li><strong>곧 해외여행·유학 등으로 실제 사용 예정</strong>이라면 — 지금 환율도 6월보다는 크게 낮아진 수준이라 나쁘지 않은 타이밍이에요</li>
+      <li><strong>당장 쓸 계획 없이 환테크 목적</strong>이라면 — 더 떨어질 가능성도 있는 만큼, 한 번에 다 바꾸기보다 나눠서 환전하는 방법을 고려해볼 만해요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 환율이 왜 이렇게 짧은 기간에 크게 움직이나요?</p><p class="a">기업의 대규모 자금 유출입(이번엔 SK하이닉스 ADR 상장), 국제유가, 다른 나라 통화(엔화) 움직임 등 여러 요인이 동시에 겹치면 환율은 짧은 기간에도 크게 출렁일 수 있어요.</p></div>
+    <div class="qa"><p class="q">Q. 1,300원대까지 떨어질 가능성이 있나요?</p><p class="a">일부 전문가들이 가능성을 언급하긴 했지만, 동시에 "추세 전환은 아니다"라는 신중론도 있어요. 확정된 방향이라기보다는 여러 시나리오 중 하나로 보시는 게 맞아요.</p></div>
+    <div class="qa"><p class="q">Q. 해외직구할 때 환율 하락의 영향을 얼마나 받나요?</p><p class="a">환율이 낮아질수록 같은 달러 가격이라도 원화로 환산한 결제 금액이 줄어들어요. 다만 해외 사이트별로 환율 적용 시점이 다를 수 있으니, 결제 직전 환율을 한 번 확인하는 습관이 좋아요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">환율은 방향을 정확히 맞추기가 정말 어려운 영역이에요. 지금처럼 빠르게 떨어졌다고 "이제 계속 내려가겠지" 단정하는 것도, 반대로 "곧 다시 오르겠지"라고 확신하는 것도 위험해요. 저는 <strong>당장 쓸 돈은 필요할 때 나눠서 환전</strong>하고, 여윳돈으로 환테크를 하는 게 아니라면 환율 예측에 너무 힘 빼지 않는 걸 추천해요.</p></div>
+
+    <p>환율은 국제 정세와 여러 나라의 경제지표에 따라 시시각각 바뀌니, 실제 환전 전에는 그날그날의 최신 환율을 꼭 확인하시길 바라요.</p>
+
+    <p class="kw">#원달러환율 #환율전망 #환율하락 #환전타이밍 #원화강세 #SK하이닉스ADR #환율뉴스 #해외여행환전</p>
+  </article>
+</div>
