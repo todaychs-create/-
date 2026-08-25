@@ -1,0 +1,117 @@
+<title>예금자보호한도 1억원, 내 돈 어디까지 안전할까</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">예금자보호한도 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>예금 5천만원까지만 보호된다는 거, 이제 옛날 얘기예요</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>뭐가 바뀌었는지</li>
+        <li>내 예금은 어떻게 적용되는지</li>
+        <li>그래도 나눠 넣어야 할까</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">은행이 잘못되더라도 <strong>5천만원까지만 보호된다</strong>는 얘기, 다들 한 번쯤 들어보셨을 거예요. 목돈을 여러 은행에 나눠 넣으신 분들 많으시죠. 그런데 이 기준이 <span class="hi">1억원으로 올랐다는 사실</span>, 혹시 아직 모르셨다면 오늘 꼭 확인하고 가세요.</p>
+
+    <h2>뭐가 바뀌었나요?</h2>
+    <p>예금자보호법이 개정되면서, <strong>2025년 9월 1일부터</strong> 한 금융회사당 보호받는 한도가 <span class="em">5,000만원에서 1억원으로</span> 올랐어요. 25년 만의 첫 상향이라 의미가 큰 변화예요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>보호 한도</th></tr></thead>
+        <tbody>
+          <tr><td>2025년 8월까지</td><td>1인당 금융회사별 5,000만원</td></tr>
+          <tr><td>2025년 9월 1일부터</td><td class="v">1인당 금융회사별 1억원</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>여기서 "보호"란, 은행이나 저축은행이 영업정지나 파산 같은 상황에 놓였을 때, <strong>예금보험공사</strong>가 원금과 이자를 합쳐 한도까지 대신 지급해준다는 뜻이에요.</p>
+
+    <h2>내 예금은 어떻게 적용되나요?</h2>
+    <p>가장 궁금해하시는 부분이 바로 이거예요. 결론부터 말씀드리면, <span class="hi">따로 신청하지 않아도 자동으로 적용</span>돼요.</p>
+    <ul class="plain">
+      <li>9월 1일 이전에 가입한 예금이라도 <strong>동일하게 1억원까지</strong> 보호받아요</li>
+      <li>은행 방문이나 서류 제출 등 <strong>추가로 하실 일은 없어요</strong></li>
+      <li>기준은 <strong>"한 사람이 한 금융회사에서"</strong>예요. 여러 은행에 나눠 넣으면 각각 1억원씩 적용돼요</li>
+      <li>예금·적금뿐 아니라 외화예금, 원금보장형 상품, 퇴직연금(DC형·IRP) 안의 예금성 자산도 포함돼요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>예를 들어 A은행에 8천만원, B은행에 8천만원을 넣어두셨다면, 두 곳 모두 <span class="hi">전액 보호</span> 대상이에요. 예전 기준(5천만원)이었다면 각각 3천만원씩 보호 밖이었던 셈이니, 훨씬 안전해진 거예요.</span></div>
+
+    <h2>그래도 나눠 넣어야 할까요?</h2>
+    <p>목돈이 1억원을 넘으신다면, 여전히 <strong>한 곳에 몰아넣기보다 나눠서 예치</strong>하시는 게 안전해요. 다만 예전처럼 "5천만원 단위로" 잘게 쪼갤 필요는 없어졌고, <span class="em">1억원 단위로 여유 있게 나누셔도</span> 충분해요. 관리하실 계좌 개수가 줄어드는 만큼 훨씬 편해지신 거죠.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 저축은행도 1억원까지 보호되나요?</p><p class="a">네, 예금보험공사에 가입된 저축은행이라면 은행과 동일하게 1억원까지 보호돼요. 다만 가입 여부는 상품 가입 전 꼭 확인하시는 게 좋아요.</p></div>
+    <div class="qa"><p class="q">Q. 부부가 각자 이름으로 넣으면 각각 1억원씩 적용되나요?</p><p class="a">네, 보호 한도는 "예금자 1인" 기준이라, 부부가 각자 명의로 예치하면 각각 1억원까지 별도로 적용돼요.</p></div>
+    <div class="qa"><p class="q">Q. 새마을금고나 신협도 똑같이 적용되나요?</p><p class="a">새마을금고·신협·농협 등 상호금융권은 예금보험공사가 아니라 자체 예금자보호기금으로 보호되는데, 이쪽도 순차적으로 한도를 맞추는 방향으로 논의되고 있어요. 가입 전 해당 기관에 현재 적용 한도를 확인하시는 게 정확해요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">퇴직금이나 목돈을 여러 은행에 쪼개 넣느라 통장만 여러 개 만들어두신 분들 많으실 텐데, 이번 개정으로 <strong>관리가 한결 편해지셨을 거예요</strong>. 그렇다고 전 재산을 한 곳에 몰아넣기보다는, 큰 목돈이라면 여전히 두세 곳으로 나눠두시는 걸 권해드려요. 안전은 아무리 챙겨도 지나치지 않으니까요.</p></div>
+
+    <p>정확한 보호 여부는 가입하시는 금융회사가 예금보험공사 가입 기관인지 먼저 확인하시고, 상품 가입 전 창구나 콜센터에 한 번 더 물어보시는 게 가장 확실해요.</p>
+
+    <p class="kw">#예금자보호한도 #예금자보호1억원 #예금보험공사 #예금자보호법개정 #목돈굴리기 #안전한예금 #저축은행예금보호 #시니어재테크</p>
+  </article>
+</div>
