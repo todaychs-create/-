@@ -1,0 +1,121 @@
+<title>K패스 교통카드, 대중교통비 최대 53% 돌려받기</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">K패스 교통카드 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>버스·지하철 매일 타신다면, K패스 안 쓰면 손해예요</h1>
+    <p class="byline">오늘의 지식 · 교통·생활정보</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>환급률이 얼마나 되는지</li>
+        <li>2026년에 뭐가 새로 생겼는지</li>
+        <li>어떻게 발급받는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">매일 대중교통으로 출퇴근하신다면, <strong>K패스</strong> 카드 하나로 교통비를 상당 부분 돌려받으실 수 있어요. 아직 일반 교통카드를 쓰고 계신다면, 오늘 소개해드리는 내용 보시고 바꿔보시는 걸 추천해요.</p>
+
+    <h2>환급률이 얼마나 되나요?</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>대상</th><th>환급률</th></tr></thead>
+        <tbody>
+          <tr><td>일반</td><td class="v">20%</td></tr>
+          <tr><td>청년(만 19~34세)</td><td class="v">30%</td></tr>
+          <tr><td>2자녀 가구 부모</td><td class="v">30%</td></tr>
+          <tr><td>3자녀 이상 가구 부모</td><td class="v">50%</td></tr>
+          <tr><td>저소득층(기초수급자·차상위)</td><td class="v">53%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>한 달에 대중교통비로 <strong>15회 이상</strong> 이용하시면, 이용한 금액의 일정 비율을 다음 달에 환급받는 방식이에요. 매일 출퇴근하시는 분이라면 <span class="hi">거의 자동으로 조건을 채우게</span> 되는 셈이에요.</p>
+
+    <h2>2026년에 뭐가 새로 생겼나요?</h2>
+    <p>2026년부터는 <strong>'모두의 카드'</strong>라는 게 추가됐어요. 기존 K패스가 이용 금액의 일정 비율만 돌려주는 방식이라면, 모두의 카드는 <span class="em">기준금액을 초과한 교통비를 100% 전액</span> 돌려줘요.</p>
+    <ul class="plain">
+      <li>2026년 9월까지 모두의 카드 환급 기준금액이 <strong>50% 인하</strong>돼서 혜택을 받기가 더 쉬워졌어요</li>
+      <li>K패스 기본형도 <strong>시차 출퇴근 시간대</strong>에 이용하면 환급률이 최대 30%p 올라가요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>본인의 출퇴근 패턴에 따라 <span class="hi">K패스 기본형이 유리한지, 모두의 카드가 유리한지</span> 달라질 수 있어요. 대중교통 이용 횟수와 금액이 많으신 분이라면 모두의 카드 조건을 한 번 비교해보시는 게 좋아요.</span></div>
+
+    <h2>어떻게 발급받나요?</h2>
+    <ul class="plain">
+      <li>K패스 홈페이지나 앱에서 <strong>기존 교통카드를 그대로 등록</strong>해서 사용할 수 있어요</li>
+      <li>신용·체크카드사에서 발급하는 K패스 전용 카드로도 이용 가능해요</li>
+      <li>회원가입 후 매달 자동으로 사용 내역이 집계돼서, 다음 달에 환급금이 지급돼요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 기후동행카드랑 같이 쓸 수 있나요?</p><p class="a">아니요, K패스와 기후동행카드는 중복 이용이 불가능해요. 서울 안에서만 다니신다면 기후동행카드가, 다른 지역까지 오가신다면 K패스가 더 유리할 수 있어요.</p></div>
+    <div class="qa"><p class="q">Q. 한 달에 15회를 못 채우면 아예 환급이 안 되나요?</p><p class="a">네, 월 15회 이상 이용해야 환급 대상이 돼요. 15회 미만이면 해당 월은 환급을 받지 못해요.</p></div>
+    <div class="qa"><p class="q">Q. 환급금은 어떻게 받나요?</p><p class="a">보통 다음 달 중순쯤 등록하신 계좌나 카드로 자동 환급돼요. 정확한 지급일은 이용하시는 카드사·플랫폼 공지를 확인하시면 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">K패스는 신청만 해두면 <strong>별다른 노력 없이 매달 자동으로 교통비를 아낄 수 있는</strong> 제도예요. 아직 안 쓰고 계신 분이라면, 오늘 카드 발급이나 등록부터 해두시길 권해드려요. 특히 자녀가 많으시거나 청년이신 분들은 환급률이 더 높으니 꼭 챙기세요.</p></div>
+
+    <p>환급률과 기준금액은 정책에 따라 계속 조정되니, 정확한 최신 조건은 K패스 공식 홈페이지에서 확인하시길 바라요.</p>
+
+    <p class="kw">#K패스교통카드 #K패스환급 #대중교통비환급 #모두의카드 #교통비절약 #K패스신청방법 #청년교통비지원 #K패스환급률</p>
+  </article>
+</div>

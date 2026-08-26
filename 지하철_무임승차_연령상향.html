@@ -1,0 +1,114 @@
+<title>지하철 무임승차, 65세에서 70세로 바뀌나요</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">지하철 무임승차 연령 상향 논의 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>지하철 무임승차 65세→70세 상향, 지금 논의되는 이유</h1>
+    <p class="byline">오늘의 지식 · 교통·복지</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>무슨 논의가 진행 중인지</li>
+        <li>왜 이런 논의가 나왔는지</li>
+        <li>어르신들 반응은 어떤지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">지금까지 <strong>만 65세부터</strong> 지하철을 무료로 타실 수 있었죠. 그런데 서울시가 이 기준을 <span class="hi">만 70세로 올리는 방안</span>을 본격적으로 논의하고 있어요. 아직 확정된 건 아니지만, 어떤 논의가 오가고 있는지 오늘 정리해드릴게요.</p>
+
+    <h2>무슨 논의가 진행 중인가요?</h2>
+    <p>서울시는 현행 <strong>65세인 도시철도(지하철) 무임 연령을 70세로 상향</strong>하는 방안을 추진 중이에요. 이를 위해 <span class="em">'서울 노인교통복지 위원회'</span>를 구성해서 논의를 시작한 상태예요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>현재</th><th>논의 중인 방안</th></tr></thead>
+        <tbody>
+          <tr><td>지하철 무임승차 연령</td><td>65세</td><td>70세로 상향 검토</td></tr>
+          <tr><td>대안</td><td>-</td><td>70세 이상 버스비 일부 지원</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>서울시는 지하철 무임승차 연령을 올리는 대신, 절감되는 재원으로 <strong>70세 이상 어르신 버스비를 지원</strong>하는 방안도 함께 검토하고 있어요.</p>
+
+    <h2>왜 이런 논의가 나왔나요?</h2>
+    <p>가장 큰 이유는 <strong>도시철도 운송 적자</strong>예요. 고령 인구가 계속 늘면서 무임승차로 인한 손실 규모도 함께 커지고 있고, 이 부담이 지하철 운영 재정을 압박하고 있다는 게 서울시의 설명이에요.</p>
+    <div class="callout"><span>💡</span><span>서울시 자체 조사에서는 <span class="hi">시민 10명 중 7명 이상이 연령 상향에 찬성</span>했다는 결과도 나왔어요. 다만 이건 어디까지나 조사 결과일 뿐, 실제 정책 확정과는 별개예요.</span></div>
+
+    <h2>어르신들 반응은 어떤가요?</h2>
+    <p>노후희망유니온, 전국시니어노조 등 <strong>노인복지 관련 13개 단체</strong>는 강하게 반발하고 있어요. 이들은 "연령 상향 논의를 중단하고, 노인 교통복지의 새로운 해법을 마련하라"고 요구하며 서울시청 앞에서 기자회견을 열기도 했어요.</p>
+    <ul class="plain">
+      <li>단순히 연령만 올리면 <strong>65~69세 어르신들의 이동권이 위축</strong>될 수 있다는 우려가 나와요</li>
+      <li>버스비 지원으로 대체하더라도, <strong>지하철 대비 접근성이나 편의성 차이</strong>가 있다는 지적도 있어요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 지금 당장 65세 무임승차가 없어지나요?</p><p class="a">아니요, 아직 위원회 논의 초기 단계라 실제 시행 여부와 시기는 정해지지 않았어요. 확정되면 별도의 유예기간을 두고 시행될 가능성이 높아요.</p></div>
+    <div class="qa"><p class="q">Q. 서울만 해당하는 논의인가요?</p><p class="a">현재 논의는 서울시 도시철도를 중심으로 진행되고 있어요. 다른 지자체나 전국 단위 정책 변화 여부는 서울시 결정 이후 별도로 논의될 가능성이 있어요.</p></div>
+    <div class="qa"><p class="q">Q. 버스비 지원은 어떤 방식으로 이루어지나요?</p><p class="a">아직 구체적인 지원 방식(정액 지원, 환급 등)은 확정되지 않았어요. 위원회 논의 결과가 나오면 서울시가 공식 발표할 예정이에요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">아직 확정된 정책이 아니니 너무 걱정하실 필요는 없지만, <strong>이런 논의가 진행되고 있다는 사실 자체는 알아두시는 게 좋아요</strong>. 특히 60대 중후반이신 분들은 향후 정책 발표를 계속 지켜보시고, 관련 소식이 나올 때마다 정확한 시행 시기를 확인하시길 권해드려요.</p></div>
+
+    <p>이 사안은 계속 논의 중인 정책이라 언제든 방향이 바뀔 수 있으니, 최신 소식은 서울시 공식 발표나 뉴스를 통해 확인하시길 바라요.</p>
+
+    <p class="kw">#지하철무임승차 #노인무임승차연령 #서울시지하철정책 #무임승차70세 #노인교통복지 #지하철적자 #버스비지원 #노인교통정책2026</p>
+  </article>
+</div>

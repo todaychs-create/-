@@ -1,0 +1,118 @@
+<title>AI 목소리 복제 보이스피싱, 2026년 이렇게 대비하세요</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+  .linkbox{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 20px;font-size:1.1rem}
+  .linkbox p{margin:6px 0}
+</style>
+
+<div class="wrap">
+  <p class="cap">보이스피싱 예방 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>자녀 목소리와 똑같은데 보이스피싱이라고요?</h1>
+    <p class="byline">오늘의 지식 · 안전·생활정보</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>요즘 보이스피싱이 왜 더 무서워졌는지</li>
+        <li>어떤 방식으로 접근하는지</li>
+        <li>가족끼리 미리 정해두면 좋은 것</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">"엄마, 나 사고 났어..." 전화기 너머로 들리는 목소리가 <strong>진짜 자녀 목소리와 똑같다면</strong> 어떠실까요? 최근 AI 기술을 이용한 보이스피싱이 급증하고 있어요. 30초 정도의 음성만 있으면 목소리를 거의 완벽하게 복제할 수 있는 시대가 됐거든요. 오늘은 어떻게 대비해야 하는지 정리해드릴게요.</p>
+
+    <h2>요즘 보이스피싱이 왜 더 무서워졌나요?</h2>
+    <p>예전 보이스피싱은 어눌한 말투나 이상한 억양으로 어느 정도 눈치챌 수 있었어요. 그런데 요즘은 <span class="hi">AI 음성 복제(딥보이스)와 영상 딥페이크</span>가 결합되면서, 진짜 가족이 말하는 것처럼 들리고 심지어 영상통화로 얼굴까지 보여주는 경우도 생기고 있어요.</p>
+    <div class="callout"><span>⚠️</span><span>SNS나 유튜브에 올라온 <span class="hi">단 30초 분량의 목소리</span>만으로도 AI가 그 사람 목소리를 복제할 수 있다고 해요. "목소리가 똑같으니 진짜겠지"라는 생각 자체가 더 이상 안전하지 않아요.</span></div>
+
+    <h2>어떤 방식으로 접근하나요?</h2>
+    <p>단순히 돈을 보내라고 하는 방식에서, 더 정교한 형태로 진화하고 있어요.</p>
+    <ul class="plain">
+      <li><strong>본인인증을 빙자</strong>해 앱 설치를 유도하고, 스마트폰을 원격으로 조종해요</li>
+      <li><strong>검찰·경찰·금융기관 사칭</strong>으로 "계좌가 범죄에 연루됐다"며 불안감을 조성해요</li>
+      <li><strong>가족·지인의 목소리(딥보이스)</strong>로 급하게 돈을 요구해요</li>
+      <li>문자 속 <strong>링크(스미싱)</strong>를 눌러 악성 앱을 설치하게 유도해요</li>
+    </ul>
+
+    <h2>가족끼리 미리 정해두면 좋은 것</h2>
+    <p>가장 효과적인 대비책은 <strong>가족만 아는 암호</strong>를 미리 정해두는 거예요. AI가 목소리는 복제할 수 있어도, 가족만 아는 특정 질문이나 단어까지는 알 수 없거든요.</p>
+    <ul class="plain">
+      <li>"진짜 맞으면 우리 가족만 아는 그 단어 말해봐"처럼 확인할 수 있는 <strong>암호 문구</strong>를 미리 정해두세요</li>
+      <li>급하게 돈을 요구하는 전화를 받으면, <strong>일단 끊고 본인에게 직접 다시 전화</strong>해서 확인하세요</li>
+      <li>의심스러운 문자는 <strong>절대 링크를 누르지 말고</strong>, 카카오톡 '보호나라' 채널에 붙여넣어 스미싱 여부를 바로 확인할 수 있어요</li>
+    </ul>
+
+    <div class="linkbox">
+      <p>📞 <strong>피해가 의심되면 즉시 신고하세요</strong></p>
+      <p>☎️ 경찰: 112 &nbsp;|&nbsp; 금융감독원: 1332 &nbsp;|&nbsp; 한국인터넷진흥원(KISA): 118</p>
+    </div>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 이미 송금을 했다면 어떻게 해야 하나요?</p><p class="a">즉시 112 또는 해당 은행 콜센터에 전화해 '지급정지'를 요청하세요. 빠르게 신고할수록 돈이 인출되기 전에 막을 가능성이 높아져요.</p></div>
+    <div class="qa"><p class="q">Q. 영상통화로 얼굴까지 확인했는데도 조심해야 하나요?</p><p class="a">네, 딥페이크 기술로 영상 속 얼굴까지 실시간으로 조작하는 사례가 늘고 있어요. 영상으로 확인했더라도 급하게 돈을 요구한다면 반드시 다른 방법(직접 전화, 암호 문구)으로 한 번 더 확인하세요.</p></div>
+    <div class="qa"><p class="q">Q. 모르는 번호로 온 문자의 링크를 실수로 눌렀어요. 어떻게 하나요?</p><p class="a">즉시 스마트폰을 비행기 모드로 전환하거나 와이파이·데이터를 끄고, 백신 앱으로 검사하세요. 이후 118(KISA)에 문의해 추가 조치를 안내받으시는 게 안전해요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">"설마 나한테 이런 일이 생기겠어"라고 생각하시는 분들이 제일 위험해요. 기술이 워낙 정교해져서 <strong>목소리나 영상만으로는 더 이상 확신할 수 없는 시대</strong>가 됐거든요. 오늘 가족들과 모여서 우리 가족만의 확인 암호 하나 정해두시길 꼭 권해드려요.</p></div>
+
+    <p>보이스피싱 수법은 계속 진화하고 있으니, 새로운 사례가 나오면 가족 단톡방에 공유해서 함께 경계심을 갖는 게 가장 좋은 예방법이에요.</p>
+
+    <p class="kw">#보이스피싱예방 #AI보이스피싱 #딥페이크사기 #스미싱예방 #가족암호 #보이스피싱신고 #보호나라 #금융사기예방</p>
+  </article>
+</div>
