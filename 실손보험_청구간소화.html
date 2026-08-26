@@ -1,0 +1,121 @@
+<title>실손보험 청구, 이제 서류 없이 앱으로 끝난다</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">실손보험 청구 간소화 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>병원비 실손보험, 이제 서류 챙길 필요 없이 앱으로 끝나요</h1>
+    <p class="byline">오늘의 지식 · 보험·생활정보</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>뭐가 얼마나 편해졌는지</li>
+        <li>실손24, 어떻게 쓰는지</li>
+        <li>아직 안 되는 병원도 있는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">병원 다녀오시고 실손보험 청구하려면 진료비 영수증에 진단서까지 챙겨서 보험사 앱에 사진 찍어 올리고... 번거로우셨죠? 이제 그 과정이 <span class="hi">서류 없이 앱 몇 번 터치로 끝나는</span> 수준까지 왔어요. 오늘은 뭐가 어떻게 바뀌었는지 정리해드릴게요.</p>
+
+    <h2>뭐가 얼마나 편해졌나요?</h2>
+    <p>정부와 보험업계가 추진해온 <strong>실손보험 청구 전산화</strong>가 확대되면서, 병원이나 약국에서 진료를 받으면 <span class="em">진료·처방 내역이 자동으로 보험사에 전송</span>될 수 있게 됐어요. 예전처럼 영수증을 챙기거나 서류를 사진 찍어 첨부할 필요가 없어진 거예요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>예전 방식</th><th>지금(간소화 이후)</th></tr></thead>
+        <tbody>
+          <tr><td>서류 준비</td><td>영수증·진단서 직접 발급</td><td class="v">불필요</td></tr>
+          <tr><td>청구 방법</td><td>앱에 사진 첨부·수기 입력</td><td class="v">앱에서 내역 선택 후 전송</td></tr>
+          <tr><td>소요 시간</td><td>수일~수주</td><td class="v">최소화(자동 전송)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>실손24, 어떻게 쓰나요?</h2>
+    <p>중심이 되는 서비스는 <strong>'실손24'</strong>라는 앱(또는 웹사이트)이에요. 사용 방법은 생각보다 단순해요.</p>
+    <ul class="plain">
+      <li>병원·약국 진료 후 <strong>실손24 앱에 접속</strong>해요</li>
+      <li>본인의 진료·처방 내역이 자동으로 조회돼요</li>
+      <li>청구하고 싶은 내역을 <strong>선택만 하면</strong> 해당 병원이 보험사로 서류를 직접 전송해요</li>
+      <li>보험사가 심사 후 등록된 계좌로 보험금을 지급해요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>2026년 하반기부터는 별도로 실손24 앱을 설치하지 않아도, <span class="hi">평소 쓰던 은행 앱이나 카드사 앱</span>에서도 실손보험 자동청구를 이용할 수 있도록 확대될 예정이에요. 스마트폰에 앱을 하나 더 까는 게 부담스러우셨던 분들께 반가운 소식이에요.</span></div>
+
+    <h2>아직 안 되는 병원도 있나요?</h2>
+    <p>네, 아직 모든 병원·약국이 연계된 건 아니에요. <strong>대형 종합병원은 대부분 연계가 완료</strong>됐지만, 동네 의원이나 약국은 참여율을 높이는 작업이 진행 중이에요. 정부는 <span class="em">올해 하반기까지 의료기관 연계율을 80~90%까지 확대</span>하겠다는 목표를 발표한 상태예요.</p>
+    <ul class="plain">
+      <li>병원에서 "실손24 연계가 안 된다"고 안내받으면, 예전처럼 서류를 직접 받아 앱에 첨부하는 방식으로 청구하시면 돼요</li>
+      <li>연계 여부는 병원 방문 시 접수창구에서 바로 확인하실 수 있어요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 실손24를 쓰려면 개인정보를 새로 등록해야 하나요?</p><p class="a">본인 명의 휴대폰으로 본인인증만 하면 이용할 수 있어요. 가입하신 보험사와 연동되니 별도로 보험 정보를 입력하실 필요는 없어요.</p></div>
+    <div class="qa"><p class="q">Q. 여러 보험사에 실손보험이 있으면 어떻게 하나요?</p><p class="a">실손24에서 청구 시 가입하신 보험사를 선택할 수 있어요. 다만 실손보험은 원칙적으로 한 개만 가입 가능한 상품이라, 중복 가입 여부는 보험사에 확인해보시는 게 좋아요.</p></div>
+    <div class="qa"><p class="q">Q. 자동전송이 안 되는 병원에서 서류를 못 받으면 어떻게 하나요?</p><p class="a">진료 후 발급받는 영수증과 진료비 세부내역서는 병원에서 언제든 재발급받으실 수 있어요. 당장 못 받으셨다면 이후 방문 시나 전화로 요청하시면 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">실손보험 청구가 번거로워서 <strong>소액은 그냥 포기</strong>하시는 분들 정말 많으시더라고요. 이번 간소화로 그런 부담이 많이 줄어든 만큼, 병원 다녀오신 뒤에는 꼭 실손24 앱을 한번 열어보시길 권해드려요. 몇천원, 몇만원이라도 챙길 수 있는 걸 놓치지 않으시면 좋겠어요.</p></div>
+
+    <p>연계 병원 범위와 서비스 방식은 계속 확대되고 있으니, 실제 이용 전에는 실손24 홈페이지나 가입하신 보험사 공지를 통해 최신 정보를 확인하시길 바라요.</p>
+
+    <p class="kw">#실손보험청구간소화 #실손24 #실손보험청구방법 #병원비청구 #보험금청구간소화 #실손보험자동청구 #실손보험앱 #보험청구서류간소화</p>
+  </article>
+</div>
