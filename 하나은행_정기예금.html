@@ -1,0 +1,117 @@
+<title>하나은행 하나의정기예금, 우대금리 조건 이렇게 채우세요</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">하나은행 하나의정기예금 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>하나은행 하나의정기예금, 기본금리와 우대조건 정리</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>기본금리는 얼마인지</li>
+        <li>우대금리 조건은 뭔지</li>
+        <li>가입 방법</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">하나은행의 대표 정기예금인 <strong>'하나의정기예금'</strong>은 이름처럼 단순하고 직관적인 구조가 특징이에요. 기본금리에 몇 가지 우대조건만 채우면 <span class="hi">금리를 더 받을 수 있는데</span>, 오늘 조건을 정리해드릴게요.</p>
+
+    <h2>기본금리는 얼마인가요?</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>12개월 금리(세전)</th></tr></thead>
+        <tbody>
+          <tr><td>기본금리</td><td class="v">연 2.90%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>2026년 기준 시중은행 대부분이 <strong>연 2.90~3.00%대</strong>에 몰려 있는데, 하나은행도 비슷한 수준을 유지하고 있어요. 여기에 우대조건을 채우면 소폭 더 받으실 수 있어요.</p>
+
+    <h2>우대금리 조건은 뭔가요?</h2>
+    <ul class="plain">
+      <li><strong>하나원큐 앱</strong>을 통한 비대면 가입 시 우대금리가 붙는 경우가 많아요</li>
+      <li>급여이체, 자동이체 등록, 하나카드 실적 같은 <strong>거래 실적 우대</strong>가 적용될 수 있어요</li>
+      <li>일부 이벤트 기간에는 <strong>신규 가입 특별우대</strong>가 추가되기도 해요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>하나은행은 <span class="hi">이벤트성 특판을 자주 진행</span>하는 편이에요. 정기예금 가입 전 하나원큐 앱의 이벤트 페이지를 한 번 확인해보시면, 기본금리보다 유리한 조건을 찾을 수도 있어요.</span></div>
+
+    <h2>가입 방법</h2>
+    <ul class="plain">
+      <li><strong>하나원큐(1Q) 앱</strong>이나 영업점에서 가입 가능해요</li>
+      <li>가입 기간은 1개월부터 최대 60개월까지 다양하게 선택할 수 있어요</li>
+      <li>예금자보호법에 따라 <strong>1인당 1억원</strong>까지 원금과 이자가 보호돼요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 기간을 짧게(3개월, 6개월) 가입하면 금리가 낮아지나요?</p><p class="a">네, 일반적으로 가입 기간이 짧을수록 적용 금리도 낮아지는 구조예요. 만기까지 자금을 묶어둘 수 있는 기간을 고려해서 선택하시는 게 좋아요.</p></div>
+    <div class="qa"><p class="q">Q. 이미 하나은행 고객이면 우대금리를 못 받나요?</p><p class="a">기존 고객도 급여이체나 카드실적 같은 거래 조건을 채우면 우대금리를 받을 수 있어요. 신규 고객 전용 이벤트만 제외하면 조건은 비슷하게 적용돼요.</p></div>
+    <div class="qa"><p class="q">Q. 만기 후 자동으로 재예치되나요?</p><p class="a">가입 시 설정에 따라 다르지만, 자동재예치 옵션을 선택하시면 만기 시 새로운 금리로 자동 갱신돼요. 원치 않으시면 만기 전 해지·인출 신청을 하시면 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">시중은행 정기예금은 상품마다 큰 차이가 없어 보여도, <strong>이벤트나 우대조건에 따라 실제 받는 금리는 꽤 달라질 수 있어요</strong>. 하나은행을 이용 중이시라면 하나원큐 앱의 이벤트 페이지를 정기적으로 확인해보시는 습관을 들이시길 권해드려요.</p></div>
+
+    <p>금리와 이벤트 조건은 하나은행 사정에 따라 수시로 바뀌니, 가입 전 하나원큐 앱이나 홈페이지에서 최신 정보를 확인하시길 바라요.</p>
+
+    <p class="kw">#하나은행정기예금 #하나의정기예금 #하나원큐 #하나은행금리 #시중은행정기예금비교 #하나은행우대금리 #정기예금가입방법 #예금자보호한도</p>
+  </article>
+</div>

@@ -1,0 +1,118 @@
+<title>65세 이상이라면 예금 이자, 세금 한 푼도 안 낼 수 있어요</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">비과세종합저축 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>65세 이상이라면, 예금 이자에 세금을 아예 안 낼 수 있어요</h1>
+    <p class="byline">오늘의 지식 · 예금·절세</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>비과세종합저축이 뭔가요</li>
+        <li>얼마나 아낄 수 있는지</li>
+        <li>가입은 어떻게 하는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">예금 이자를 받으면 보통 <strong>15.4%</strong>의 세금이 빠져나가죠. 그런데 만 65세 이상이시라면, 이 세금을 <span class="hi">한 푼도 안 내는 방법</span>이 있어요. 바로 <strong>비과세종합저축</strong>이라는 제도인데, 의외로 모르고 그냥 일반 예금에 가입하시는 분들이 많아요. 오늘 자세히 정리해드릴게요.</p>
+
+    <h2>비과세종합저축이 뭔가요?</h2>
+    <p>비과세종합저축은 <strong>만 65세 이상 고령자, 장애인, 독립유공자</strong> 등이 가입할 수 있는 절세 상품이에요. 이름 그대로 <span class="em">이자소득세가 완전히 면제</span>돼요. 일반 예금처럼 별도 상품이 아니라, <strong>기존에 가입하시는 예금·적금에 "비과세종합저축"으로 신청만 하면</strong> 적용되는 방식이에요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>세율</th></tr></thead>
+        <tbody>
+          <tr><td>일반 예금</td><td>이자소득세 15.4%</td></tr>
+          <tr><td>비과세종합저축</td><td class="v">0%(완전 비과세)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>얼마나 아낄 수 있나요?</h2>
+    <p>한도는 <strong>전 금융기관 합산 원금 5,000만원</strong>까지예요. 이 한도 안에서 발생한 이자·배당소득 전체가 비과세로 처리돼요.</p>
+    <div class="callout"><span>💡</span><span>예를 들어 5,000만원을 연 3% 정기예금에 넣으면 세전 이자가 150만원인데, 일반 과세라면 <span class="hi">약 23만원의 세금</span>이 빠져요. 비과세종합저축으로 가입하면 이 <span class="hi">23만원을 그대로 손에 쥐실 수 있어요.</span></span></div>
+    <ul class="plain">
+      <li>가입 대상은 만 65세 이상, 장애인복지법상 장애인, 독립유공자와 그 유족·가족 등이에요</li>
+      <li>다만 <strong>직전 3개년 금융소득종합과세 대상자(연 금융소득 2,000만원 초과)</strong>는 가입이 제한돼요</li>
+    </ul>
+
+    <h2>가입은 어떻게 하나요?</h2>
+    <ul class="plain">
+      <li>은행·저축은행·증권사 등에서 예금·적금 가입 시 <strong>"비과세종합저축으로 가입하겠다"</strong>고 창구나 앱에서 신청하시면 돼요</li>
+      <li>신분증으로 나이 확인이 되면 별도의 복잡한 서류 없이 바로 적용받을 수 있어요</li>
+      <li>이미 가입한 일반 예금을 비과세로 전환하는 건 안 되고, <strong>새로 가입할 때</strong> 신청하셔야 해요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 여러 은행에 나눠 가입해도 5,000만원까지 다 되나요?</p><p class="a">네, 다만 한도는 개인별로 전 금융기관을 합산해서 계산돼요. 여러 곳에 나눠 가입하셔도 합쳐서 5,000만원까지만 비과세가 적용돼요.</p></div>
+    <div class="qa"><p class="q">Q. 정기예금뿐 아니라 적금에도 적용되나요?</p><p class="a">네, 예금뿐 아니라 적금, 일부 펀드·채권형 상품에도 비과세종합저축으로 가입할 수 있어요. 상품별로 가능 여부는 가입 창구에서 확인하시면 돼요.</p></div>
+    <div class="qa"><p class="q">Q. 이미 가입한 예금을 비과세로 바꿀 수 있나요?</p><p class="a">아니요, 기존에 일반 과세로 가입한 상품을 비과세로 전환하는 건 원칙적으로 불가능해요. 다음 예금 갱신·신규 가입 시 비과세종합저축으로 신청하시면 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">65세가 넘으셨는데 이 제도를 모르고 그냥 일반 과세로 예금을 가입하시는 분들을 정말 많이 봤어요. 신청 절차도 어렵지 않으니, <strong>다음에 예금이나 적금을 새로 가입하실 때는 꼭 "비과세종합저축으로 해주세요"</strong>라고 말씀해보세요. 몇십만원 단위로 차이가 날 수 있어요.</p></div>
+
+    <p>가입 대상과 한도는 세법 개정에 따라 조정될 수 있으니, 가입 전 은행 창구나 국세청 홈페이지에서 최신 기준을 확인하시길 바라요.</p>
+
+    <p class="kw">#비과세종합저축 #65세이상예금절세 #이자소득세면제 #고령자예금혜택 #예금비과세한도 #시니어절세 #예금이자세금 #비과세종합저축가입방법</p>
+  </article>
+</div>
