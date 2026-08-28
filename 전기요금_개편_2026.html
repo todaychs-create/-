@@ -1,0 +1,116 @@
+<title>전기요금, 49년 만에 시간대별로 확 바뀝니다</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">2026년 전기요금 개편 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>낮에 빨래하면 싸진다는 전기요금 개편, 무슨 얘기일까</h1>
+    <p class="byline">오늘의 지식 · 에너지·생활정보</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>뭐가 바뀌는지</li>
+        <li>왜 이렇게 바꾸는지</li>
+        <li>우리 집엔 언제부터 적용되는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">전기요금 체계가 <strong>1977년 이후 49년 만에</strong> 전면 개편된다는 소식, 들어보셨나요? "낮에는 싸지고 저녁에는 비싸진다"는 얘기가 나오는데, 정확히 뭐가 어떻게 바뀌는 건지 오늘 정리해드릴게요.</p>
+
+    <h2>뭐가 바뀌나요?</h2>
+    <p>지금까지는 시간대와 상관없이 요금이 비슷했다면, 앞으로는 <strong>낮과 저녁의 요금 구조가 뒤바뀌어요.</strong></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>시간대</th><th>기존</th><th>개편 후</th></tr></thead>
+        <tbody>
+          <tr><td>낮 (오전 11시~오후 3시)</td><td>최고요금</td><td class="v">중간요금(인하)</td></tr>
+          <tr><td>저녁 (오후 6시~9시)</td><td>중간요금</td><td class="v">최고요금(인상)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>즉 세탁기, 청소기 같은 전력 소모가 큰 가전제품을 <span class="em">낮 시간대에 사용하면 요금 부담이 줄고</span>, 반대로 다들 퇴근 후 몰리는 저녁 시간대에 사용하면 요금이 <span class="hi">더 비싸지는</span> 구조예요.</p>
+
+    <h2>왜 이렇게 바꾸나요?</h2>
+    <p>이유는 <strong>태양광 발전</strong> 때문이에요. 낮에는 태양광 전기가 남아돌아 오히려 버려지는 상황이 생기고, 반대로 해가 진 저녁엔 가스 발전소를 추가로 돌려야 하는 구조적 문제가 있었어요.</p>
+    <div class="callout"><span>💡</span><span>요금으로 <span class="hi">낮 시간 사용을 유도하고 저녁 시간 사용을 분산</span>시켜서, 발전 자원을 더 효율적으로 쓰려는 목적이에요. 국민들의 사용 습관을 바꿔 에너지 낭비를 줄이려는 취지죠.</span></div>
+
+    <h2>우리 집엔 언제부터 적용되나요?</h2>
+    <ul class="plain">
+      <li><strong>산업용(을)</strong> — 2026년 4월 16일부터 우선 시행</li>
+      <li><strong>일반용·교육용</strong> — 2026년 6월 1일부터 적용</li>
+      <li><strong>가정용(주택용)</strong> — <span class="em">스마트 계량기 보급이 선행돼야 해서</span> 구체적인 시행 시기는 아직 미확정이에요</li>
+    </ul>
+    <p>가정용 누진제(3단계)는 현재 방식이 그대로 유지되고 있으니, <strong>당장 우리 집 요금이 바로 바뀌는 건 아니에요.</strong> 다만 스마트 계량기가 설치되면 순차적으로 시간대별 요금이 적용될 예정이라, 미리 알아두시면 좋아요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 우리 집에 스마트 계량기가 있는지 어떻게 확인하나요?</p><p class="a">한전 고객센터(국번없이 123)나 한전 홈페이지·앱에서 본인 계량기 종류를 확인하실 수 있어요. 이미 설치된 가정도 있고, 아직 안 된 가정도 있어요.</p></div>
+    <div class="qa"><p class="q">Q. 누진제도 함께 없어지나요?</p><p class="a">아니요, 현재는 주택용 3단계 누진제가 유지돼요. 시간대별 요금제가 도입되더라도 누진 구조와 별개로 운영될 가능성이 높아요.</p></div>
+    <div class="qa"><p class="q">Q. 산업용·일반용 요금 개편이 가정용 전기요금에도 영향을 주나요?</p><p class="a">직접적으로 가정용 요금이 바뀌는 건 아니지만, 전체 전력 수급 구조가 개선되면 장기적으로 요금 안정에 도움이 될 수 있다는 게 정부 설명이에요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">가정용 적용은 아직 시간이 좀 남았지만, 미리 습관을 들여두시면 나중에 요금제가 바뀌었을 때 당황하지 않으실 거예요. 세탁이나 청소처럼 <strong>시간을 조절할 수 있는 집안일은 가급적 낮 시간대</strong>에 하시는 습관을 미리 들여보시는 것도 좋을 것 같아요.</p></div>
+
+    <p>가정용 시행 시기와 세부 요금 체계는 확정되는 대로 한전 공지를 통해 안내되니, 최신 소식은 한전 홈페이지에서 확인하시길 바라요.</p>
+
+    <p class="kw">#전기요금개편2026 #시간대별전기요금 #전기요금인상 #전기요금누진제 #한전전기요금 #스마트계량기 #전기요금절약 #전기요금인하시간대</p>
+  </article>
+</div>

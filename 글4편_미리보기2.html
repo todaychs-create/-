@@ -1,0 +1,202 @@
+<title>블로그 초안 4편 (5~8) — 미리보기</title>
+<style>
+  :root{
+    --bg:#f3f1ec; --surface:#fff; --ink:#23201b; --ink-soft:#565049; --ink-faint:#8a8478;
+    --line:#e4dfd4; --accent:#2f6db3; --accent-soft:#e6eef7; --hi:#fff3b0;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef4f9; --box-accent:#2f6db3; --box-soft:#dce8f4; --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#12140f; --surface:#1b1e17; --ink:#e9ede8; --ink-soft:#aeb3ac; --ink-faint:#828a82;
+    --line:#2c322b; --accent:#6ea8e0; --accent-soft:#1a2634; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#161f29; --box-accent:#6ea8e0; --box-soft:#22303f; }}
+  :root[data-theme="dark"]{
+    --bg:#12140f; --surface:#1b1e17; --ink:#e9ede8; --ink-soft:#aeb3ac; --ink-faint:#828a82;
+    --line:#2c322b; --accent:#6ea8e0; --accent-soft:#1a2634; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#161f29; --box-accent:#6ea8e0; --box-soft:#22303f; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ec; --surface:#fff; --ink:#23201b; --ink-soft:#565049; --ink-faint:#8a8478;
+    --line:#e4dfd4; --accent:#2f6db3; --accent-soft:#e6eaf7; --hi:#fff3b0;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef4f9; --box-accent:#2f6db3; --box-soft:#dce8f4; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:36px 38px 42px;margin-bottom:34px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  .num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:2.1rem;line-height:1.32;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.5rem;margin:34px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none;border-bottom:1px solid var(--box-soft)}
+  .imgslot a:hover{border-bottom-color:var(--box-accent)}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.28rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .disc{margin-top:14px;color:var(--ink-faint);font-size:1rem}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+</style>
+
+<div class="wrap">
+  <p class="cap">블로그 초안 4편 (5~8) · 웹 최신정보 기반 · 검수 후 발행</p>
+
+  <!-- 글 5 -->
+  <article class="post">
+    <span class="num">글 5</span>
+    <h1>9월부터 국민연금·건강보험료 오른다… 내 월급 얼마 줄어들까?</h1>
+    <p class="byline">오늘의 지식 · 직장인 필독</p>
+    <p class="lead">월급 통장 보고 "어? 실수령액이 왜 줄었지?" 할 수 있어요. <span class="hi">9월부터 국민연금·건강보험료가 인상</span>되거든요. 직장인 기준으로 얼마나 더 떼이는지 쉽게 정리했어요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/salary%20paycheck/" target="_blank" rel="noopener">"salary paycheck" ↗</a>
+      <a href="https://pixabay.com/images/search/calculator%20money/" target="_blank" rel="noopener">"calculator money" ↗</a>
+    </div>
+
+    <h2>국민연금 — 28년 만에 인상</h2>
+    <p>국민연금 보험료율이 <strong>9월 1일부터 9% → 9.5%</strong>로 올라요. 무려 28년 만이래요. 직장가입자는 평균소득 기준 <span class="em">월 약 7,700원</span>을 더 내게 되고, 근로자와 회사가 각각 4.75%씩 부담해요.</p>
+
+    <h2>건강보험료 — 약 1.48% 인상</h2>
+    <p>건강보험 직장 보험료율도 <strong>7.09% → 7.19%</strong>로 올라요. 이것도 근로자·회사가 반반씩 부담하고요.</p>
+    <div class="callout"><span>💡</span><span>둘 다 <span class="hi">회사와 절반씩</span> 나눠 내는 거라, 실제 내 월급에서 빠지는 건 인상분의 절반이에요.</span></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>국민연금 <strong>9% → 9.5%</strong> (9/1부터, 28년 만)</li>
+        <li>직장인 평균 <strong>월 약 7,700원</strong> 추가 부담</li>
+        <li>건강보험료율 <strong>7.09% → 7.19%</strong></li>
+        <li>둘 다 <strong>회사와 반반</strong> 부담</li>
+      </ul>
+    </div>
+    <p>작아 보여도 1년이면 쌓여요. 실수령액 바뀌는 거 미리 알아두면 덜 당황해요!</p>
+    <p class="tags">#국민연금 #건강보험료 #보험료인상 #직장인 #실수령액</p>
+    <p class="disc">※ AI 초안입니다. 정확한 요율·인상액·적용시점은 발행 전 국민연금공단·건강보험공단에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 6 -->
+  <article class="post">
+    <span class="num">글 6</span>
+    <h1>2026 저소득층 지원 확대 — 생계급여 오르고 의료급여 부양비 폐지</h1>
+    <p class="byline">오늘의 지식 · 복지 정보</p>
+    <p class="lead">힘든 시기에 <span class="hi">조금이라도 도움 되는 변화</span>가 있어요. 2026년부터 저소득층 대상 지원이 늘어나거든요. 해당되거나 주변에 알려줄 분 있으면 꼭 챙겨보세요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/helping%20hands/" target="_blank" rel="noopener">"helping hands" ↗</a>
+      <a href="https://pixabay.com/images/search/family%20support/" target="_blank" rel="noopener">"family support" ↗</a>
+    </div>
+
+    <h2>생계급여 인상</h2>
+    <p>생계급여가 <strong>4인 가구 기준 월 최대 195만1천원 → 207만8천원</strong>으로 올라요. 매달 받는 돈이라 체감이 큰 변화예요.</p>
+
+    <h2>의료급여 '부양비' 폐지</h2>
+    <p>그동안 부양의무자 때문에 의료급여를 못 받거나 깎이던 분들 많았는데, <span class="em">의료급여 부양비가 폐지</span>돼요. 실질적으로 도움받는 분이 늘어날 수 있어요.</p>
+    <div class="callout"><span>💡</span><span>긴급복지 지원 규모도 <span class="hi">확대</span>돼요. 갑작스러운 위기 상황이면 '긴급복지'를 꼭 기억하세요!</span></div>
+
+    <h2>어디서 신청·확인하나요?</h2>
+    <p>주소지 <strong>주민센터</strong>나 <span class="em">복지로(bokjiro.go.kr)</span>에서 대상 여부와 신청 방법을 확인할 수 있어요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>생계급여 <strong>4인 195.1만 → 207.8만원</strong></li>
+        <li>의료급여 <strong>부양비 폐지</strong> → 수급 문턱 완화</li>
+        <li>긴급복지 지원 <strong>확대</strong></li>
+        <li>확인·신청은 <strong>주민센터·복지로</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#생계급여 #의료급여 #기초생활보장 #긴급복지 #복지정책</p>
+    <p class="disc">※ AI 초안입니다. 금액·대상·시행시점은 발행 전 복지로·보건복지부에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 7 -->
+  <article class="post">
+    <span class="num">글 7</span>
+    <h1>대중교통비 아끼는 법 — 월 15회 타면 교통비 환급받아요</h1>
+    <p class="byline">오늘의 지식 · 생활 꿀팁</p>
+    <p class="lead">매달 나가는 교통비, 은근 무시 못 하잖아요? 근데 <span class="hi">조건만 맞으면 일부를 돌려받을 수</span> 있어요. 버스·지하철 자주 타는 분이라면 무조건 챙겨야 하는 꿀팁이에요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/subway%20station/" target="_blank" rel="noopener">"subway station" ↗</a>
+      <a href="https://pixabay.com/images/search/bus%20transport/" target="_blank" rel="noopener">"bus transport" ↗</a>
+    </div>
+
+    <h2>핵심은 "월 15회 이상"</h2>
+    <p>대중교통을 <strong>한 달에 15회 이상</strong> 이용하면 교통비 일부를 환급받을 수 있어요. 출퇴근·통학으로 매일 타는 분이면 조건은 대부분 자동으로 채워져요.</p>
+    <div class="callout"><span>💡</span><span>환급은 자동이 아닐 수 있어요. <span class="hi">해당 교통 환급 카드·앱에 가입·등록</span>해야 받을 수 있으니 미리 확인하세요.</span></div>
+
+    <h2>이런 분께 특히 이득</h2>
+    <ul>
+      <li>매일 버스·지하철로 <strong>출퇴근·통학</strong>하는 분</li>
+      <li>교통비가 부담되는 <strong>사회초년생·학생</strong></li>
+      <li>환승을 자주 해서 <strong>월 교통비가 큰</strong> 분</li>
+    </ul>
+
+    <h2>어떻게 시작하나요?</h2>
+    <p>거주 지역·이용 노선에 맞는 <span class="em">교통비 환급 제도(예: 관련 교통카드·앱)</span>를 찾아 가입하면 돼요. 지역마다 세부 조건이 다르니 우리 동네 것 기준으로 확인하는 게 정확해요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>대중교통 <strong>월 15회 이상</strong>이면 교통비 환급 가능</li>
+        <li>매일 출퇴근·통학하면 조건 대부분 충족</li>
+        <li>환급은 <strong>카드·앱 등록</strong>해야 받음 (자동 아닐 수 있음)</li>
+        <li>세부 조건은 <strong>지역별로 확인</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#교통비환급 #대중교통 #교통비절약 #생활꿀팁 #출퇴근</p>
+    <p class="disc">※ AI 초안입니다. 환급 조건·대상·신청 방법은 지역·제도마다 달라요. 발행 전 해당 기관·앱에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 8 -->
+  <article class="post">
+    <span class="num">글 8</span>
+    <h1>신생아 특례대출, 연 1%대 금리?! 조건·한도 총정리 (2026)</h1>
+    <p class="byline">오늘의 지식 · 내 집 마련</p>
+    <p class="lead">아이 낳고 집 걱정 크시죠? <span class="hi">신생아 특례대출</span>은 출산 가구한테 <strong>연 1%대 금리</strong>로 돈을 빌려주는 제도예요. 조건이 생각보다 넓어서, 해당되면 진짜 큰 도움이 돼요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/new%20home%20family/" target="_blank" rel="noopener">"new home family" ↗</a>
+      <a href="https://pixabay.com/images/search/baby%20house/" target="_blank" rel="noopener">"baby house" ↗</a>
+    </div>
+
+    <h2>누가 받을 수 있나요?</h2>
+    <p>출산(입양 포함) 가구가 대상이고, <strong>부부합산 소득 2억원 이하</strong>까지 폭넓게 잡혀 있어요. 주택 <strong>구입(매매)</strong>과 <strong>전세자금</strong> 둘 다 지원돼요.</p>
+
+    <h2>한도랑 금리는요?</h2>
+    <ul>
+      <li><strong>전세</strong>: 최대 2.4억원까지 (보증금의 80%)</li>
+      <li><strong>매매</strong>: 최대 4억원까지 (LTV 70%)</li>
+      <li>금리는 조건에 따라 <span class="em">연 1%대</span>도 가능</li>
+    </ul>
+    <div class="callout"><span>⚠️</span><span>2026년에 <span class="hi">청약통장 우대금리 기준 강화, 중도상환수수료 인하</span> 등 세부 조건이 바뀌었어요. 신청 전 최신 기준 확인 필수!</span></div>
+
+    <h2>어디서 신청하나요?</h2>
+    <p>주택도시기금 <span class="em">기금e든든</span>이나 취급 은행(디딤돌·버팀목 등)에서 신청해요. 소득·주택가격 요건이 있으니 미리 자격을 따져보세요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>출산 가구 대상, <strong>부부합산 소득 2억 이하</strong></li>
+        <li>전세 최대 <strong>2.4억(80%)</strong> / 매매 최대 <strong>4억(LTV 70%)</strong></li>
+        <li>금리 <strong>연 1%대</strong>도 가능</li>
+        <li>2026년 세부조건 변경 → <strong>최신 기준 확인</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#신생아특례대출 #내집마련 #전세대출 #디딤돌대출 #출산가구</p>
+    <p class="disc">※ AI 초안입니다. 금리·한도·소득요건은 자주 바뀌어요. 발행 전 주택도시기금·취급 은행에서 꼭 확인하세요.</p>
+  </article>
+</div>

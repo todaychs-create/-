@@ -1,0 +1,119 @@
+<title>예금 풍차돌리기, 매달 만기가 돌아오게 만드는 방법</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">예금 풍차돌리기 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>예금 풍차돌리기, 매달 만기가 돌아오게 만드는 방법</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>풍차돌리기가 뭔가요</li>
+        <li>왜 이렇게 하는지</li>
+        <li>실제로 해보는 방법</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">목돈을 정기예금에 한 번에 넣으면, 만기가 돌아올 때까지 완전히 묶여버리죠. 그런데 <strong>예금 풍차돌리기</strong>를 하시면, <span class="hi">매달 만기가 돌아오는 구조</span>를 만들 수 있어요. 급전이 필요할 때도 유연하게 대응할 수 있는 방법이라 관심을 가지시는 분들이 많아요. 오늘 정리해드릴게요.</p>
+
+    <h2>풍차돌리기가 뭔가요?</h2>
+    <p>목돈을 한 곳에 <strong>한 번에 넣는 대신, 12개로 나눠서 매달 순차적으로 가입</strong>하는 방법이에요. 이름처럼 풍차 날개가 돌아가듯, <span class="em">매달 만기가 하나씩 돌아오게</span> 만드는 구조예요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>월</th><th>가입 내역</th></tr></thead>
+        <tbody>
+          <tr><td>1월</td><td>1년 만기 정기예금 A 가입</td></tr>
+          <tr><td>2월</td><td>1년 만기 정기예금 B 가입</td></tr>
+          <tr><td>...</td><td>매달 반복</td></tr>
+          <tr><td>다음 해 1월</td><td class="v">A 만기 도래(자금 확보)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>왜 이렇게 하나요?</h2>
+    <ul class="plain">
+      <li><strong>유동성 확보</strong> — 매달 만기가 돌아오니, 급전이 필요할 때 해지하지 않고도 대응할 수 있어요</li>
+      <li><strong>확정금리 유지</strong> — 파킹통장과 달리 매달 가입분은 여전히 정기예금 확정금리를 받아요</li>
+      <li><strong>금리 변동 대응</strong> — 매달 새로 가입하면서 그때그때 더 높은 금리 상품으로 갈아탈 수 있어요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>풍차돌리기의 핵심은 <span class="hi">"쓸 일 없는 목돈도 유동성을 확보해둔다"</span>는 거예요. 급하게 자금이 필요할 때, 전체 예금을 중도해지해서 손해 보는 대신 <strong>돌아온 만기분만 활용</strong>하면 되니까요.</span></div>
+
+    <h2>실제로 해보는 방법</h2>
+    <ul class="plain">
+      <li>목돈을 <strong>12등분</strong>해서 매달 1개씩 1년 만기 정기예금에 가입해요</li>
+      <li>이미 목돈이 있으시다면, <strong>1개월~12개월 만기를 각각 다르게</strong> 설정해서 한 번에 가입하는 방법도 있어요(첫 달부터 매달 만기가 돌아오게)</li>
+      <li>만기가 돌아오면 그 자금으로 다시 새 정기예금에 가입하거나, 필요하면 그대로 사용하시면 돼요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 굳이 나눠서 가입해야 하나요? 그냥 한 번에 넣으면 안 되나요?</p><p class="a">한 번에 넣으면 이자 계산이 단순하고 편하지만, 급전이 필요할 때 전체를 중도해지해야 해서 손해가 커요. 풍차돌리기는 이런 유동성 문제를 줄이기 위한 방법이에요.</p></div>
+    <div class="qa"><p class="q">Q. 여러 은행에 나눠서 풍차돌리기를 하면 더 좋을까요?</p><p class="a">예금자보호 한도(1인당 1억원)를 고려해서, 목돈이 크시다면 여러 은행에 나눠 가입하시는 것도 좋은 방법이에요. 다만 관리가 번거로워질 수 있으니 본인 상황에 맞게 조절하세요.</p></div>
+    <div class="qa"><p class="q">Q. 적금으로도 풍차돌리기를 할 수 있나요?</p><p class="a">네, 적금 풍차돌리기도 같은 원리예요. 매달 새로운 적금에 가입해서, 1년 뒤부터는 매달 만기 적금이 하나씩 돌아오게 만드는 방식이에요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">목돈을 한 곳에 몰아넣으면 마음은 편할지 몰라도, <strong>정작 급할 때 손해를 보고 깨야 하는 상황</strong>이 생기더라고요. 풍차돌리기는 관리가 조금 번거롭긴 해도, 유동성과 금리 두 가지를 함께 챙길 수 있는 좋은 방법이니 목돈이 크신 분들은 한번 시도해보시길 권해드려요.</p></div>
+
+    <p>구체적인 금리와 상품은 은행마다 다르니, 실제 가입 전 여러 은행의 최신 정기예금 금리를 비교해보시길 바라요.</p>
+
+    <p class="kw">#예금풍차돌리기 #정기예금전략 #목돈굴리기전략 #예금유동성확보 #적금풍차돌리기 #정기예금분산가입 #예금자보호한도 #재테크전략</p>
+  </article>
+</div>

@@ -1,0 +1,118 @@
+<title>6개월 정기예금 vs 1년 정기예금, 지금은 뭐가 유리할까</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">6개월 vs 1년 정기예금 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>정기예금, 6개월과 1년 중 지금은 뭐가 더 유리할까요</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>기간별 금리 차이</li>
+        <li>금리 방향에 따라 달라지는 선택</li>
+        <li>지금 상황에서는 어떤 게 유리한지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">정기예금에 가입하실 때 <strong>"몇 개월로 넣을까"</strong> 고민되시죠. 무조건 기간이 길다고 유리한 게 아니에요. 앞으로 금리가 오를지 내릴지에 따라 <span class="hi">유리한 선택이 달라지거든요.</span> 오늘 판단 기준을 정리해드릴게요.</p>
+
+    <h2>기간별 금리 차이</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>가입 기간</th><th>일반적인 금리 특징</th></tr></thead>
+        <tbody>
+          <tr><td>3개월</td><td>가장 낮은 편</td></tr>
+          <tr><td>6개월</td><td>3개월보다 소폭 높음</td></tr>
+          <tr><td>12개월</td><td class="v">기준금리(가장 많이 비교되는 구간)</td></tr>
+          <tr><td>24개월 이상</td><td>은행·시기별로 12개월보다 낮을 수도 있음</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>일반적으로 <strong>12개월(1년) 만기</strong>가 가장 대표적인 비교 기준이에요. 흥미로운 점은, 요즘처럼 <span class="em">금리 상승기에는 오히려 2년·3년 장기 상품 금리가 1년보다 낮은 경우</span>도 있다는 거예요.</p>
+
+    <h2>금리 방향에 따라 달라지는 선택</h2>
+    <ul class="plain">
+      <li><strong>앞으로 금리가 더 오를 것 같다면</strong> — 짧은 기간(6개월)으로 가입해서, 만기 후 더 높은 금리로 재가입하는 게 유리해요</li>
+      <li><strong>앞으로 금리가 내릴 것 같다면</strong> — 지금의 금리를 오래 확정해두는 긴 기간(1년 이상)이 유리해요</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>금리 방향을 <span class="hi">정확히 예측하는 건 전문가도 어려운 일</span>이에요. 확신이 없으시다면, 목돈을 6개월과 1년으로 나눠서 예치하는 것도 리스크를 줄이는 좋은 방법이에요.</span></div>
+
+    <h2>지금 상황에서는 어떤 게 유리한가요?</h2>
+    <p>2026년 현재는 시중은행 금리가 <strong>다시 3%대로 오르는 흐름</strong>이에요. 이런 시기에는 <span class="em">짧은 기간으로 가입해서 갈아타기 전략</span>을 고려해볼 만해요. 다만 개인마다 자금 계획과 목표가 다르니, 아래 기준으로 판단해보세요.</p>
+    <ul class="plain">
+      <li>당장 확실한 여윳돈이라면 <strong>6개월 단위로 짧게 굴리며 흐름을 지켜보는 것</strong>도 방법이에요</li>
+      <li>번거로운 게 싫고 안정적으로 묻어두고 싶으시다면 <strong>1년 만기</strong>가 무난해요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 6개월 만기가 끝나면 자동으로 재예치되나요?</p><p class="a">가입 시 자동재예치를 설정해두셨다면 그때의 금리로 자동 갱신돼요. 원치 않으시면 만기일에 직접 해지·인출하시면 돼요.</p></div>
+    <div class="qa"><p class="q">Q. 짧게 여러 번 가입하면 수수료가 더 나가나요?</p><p class="a">아니요, 정기예금은 가입·해지 시 별도 수수료가 없는 경우가 대부분이에요. 다만 매번 가입 절차를 반복해야 하는 번거로움은 감수하셔야 해요.</p></div>
+    <div class="qa"><p class="q">Q. 장기 상품이 항상 금리가 더 높은 거 아닌가요?</p><p class="a">일반적으로는 맞지만, 금리가 오르는 시기에는 은행들이 단기 상품에 더 높은 금리를 주기도 해요. 가입 전 기간별 금리를 꼭 비교해보시는 게 좋아요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">"무조건 1년, 무조건 장기"라는 공식은 없어요. 가입 전 <strong>은행 앱에서 기간별 금리표를 한 번씩 비교</strong>해보시고, 확신이 없으시면 절반은 짧게, 절반은 길게 나눠서 가입하시는 것도 좋은 절충안이에요.</p></div>
+
+    <p>기간별 금리는 은행과 시기에 따라 계속 바뀌니, 가입 전 최신 금리표를 꼭 확인하시길 바라요.</p>
+
+    <p class="kw">#정기예금기간선택 #6개월정기예금 #1년정기예금 #정기예금금리비교 #단기정기예금 #예금가입전략 #금리상승기예금 #목돈굴리기전략</p>
+  </article>
+</div>

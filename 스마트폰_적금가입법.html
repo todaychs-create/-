@@ -1,0 +1,122 @@
+<title>스마트폰으로 적금·예금 가입하는 법</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.85}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.4;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1.05rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.25rem;margin:0 0 18px}
+  .lead{font-size:1.32rem;color:var(--ink-soft)}
+  h2{font-size:1.5rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.1rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:5px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 20px}
+  ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 52px;font-size:1.25rem;border-bottom:1px dashed var(--line)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center;font-size:1.1rem}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.25rem}
+  ul.plain li{margin-bottom:9px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:17px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.2rem;font-weight:600}
+  .word{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 20px}
+  .word b{display:block;color:var(--box-accent);margin-bottom:4px;font-size:1.15rem}
+  .word p{margin:0;font-size:1.15rem}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.18rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.15rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.22rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.08rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">스마트폰으로 적금·예금 가입하기 · 왕초보용 · 검수 후 발행</p>
+  <article class="post">
+    <h1>은행 안 가고 폰으로 적금 가입하는 법, 하나하나 알려드릴게요</h1>
+    <p class="byline">오늘의 지식 · 스마트폰 은행 이용법</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>은행 앱, 뭘 깔아야 하나요</li>
+        <li>본인인증이 뭐고 어떻게 하나요</li>
+        <li>적금·예금 가입, 순서대로 따라하기</li>
+        <li>처음 만든 통장이 이상할 때 (한도제한계좌)</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">요즘은 은행에 직접 가지 않아도 스마트폰으로 적금이나 예금에 가입할 수 있어요. 그런데 막상 해보려면 "어디를 눌러야 하지?", "이 용어는 또 뭐지?" 하고 막막하실 수 있어요. 오늘은 정말 하나하나, 순서대로 쉽게 알려드릴게요. 천천히 따라오시면 돼요.</p>
+
+    <h2>은행 앱, 뭘 깔아야 하나요</h2>
+    <p>먼저 스마트폰에 <strong>다니시는 은행의 앱</strong>을 설치하셔야 해요. 삼성폰이면 '플레이스토어', 아이폰이면 '앱스토어'라는 곳에서 은행 이름을 검색하면 돼요.</p>
+    <div class="word"><b>📱 플레이스토어 / 앱스토어가 뭔가요?</b><p>스마트폰에 새로운 앱(프로그램)을 받을 수 있는 곳이에요. 삼성폰이나 안드로이드폰은 '플레이스토어', 아이폰은 '앱스토어'라는 이름의 아이콘이 화면에 이미 깔려 있어요. 그걸 누르고, 위쪽 검색창에 은행 이름(예: "신한은행")을 입력하면 앱이 나와요.</p></div>
+    <ul class="plain">
+      <li>일반 은행(신한·국민·우리 등)에 계좌가 있으면 <strong>그 은행 이름 앱</strong>을 설치하세요</li>
+      <li>인터넷은행(카카오뱅크·토스뱅크 등)은 <strong>앱 자체가 은행</strong>이에요. 영업점이 따로 없어요</li>
+    </ul>
+
+    <h2>본인인증이 뭐고 어떻게 하나요</h2>
+    <p>앱을 열면 제일 먼저 <strong>본인인증</strong>이라는 걸 하게 돼요. "이 폰을 쓰는 사람이 진짜 본인이 맞다"는 걸 확인하는 절차예요.</p>
+    <div class="callout"><span>💡</span><span>준비물만 미리 챙겨두면 어렵지 않아요. <span class="hi">신분증(주민등록증·운전면허증)</span>과 <span class="hi">본인 명의 휴대폰</span>, 이 두 가지면 대부분 해결돼요.</span></div>
+    <p>진행 방식은 보통 이래요. <strong>휴대폰 문자로 인증번호</strong>를 받아 입력하고, <strong>신분증을 카메라로 촬영</strong>해서 앱에 올려요. 마지막으로 짧은 <strong>본인 확인 영상(얼굴 촬영)</strong>을 찍는 경우도 있어요. 순서는 앱이 화면에 친절하게 안내해주니, 나오는 대로 하나씩 따라가시면 돼요.</p>
+
+    <h2>적금·예금 가입, 순서대로 따라하기</h2>
+    <p>본인인증까지 끝났다면 이제 진짜 가입 단계예요. 순서는 대부분 이렇게 진행돼요.</p>
+    <ol class="steps">
+      <li>은행 앱을 열고 <strong>"상품 가입" 또는 "예금·적금"</strong> 메뉴를 눌러요 (보통 화면 아래쪽이나 메인 화면에 있어요)</li>
+      <li>가입하고 싶은 <strong>적금·예금 상품을 선택</strong>해요 (이름과 금리가 함께 나와요)</li>
+      <li><strong>매달 넣을 금액</strong>(적금) 또는 <strong>한 번에 넣을 금액</strong>(예금)을 입력해요</li>
+      <li>돈을 넣을 <strong>기간(6개월·1년 등)</strong>을 선택해요</li>
+      <li>약관 동의(안내문에 동의하는 절차)를 하고 <strong>비밀번호를 입력</strong>하면 가입 완료!</li>
+    </ol>
+    <p>여기서 <span class="em">"우대금리 조건"</span>이라는 게 나올 수 있는데, 이건 특정 조건(카드 사용, 자동이체 등)을 채우면 이자를 더 주는 거예요. 조건이 복잡하면 그냥 기본금리로 가입하셔도 전혀 문제없어요.</p>
+
+    <h2>처음 만든 통장이 이상할 때 (한도제한계좌)</h2>
+    <p>스마트폰으로 처음 계좌를 만들면, 하루에 이체하거나 찾을 수 있는 돈이 <strong>30만원~100만원</strong>으로 제한되는 경우가 있어요. 이걸 <span class="em">'한도제한계좌'</span>라고 불러요. 보이스피싱 같은 사고를 막기 위한 안전장치예요.</p>
+    <div class="callout"><span>⚠️</span><span>큰 금액을 넣거나 이체하려는데 <span class="hi">"한도 초과"</span>라고 나온다면, 이 계좌 제한 때문일 가능성이 커요. 당황하지 않으셔도 돼요.</span></div>
+    <p>이 제한을 풀려면, 앱에서 재직증명서나 공과금 납부 내역 같은 서류를 사진 찍어 올리거나, 은행에 <strong>한 번만 직접 방문</strong>해서 해제 요청을 하면 돼요. 이후엔 계속 스마트폰으로 편하게 이용하실 수 있어요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 앱 화면 글씨가 너무 작아서 잘 안 보여요.</p><p class="a">스마트폰 설정에서 글자 크기를 키우실 수 있어요. 보통 '설정 → 디스플레이 → 글자 크기'에서 조절 가능해요. 은행 앱 자체에도 '큰 글씨' 모드를 제공하는 곳이 많으니 앱 안의 설정 메뉴도 확인해보세요.</p></div>
+    <div class="qa"><p class="q">Q. 신분증 촬영이 자꾸 실패해요.</p><p class="a">밝은 곳에서, 신분증을 평평한 곳에 놓고 화면 안내선에 맞춰 촬영하면 성공률이 높아져요. 그래도 안 되면 은행 고객센터에 전화로 문의하셔도 돼요.</p></div>
+    <div class="qa"><p class="q">Q. 그래도 무섭거나 헷갈리면 어떻게 하나요?</p><p class="a">전혀 문제없어요. 스마트폰으로 하는 게 부담스러우시면 언제든 은행 영업점에 직접 방문하셔서 가입하셔도 돼요. 다만 이 글을 참고하시면 한 번 정도는 폰으로도 충분히 해내실 수 있을 거예요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">처음 한 번이 어렵지, 한 번 해보시면 그다음부턴 훨씬 수월해요. 급하게 하지 마시고, 신분증이랑 폰만 챙겨서 천천히 순서대로 따라 해보세요. 혹시 중간에 막히면 그 은행 고객센터에 전화해서 "지금 앱으로 적금 가입하는 중인데 여기서 막혔어요"라고 물어보시면 친절하게 안내해줘요. 절대 혼자 끙끙 앓지 마시고요.</p></div>
+
+    <p>은행마다 화면 구성이나 용어가 조금씩 다를 수 있으니, 실제 진행하실 땐 그 은행 앱에 나오는 안내 문구를 천천히 읽으며 따라가시면 돼요.</p>
+
+    <p class="kw">#스마트폰적금가입 #비대면계좌개설 #은행어플사용법 #폰으로적금가입 #한도제한계좌 #모바일뱅킹초보 #시니어스마트폰뱅킹 #예금적금가입방법</p>
+  </article>
+</div>

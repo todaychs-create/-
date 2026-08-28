@@ -1,0 +1,114 @@
+<title>SBI저축은행 정기예금, 특판은 순식간에 마감됩니다</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">SBI저축은행 정기예금 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>SBI저축은행 연 4.1% 특판, 5영업일 만에 마감된 이유</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>무슨 일이 있었는지</li>
+        <li>지금 남은 상품 금리는 어느 정도인지</li>
+        <li>다음 특판을 놓치지 않으려면</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">저축은행 정기예금 중 업계 1위인 <strong>SBI저축은행</strong>이 최고 <span class="hi">연 4.1%</span> 특판을 내놨는데, 한도 3,000억원이 <strong>단 5영업일 만에</strong> 소진돼서 조기 마감됐어요. 왜 이렇게 빨리 마감됐는지, 그리고 지금은 어떤 상품이 남아있는지 정리해드릴게요.</p>
+
+    <h2>무슨 일이 있었나요?</h2>
+    <p>SBI저축은행은 특판 정기예금을 통해 <strong>연 4.1%</strong>라는, 요즘 기준으로 상당히 높은 금리를 제시했어요. 저축은행 업계 평균 금리(연 3.8%대)보다 눈에 띄게 높다 보니, 한도로 걸어둔 <span class="em">3,000억원이 5영업일 만에 모두 소진</span>되며 조기 마감됐어요.</p>
+    <div class="callout"><span>💡</span><span>업계 1위 저축은행이 특판을 내놓으면 <span class="hi">순식간에 마감되는 경우가 많아요.</span> 특판 소식을 보고 "나중에 가입해야지" 하고 미루시면 이미 마감돼 있는 경우가 대부분이에요.</span></div>
+
+    <h2>지금 남은 상품 금리는 어느 정도인가요?</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>금리(세전, 1년 기준)</th></tr></thead>
+        <tbody>
+          <tr><td>저축은행 업계 평균</td><td>연 3.8% 안팎</td></tr>
+          <tr><td>특판 포함 상단</td><td class="v">연 4% 초반</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>특판이 마감된 이후에도, SBI저축은행의 <strong>일반 정기예금 금리는 업계 평균 수준</strong>을 유지하고 있어요. 특판만큼은 아니어도 시중은행보다는 여전히 높은 편이에요.</p>
+
+    <h2>다음 특판을 놓치지 않으려면</h2>
+    <ul class="plain">
+      <li>SBI저축은행 앱(SBI저축은행)에서 <strong>알림 설정</strong>을 켜두면 특판 소식을 가장 빠르게 받아볼 수 있어요</li>
+      <li>금융감독원 <strong>'금융상품 한눈에'</strong>나 은행연합회·저축은행중앙회 소비자포털에서 실시간 금리를 비교해보세요</li>
+      <li>특판은 보통 <strong>한도 소진 시 즉시 마감</strong>되니, 관심 있는 상품이 나오면 당일 바로 확인하고 가입하는 게 좋아요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. SBI저축은행도 예금자보호가 되나요?</p><p class="a">네, 예금보험공사에 가입된 저축은행이라 1인당 1억원까지 원금과 이자가 보호돼요. 업계 1위 저축은행이라 안정성 측면에서도 평판이 좋은 편이에요.</p></div>
+    <div class="qa"><p class="q">Q. 특판이 마감되면 대기 신청 같은 게 가능한가요?</p><p class="a">일반적으로 별도의 대기 신청 제도는 없어요. 대신 다음 특판을 놓치지 않도록 앱 알림을 켜두시는 게 가장 현실적인 방법이에요.</p></div>
+    <div class="qa"><p class="q">Q. 특판이 아닌 일반 상품도 가입할 가치가 있나요?</p><p class="a">네, 특판만큼은 아니어도 업계 평균 이상의 금리를 유지하는 경우가 많아서, 시중은행보다는 여전히 유리한 선택이 될 수 있어요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">특판 예금은 <strong>"보이면 바로 확인, 마음에 들면 바로 가입"</strong>이 기본이에요. 며칠 고민하는 사이 한도가 소진되는 경우가 정말 흔하거든요. 저축은행 앱 알림을 미리 켜두시고, 평소에도 금융상품 한눈에 같은 비교 사이트를 자주 들여다보시는 습관을 들이시길 권해드려요.</p></div>
+
+    <p>특판 여부와 금리는 수시로 바뀌니, 실제 가입 전 SBI저축은행 공식 앱이나 홈페이지에서 최신 정보를 확인하시길 바라요.</p>
+
+    <p class="kw">#SBI저축은행정기예금 #SBI저축은행특판 #저축은행최고금리 #저축은행정기예금 #고금리예금특판 #예금자보호한도 #저축은행앱알림 #정기예금비교2026</p>
+  </article>
+</div>

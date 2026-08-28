@@ -1,0 +1,176 @@
+<title>산출물 B — 웹 미리보기 (검수 화면)</title>
+<style>
+  :root {
+    --bg: #f3f1ec; --surface: #ffffff; --ink: #23201b; --ink-soft: #5c564c;
+    --ink-faint: #8a8478; --line: #e2ddd2; --accent: #1f6f5c; --accent-soft: #e4efe9;
+    --panel: #2c2822; --panel-ink: #efece4; --warn-bg: #fdf3e3; --warn-line: #c98a3c; --warn-ink: #8a5a1a;
+    --radius: 14px; --maxw: 720px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17150f; --surface: #201d17; --ink: #ece8df; --ink-soft: #b3ac9e;
+      --ink-faint: #857f72; --line: #332f26; --accent: #6bbfa4; --accent-soft: #22332c;
+      --panel: #0f0d09; --panel-ink: #ece8df; --warn-bg: #2e2312; --warn-line: #b07f38; --warn-ink: #e3b878;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17150f; --surface: #201d17; --ink: #ece8df; --ink-soft: #b3ac9e;
+    --ink-faint: #857f72; --line: #332f26; --accent: #6bbfa4; --accent-soft: #22332c;
+    --panel: #0f0d09; --panel-ink: #ece8df; --warn-bg: #2e2312; --warn-line: #b07f38; --warn-ink: #e3b878;
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f1ec; --surface: #ffffff; --ink: #23201b; --ink-soft: #5c564c;
+    --ink-faint: #8a8478; --line: #e2ddd2; --accent: #1f6f5c; --accent-soft: #e4efe9;
+    --panel: #2c2822; --panel-ink: #efece4; --warn-bg: #fdf3e3; --warn-line: #c98a3c; --warn-ink: #8a5a1a;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 20px 80px; }
+  .caption { text-align: center; color: var(--ink-faint); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; margin: 8px 0 24px; }
+
+  /* 검수 패널 */
+  .review { background: var(--panel); color: var(--panel-ink); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 28px; }
+  .review h2 { margin: 0 0 16px; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; font-weight: 600; }
+  .meta { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: .92rem; }
+  .meta dt { opacity: .55; }
+  .meta dd { margin: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 2px 10px; font-size: .8rem; }
+  .checklist { list-style: none; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,.12); display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+  .checklist li { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: .9rem; cursor: pointer; }
+  .checklist input { width: 17px; height: 17px; accent-color: var(--accent); flex: none; }
+  .checklist input:checked + span { opacity: .5; text-decoration: line-through; }
+
+  /* 본문 */
+  .post { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px 40px 44px; overflow-x: auto; }
+  .thumb {
+    height: 190px; border-radius: 10px; margin-bottom: 28px;
+    background: radial-gradient(120% 140% at 12% 8%, var(--accent-soft) 0%, transparent 55%), linear-gradient(135deg, var(--accent) 0%, #14493c 100%);
+    display: flex; align-items: flex-end; padding: 20px; color: #fff; position: relative;
+  }
+  .thumb span { font-size: .78rem; letter-spacing: .06em; opacity: .9; }
+  .post h1 { font-size: 1.72rem; line-height: 1.32; margin: 0 0 12px; text-wrap: balance; letter-spacing: -.01em; }
+  .byline { color: var(--ink-faint); font-size: .85rem; margin-bottom: 26px; }
+  .post h2 { font-size: 1.25rem; margin: 34px 0 12px; letter-spacing: -.01em; color: var(--accent); }
+  .post p { margin: 0 0 15px; font-size: 1.02rem; }
+  .post ul { margin: 0 0 18px; padding-left: 20px; }
+  .post li { margin-bottom: 7px; }
+  .callout { display: flex; gap: 10px; background: var(--warn-bg); border-left: 3px solid var(--warn-line); border-radius: 0 8px 8px 0; padding: 13px 16px; margin: 0 0 20px; color: var(--warn-ink); font-size: .96rem; }
+  .callout b { font-weight: 700; }
+
+  /* 자동 수집 이미지 슬롯 */
+  .imgslot { margin: 8px 0 24px; border: 1px dashed var(--accent); border-radius: 10px; background: var(--accent-soft); padding: 26px 18px; text-align: center; }
+  .imgslot .ic { font-size: 1.6rem; }
+  .imgslot .t { display: block; margin-top: 6px; font-size: .9rem; color: var(--ink-soft); }
+  .imgslot .src { display: block; margin-top: 3px; font-size: .78rem; color: var(--ink-faint); }
+
+  .summary { background: var(--accent-soft); border-radius: 10px; padding: 18px 22px; margin: 24px 0; }
+  .summary strong { color: var(--accent); }
+  .disclaimer { color: var(--ink-faint); font-size: .86rem; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 26px; }
+  .hash { color: var(--accent); font-size: .9rem; margin-top: 10px; }
+
+  @media (max-width: 560px) {
+    .post { padding: 26px 20px 30px; }
+    .meta, .checklist { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="wrap">
+  <p class="caption">산출물 형태 B · 웹 미리보기(검수 화면)</p>
+
+  <section class="review">
+    <h2>발행 준비 정보</h2>
+    <dl class="meta">
+      <dt>제목</dt><dd>"결혼하면 나라가 100만원 쏜다"… 국가 축의금, 이거 진짜예요?</dd>
+      <dt>분량</dt><dd>약 2,050자 · 예상 읽기 4분 · 이미지 3</dd>
+      <dt>카테고리</dt><dd>오늘의 지식</dd>
+      <dt>추천 태그</dt>
+      <dd class="tags">
+        <span class="tag">#국가축의금</span><span class="tag">#결혼지원금</span>
+        <span class="tag">#혼인세액공제</span><span class="tag">#신혼부부지원</span><span class="tag">#결혼축하금</span>
+      </dd>
+    </dl>
+    <ul class="checklist">
+      <li><input type="checkbox" id="c1"><span>사실·수치 확인 (100만원, 소득기준)</span></li>
+      <li><input type="checkbox" id="c2"><span>오탈자 점검</span></li>
+      <li><input type="checkbox" id="c3"><span>자동수집 이미지 저작권 확인</span></li>
+      <li><input type="checkbox" id="c4"><span>출처 링크 유효성 확인</span></li>
+    </ul>
+  </section>
+
+  <article class="post">
+    <div class="thumb"><span>🖼️ 대표 이미지 (자동 생성/수집)</span></div>
+    <h1>"결혼하면 나라가 100만원 쏜다"… 국가 축의금, 이거 진짜예요?</h1>
+    <p class="byline">오늘의 지식 · 2026. 8. 6.</p>
+
+    <p>요즘 결혼 관련해서 "국가 축의금"이라는 말이 여기저기 도는데, 처음 들었을 때 저도 "엥? 나라가 무슨 축의금을 줘?" 싶었거든요.</p>
+    <p>근데 알아보니까 진짜로 정부가 결혼한 부부한테 현금 100만원을 주는 방안을 검토하고 있더라고요. 결혼 앞두신 분들, 최근에 혼인신고 하신 분들은 은근 큰 돈이라 챙겨야 할 것 같아서 오늘 싹 정리해봤어요!</p>
+
+    <h2>국가 축의금이 대체 뭔가요?</h2>
+    <p>쉽게 말하면 정부가 결혼한 부부한테 "축하한다"는 의미로 현금 100만원을 주겠다는 거예요. 진짜 봉투에 현금 주는 건 아니고ㅋㅋ, 혼인신고를 하면 나라에서 최대 100만원을 지원해주는 방식이라고 보시면 돼요.</p>
+    <p>저출생이 워낙 심각하니까, 결혼 자체를 좀 장려해보자는 취지인 것 같아요.</p>
+    <div class="callout"><span>⚠️</span><span><b>근데 중요한 거 하나!</b> 이거 아직 100% 확정 아니에요. 정부가 검토 중인 단계라, 이 부분은 뒤에서 다시 짚을게요.</span></div>
+
+    <div class="imgslot"><div class="ic">🖼️</div><span class="t">본문 이미지 ① — "국가 축의금 검토" 관련 정책 안내 이미지</span><span class="src">출처: 기획재정부 moef.go.kr · 프로그램이 자동 수집</span></div>
+
+    <h2>사실 지금도 비슷한 혜택이 있어요 (혼인세액공제)</h2>
+    <p>"결혼하면 돈 주는 거 처음 듣는데?" 하시는 분들 계실 텐데요. 지금도 비슷한 게 있어요. 바로 혼인세액공제예요.</p>
+    <p>2024년~2026년 사이에 결혼해서 혼인신고를 하면, 1인당 50만원씩 부부 합쳐 최대 100만원을 세금에서 깎아줘요. 생애 딱 한 번만요.</p>
+    <p>그러니까 지금도 결혼하면 100만원 혜택은 받아요. 근데 방식이 달라요. 이게 오늘의 핵심이에요!</p>
+
+    <h2>그럼 뭐가 바뀌는 건가요? (세액공제 → 현금)</h2>
+    <p>지금은 "세액공제" 방식인데, 정부는 이걸 폐지하고 "현금 지급"으로 바꾸는 걸 검토하고 있어요.</p>
+    <ul>
+      <li><b>세액공제</b> = 내야 할 세금에서 깎아주는 방식</li>
+      <li><b>현금 지급</b> = 그냥 통장에 100만원 넣어주는 방식</li>
+    </ul>
+    <p>얼핏 비슷해 보이는데, 사실 엄청난 차이가 있거든요.</p>
+
+    <h2>왜 현금으로 바꾸려는 걸까요?</h2>
+    <p><b>첫째, 세금을 안 내는 사람은 혜택을 못 받아요.</b> 소득이 적어 낼 세금이 별로 없는 신혼부부는 깎아줄 세금 자체가 없으니까요. 정작 돈이 더 필요한 사회초년생·저소득 부부가 소외되는 구조였어요.</p>
+    <p><b>둘째, 시간이 오래 걸려요.</b> 세액공제는 연말정산 때가 돼야 반영되니까 한참 뒤에나 체감하거든요.</p>
+    <p>근데 현금으로 바로 주면? 소득이 적든 많든 똑같이 100만원, 시점도 훨씬 빨라져요. 확실히 현금이 더 깔끔하긴 한 것 같아요!</p>
+
+    <div class="imgslot"><div class="ic">📊</div><span class="t">본문 이미지 ② — 세액공제 vs 현금 지급 비교 표/인포그래픽</span><span class="src">출처: 기획재정부 보도자료 · 프로그램이 자동 수집</span></div>
+
+    <h2>그래서 언제부터, 누가 받나요?</h2>
+    <p>자 여기가 제일 중요한데… 아직 확정이 아니에요. 정부가 2027년 세제개편안에 담는 걸 검토하는 단계예요. 국회 통과 같은 절차도 남아 있어서, 세부 조건(소득 기준·금액)은 발표를 지켜봐야 해요.</p>
+    <p>결혼 계획 있으신 분들은 뉴스 흐름 계속 체크하시는 게 좋을듯요!</p>
+
+    <h2>잠깐, 지자체도 따로 주는 거 있어요 (지금 신청 가능!)</h2>
+    <p>국가 축의금은 아직 검토 단계지만, 지자체 결혼지원금은 지금 받을 수 있는 것도 있어요. 대표적으로 서울시 결혼축하금이요.</p>
+    <ul>
+      <li>2025년 7월 14일 이후 혼인신고</li>
+      <li>중위소득 120% 이하 (2인 가구 월 471만원 정도)</li>
+      <li>서울 180일 이상 거주</li>
+    </ul>
+    <p>이 조건이면 100만원 신청 가능해요. 지역마다 금액·조건이 다르니 우리 동네에도 비슷한 게 있는지 꼭 확인해보세요!</p>
+
+    <div class="imgslot"><div class="ic">🏛️</div><span class="t">본문 이미지 ③ — 서울시 결혼축하금 신청 안내 화면</span><span class="src">출처: 복지로 bokjiro.go.kr · 프로그램이 자동 수집</span></div>
+
+    <h2>개인적인 생각</h2>
+    <p>솔직히 100만원으로 "결혼 안 하던 사람이 결혼한다"는 건 좀 무리인 것 같긴 해요ㅋㅋ 집값이며 육아비용이며 진짜 부담되는 건 따로 있으니까요.</p>
+    <p>근데 어차피 결혼할 사람 입장에선 안 받을 이유가 없는 돈이잖아요? 받을 수 있는 건 다 챙기는 게 이득이죠. 특히 저소득 신혼부부한테는 실질적으로 도움이 될 것 같아서 방향 자체는 나쁘지 않은 것 같아요.</p>
+    <p>다만 진짜 저출생 막으려면 이거 하나로는 택도 없고, 주거·육아 대책이 같이 가야 하지 않을까 싶네요.</p>
+
+    <h2>정리하면</h2>
+    <div class="summary">
+      <ul style="margin:0;">
+        <li>정부가 결혼 부부에 현금 100만원 주는 <strong>"국가 축의금" 검토 중</strong> (확정 X)</li>
+        <li>지금은 <strong>혼인세액공제</strong>(부부 최대 100만원), 2024~2026 결혼자 대상</li>
+        <li>2027년부터 <strong>현금 지급</strong>으로 바꾸는 방안 검토</li>
+        <li>세금 안 내던 <strong>저소득 부부도 혜택</strong> 받는 게 핵심 변화</li>
+        <li>서울 등 <strong>지자체 결혼지원금은 지금도 신청 가능!</strong></li>
+      </ul>
+    </div>
+    <p>결혼 앞두신 분들은 발표 잘 지켜보시고, 받을 수 있는 지원은 놓치지 마세요!</p>
+
+    <p class="disclaimer">※ 이 글은 정보 제공용이고, 국가 축의금은 아직 검토 단계라 확정된 게 아니에요. 정확한 내용은 발표 시점에 기획재정부·복지로에서 꼭 확인하시길 바라요!<br>출처: 기획재정부 moef.go.kr / 복지로 bokjiro.go.kr</p>
+    <p class="hash">#국가축의금 #결혼지원금 #혼인세액공제 #신혼부부지원 #결혼축하금</p>
+  </article>
+</div>

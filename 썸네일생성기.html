@@ -1,0 +1,218 @@
+<title>블로그 대표이미지 생성기</title>
+<style>
+  :root{
+    --bg:#eef1ee; --surface:#fff; --ink:#1f241f; --ink-soft:#57605a; --ink-faint:#8b938c;
+    --line:#e0e5e0; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e2f0eb; --accent-ink:#fff;
+    --radius:16px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#12150f; --surface:#1c211b; --ink:#e9ede8; --ink-soft:#aab3ac; --ink-faint:#7d857e;
+    --line:#2c322b; --accent:#4fb394; --accent-2:#6bc7a9; --accent-soft:#1e2a24; --accent-ink:#08110d; }}
+  :root[data-theme="dark"]{
+    --bg:#12150f; --surface:#1c211b; --ink:#e9ede8; --ink-soft:#aab3ac; --ink-faint:#7d857e;
+    --line:#2c322b; --accent:#4fb394; --accent-2:#6bc7a9; --accent-soft:#1e2a24; --accent-ink:#08110d; }
+  :root[data-theme="light"]{
+    --bg:#eef1ee; --surface:#fff; --ink:#1f241f; --ink-soft:#57605a; --ink-faint:#8b938c;
+    --line:#e0e5e0; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e2f0eb; --accent-ink:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.5}
+  button,input,select{font-family:inherit}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .wrap{max-width:920px;margin:0 auto;padding:26px 20px 70px}
+  h1{font-size:1.4rem;margin:0 0 4px}
+  .sub{color:var(--ink-faint);margin:0 0 22px;font-size:.95rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  label{display:block;font-size:.82rem;color:var(--ink-faint);margin:14px 0 6px}
+  label:first-child{margin-top:0}
+  input[type=text],textarea,select{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:1rem;color:var(--ink);resize:vertical}
+  input:focus,textarea:focus,select:focus{border-color:var(--accent);background:var(--surface)}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .swatch{width:34px;height:34px;border-radius:8px;border:2px solid transparent;cursor:pointer}
+  .swatch.on{border-color:var(--ink);box-shadow:0 0 0 2px var(--surface) inset}
+  .seg{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;margin-top:4px}
+  .seg button{flex:1;border:none;background:transparent;color:var(--ink-soft);padding:8px;border-radius:8px;font-size:.86rem;font-weight:600;cursor:pointer}
+  .seg button.on{background:var(--accent);color:var(--accent-ink)}
+  .previewbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-align:center}
+  canvas{width:100%;max-width:420px;height:auto;border-radius:12px;box-shadow:0 8px 24px -12px rgba(0,0,0,.4)}
+  .dl{width:100%;margin-top:14px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;font-size:1.05rem;padding:15px;border-radius:12px;cursor:pointer}
+  .dl:hover{filter:brightness(1.05)}
+  .toast{text-align:center;color:var(--accent);font-weight:600;font-size:.9rem;margin-top:10px;min-height:1.1em}
+  .tip{color:var(--ink-faint);font-size:.82rem;margin-top:8px}
+</style>
+
+<div class="wrap">
+  <h1>블로그 대표이미지 생성기 🖼️</h1>
+  <p class="sub">제목만 넣으면 네이버 블로그용 대표이미지(1080×1080)가 자동으로 만들어져요.</p>
+
+  <div class="grid">
+    <div class="panel">
+      <label for="ti">제목 (필수)</label>
+      <textarea id="ti" rows="2">자발적으로 퇴사해도 실업급여 받을 수 있을까?</textarea>
+
+      <label for="lb">위 라벨 (카테고리)</label>
+      <input type="text" id="lb" value="오늘의 지식" />
+
+      <label for="hl">강조 단어 (선택 · 색이 바뀌어요)</label>
+      <input type="text" id="hl" value="실업급여" />
+
+      <label>색상 테마</label>
+      <div class="row" id="colors"></div>
+
+      <label>스타일</label>
+      <div class="seg" id="style">
+        <button data-v="bar" class="on">좌측 강조바</button>
+        <button data-v="center">가운데 정렬</button>
+        <button data-v="badge">상단 뱃지</button>
+      </div>
+
+      <label>하단 문구 (선택)</label>
+      <input type="text" id="ft" value="핵심만 콕! 정리했어요" />
+    </div>
+
+    <div class="previewbox">
+      <canvas id="cv" width="1080" height="1080"></canvas>
+      <button class="dl" id="dl">📥 이미지 저장 (PNG)</button>
+      <div class="toast" id="toast"></div>
+      <p class="tip">저장이 안 되면 이미지를 <b>길게 눌러(우클릭) "이미지 저장"</b> 하세요.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const THEMES = [
+  {bg1:"#1f7a63",bg2:"#0f4436",hi:"#ffd76b"},
+  {bg1:"#c0392b",bg2:"#7d2118",hi:"#ffd76b"},
+  {bg1:"#2f6db3",bg2:"#1a3f6b",hi:"#ffe08a"},
+  {bg1:"#6c5ce7",bg2:"#3f36a0",hi:"#ffd76b"},
+  {bg1:"#e17055",bg2:"#b04a34",hi:"#fff2b0"},
+  {bg1:"#2d3436",bg2:"#000000",hi:"#4fd1a5"},
+];
+let theme = 0, style = "bar";
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const $ = id => document.getElementById(id);
+
+// 색상 스와치
+const cw = $("colors");
+THEMES.forEach((t,i)=>{
+  const b = document.createElement("button");
+  b.className = "swatch" + (i===0?" on":"");
+  b.style.background = `linear-gradient(135deg,${t.bg1},${t.bg2})`;
+  b.setAttribute("aria-label","색상 "+(i+1));
+  b.onclick = ()=>{ theme=i; [...cw.children].forEach(c=>c.classList.remove("on")); b.classList.add("on"); draw(); };
+  cw.appendChild(b);
+});
+$("style").querySelectorAll("button").forEach(b=>{
+  b.onclick = ()=>{ style=b.getAttribute("data-v"); $("style").querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); draw(); };
+});
+["ti","lb","hl","ft"].forEach(id=> $(id).addEventListener("input", draw));
+
+// 글자 단위 줄바꿈
+function wrap(text, maxW, font){
+  ctx.font = font;
+  const lines=[]; let cur="";
+  for(const ch of text){
+    if(ch==="\n"){ lines.push(cur); cur=""; continue; }
+    const test = cur+ch;
+    if(ctx.measureText(test).width > maxW && cur){ lines.push(cur); cur=ch; }
+    else cur=test;
+  }
+  if(cur) lines.push(cur);
+  return lines;
+}
+
+function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+function draw(){
+  const t = THEMES[theme];
+  const W=1080,H=1080;
+  // 배경 그라데이션
+  const g = ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,t.bg1); g.addColorStop(1,t.bg2);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  // 은은한 원 장식
+  ctx.fillStyle="rgba(255,255,255,0.06)";
+  ctx.beginPath(); ctx.arc(W-160,180,260,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(120,H-120,200,0,Math.PI*2); ctx.fill();
+
+  const label=$("lb").value.trim(), title=$("ti").value.trim(), hl=$("hl").value.trim(), foot=$("ft").value.trim();
+  const pad=110, maxW=W-pad*2;
+  const align = style==="center" ? "center" : "left";
+  const cx = align==="center" ? W/2 : pad;
+  ctx.textAlign = align;
+
+  // 라벨
+  let y=0;
+  if(style==="bar"){
+    ctx.fillStyle=t.hi; roundRect(pad,150,18,150,4); ctx.fill();
+  }
+  if(label){
+    if(style==="badge"){
+      ctx.font="700 40px sans-serif";
+      const w=ctx.measureText(label).width+56;
+      const bx = align==="center" ? W/2-w/2 : pad;
+      ctx.fillStyle="rgba(255,255,255,0.18)"; roundRect(bx,150,w,74,37); ctx.fill();
+      ctx.fillStyle="#fff"; ctx.textBaseline="middle"; ctx.textAlign="left";
+      ctx.fillText(label, bx+28, 150+40);
+      ctx.textAlign=align; ctx.textBaseline="alphabetic";
+      y=290;
+    } else {
+      ctx.font="800 44px sans-serif"; ctx.fillStyle=t.hi;
+      ctx.fillText(label, style==="bar"?pad+42:cx, 210);
+      y=300;
+    }
+  } else { y=250; }
+
+  // 제목 (자동 크기 조정)
+  let fs=96;
+  let lines = wrap(title, maxW, `800 ${fs}px sans-serif`);
+  while(lines.length>4 && fs>52){ fs-=6; lines=wrap(title,maxW,`800 ${fs}px sans-serif`); }
+  const lineH=fs*1.28;
+  // 강조 단어 위치 계산용: 각 줄에서 hl 포함되면 색칠
+  ctx.font=`800 ${fs}px sans-serif`;
+  const startY = y + fs;
+  lines.forEach((ln,i)=>{
+    const ly = startY + i*lineH;
+    if(hl && ln.includes(hl)){
+      // hl 앞/hl/뒤 세 조각을 이어 그림 (좌측정렬만 정밀, 가운데는 통짜색)
+      if(align==="left"){
+        let x=cx; const parts=ln.split(hl);
+        parts.forEach((p,pi)=>{
+          ctx.fillStyle="#fff"; ctx.fillText(p, x, ly); x+=ctx.measureText(p).width;
+          if(pi<parts.length-1){ ctx.fillStyle=t.hi; ctx.fillText(hl,x,ly); x+=ctx.measureText(hl).width; }
+        });
+      } else {
+        ctx.fillStyle=t.hi; ctx.fillText(ln,cx,ly);
+      }
+    } else {
+      ctx.fillStyle="#fff"; ctx.fillText(ln,cx,ly);
+    }
+  });
+
+  // 하단 문구
+  if(foot){
+    ctx.font="600 40px sans-serif"; ctx.fillStyle="rgba(255,255,255,0.85)";
+    ctx.fillText(foot, cx, H-110);
+  }
+}
+draw();
+
+// 저장
+function toast(m){ const t=$("toast"); t.textContent=m; setTimeout(()=>t.textContent="",2600); }
+$("dl").addEventListener("click", ()=>{
+  cv.toBlob(async (blob)=>{
+    if(!blob){ toast("이미지를 만들지 못했어요."); return; }
+    if(window.claude && window.claude.downloads){
+      try{ await window.claude.downloads.save({filename:"블로그_대표이미지.png", data:blob}); toast("✅ 저장됐어요!"); }
+      catch(e){
+        if(e && e.code==="declined") toast("저장을 취소했어요.");
+        else toast("저장이 안 돼요. 이미지를 길게 눌러 저장하세요.");
+      }
+    } else {
+      toast("이미지를 길게 눌러(우클릭) 저장하세요.");
+    }
+  }, "image/png");
+});
+</script>

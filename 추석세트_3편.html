@@ -1,0 +1,204 @@
+<title>추석 시즌 블로그 3편</title>
+<style>
+  :root{
+    --bg:#f6f0ea; --surface:#fff; --ink:#271d16; --ink-soft:#52463b; --ink-faint:#8c8073;
+    --line:#e9ded2; --accent:#c85a2b; --accent-2:#9c4420; --accent-soft:#fbeadf; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f8efe6; --box-accent:#b04e24; --box-soft:#eeddcd; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#16110c; --surface:#201a14; --ink:#ece4da; --ink-soft:#bcaf9f; --ink-faint:#8a7d6d;
+    --line:#332a20; --accent:#e8825a; --accent-2:#f0a179; --accent-soft:#2e1d12; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#241a10; --box-accent:#e8825a; --box-soft:#382a1a; }}
+  :root[data-theme="dark"]{
+    --bg:#16110c; --surface:#201a14; --ink:#ece4da; --ink-soft:#bcaf9f; --ink-faint:#8a7d6d;
+    --line:#332a20; --accent:#e8825a; --accent-2:#f0a179; --accent-soft:#2e1d12; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#241a10; --box-accent:#e8825a; --box-soft:#382a1a; }
+  :root[data-theme="light"]{
+    --bg:#f6f0ea; --surface:#fff; --ink:#271d16; --ink-soft:#52463b; --ink-faint:#8c8073;
+    --line:#e9ded2; --accent:#c85a2b; --accent-2:#9c4420; --accent-soft:#fbeadf; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f8efe6; --box-accent:#b04e24; --box-soft:#eeddcd; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;margin-bottom:34px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  .num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:2.15rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.55rem;margin:36px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .note{margin-top:12px;color:var(--ink-faint);font-size:1rem;font-style:italic}
+  .edit{background:#fff6d6;border:1px dashed var(--warn-line);border-radius:10px;padding:12px 16px;margin:0 0 20px;color:#7a5a12;font-size:1.02rem}
+  :root[data-theme="dark"] .edit{background:#2e2610;color:#e3c877}
+  @media(prefers-color-scheme:dark){.edit{background:#2e2610;color:#e3c877}}
+</style>
+
+<div class="wrap">
+  <p class="cap">추석 시즌 블로그 3편 · 각 2000~3000자 · 검수 후 발행</p>
+
+  <!-- ===== 글 1 : 추석 민생지원금 ===== -->
+  <article class="post">
+    <span class="num">글 1</span>
+    <h1>우리 지역은 얼마? 추석 민생지원금 총정리 (최대 50만원)</h1>
+    <p class="byline">오늘의 지식 · 추석 지원금</p>
+    <p class="lead">추석 앞두고 지갑 사정 빠듯하시죠? 그런데 <span class="hi">우리 동네에서 명절 지원금을 준다는 사실</span>, 모르고 지나치는 분들이 정말 많아요. 지역에 따라 <strong>많게는 50만원</strong>까지 주는데 말이에요. 오늘은 추석 민생지원금이 뭔지, 얼마 주는지, 어떻게 신청하는지 싹 정리했어요. 마감 전에 꼭 확인하세요!</p>
+
+    <div class="edit">✏️ (블로거 메모 · 발행 시 삭제) 지원금은 지자체별로 금액·기간이 전부 달라요. 발행 시 '우리 지역' 기준으로 몇 곳 예시를 넣거나, 독자가 검색하도록 안내하는 게 좋아요.</div>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/korean%20thanksgiving/" target="_blank" rel="noopener">"korean thanksgiving" ↗</a>
+      <a href="https://pixabay.com/images/search/money%20gift/" target="_blank" rel="noopener">"money gift" ↗</a>
+    </div>
+
+    <h2>추석 민생지원금이 뭐예요?</h2>
+    <p>전국 <strong>지방자치단체(시·군·구)</strong>가 명절을 앞두고 <span class="em">자체 예산으로 주는 지원금</span>이에요. '명절위로금', '민생지원금' 등 이름은 달라도 취지는 같아요. 고물가·고금리로 힘든 가계를 돕고, 지역 소상공인 매출도 살리려는 거죠.</p>
+    <div class="callout"><span>⚠️</span><span>핵심은 <span class="hi">'지자체마다 다르다'</span>는 거예요. 주는 곳도 있고 안 주는 곳도 있고, 금액·대상·기간이 전부 달라요.</span></div>
+
+    <h2>얼마나 주나요?</h2>
+    <p>지역에 따라 편차가 커요. 보통 <span class="em">10만원부터 최대 50만원</span>까지예요. 전 주민에게 주는 곳도 있고, 특정 대상(취약계층·소상공인 등)만 주는 곳도 있어요. 이미 지급을 시작한 지역이 있는가 하면, 아직 예산·의회 절차가 남은 곳도 있고요.</p>
+
+    <h2>신청 기간은 언제까지?</h2>
+    <p>이게 제일 중요해요. <strong>대체로 추석 전후로 마감</strong>돼요. 예를 들어 어떤 지역은 9월 11일까지, 어떤 곳은 7월부터 9월 중순까지 받는 식이에요. <span class="hi">기간 지나면 못 받으니</span> 우리 지역 공고를 빨리 확인해야 해요.</p>
+
+    <h2>어디서 확인·신청하나요?</h2>
+    <ul>
+      <li>거주지 <strong>시·군·구청 홈페이지</strong> 공지 (가장 정확)</li>
+      <li><strong>주민센터(행정복지센터)</strong> 문의</li>
+      <li><strong>정부24</strong>에서 '우리 지역 지원' 검색</li>
+    </ul>
+    <p>"○○시 추석 민생지원금"으로 검색하면 대상·금액·신청법이 바로 나와요.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">이런 지자체 지원금은 <strong>'몰라서 못 받는'</strong> 대표 사례예요. 전국 뉴스엔 잘 안 나오고 지역 공고로만 뜨거든요. 그래서 명절 전엔 꼭 우리 동네 소식을 챙겨보는 게 좋아요. 5분 검색으로 몇십만원이면 완전 이득이잖아요!</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>지자체 자체 <strong>추석 민생지원금</strong> (지역마다 10만~50만원)</li>
+        <li>주는 곳·금액·대상·기간이 <strong>전부 다름</strong></li>
+        <li>대체로 <strong>추석 전후 마감</strong> → 서둘러 확인</li>
+        <li>확인은 <strong>시·군·구청·주민센터·정부24</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#추석민생지원금 #명절위로금 #지자체지원금 #추석지원금 #민생지원</p>
+  </article>
+
+  <!-- ===== 글 2 : 추석 목돈 굴리기 ===== -->
+  <article class="post">
+    <span class="num">글 2</span>
+    <h1>추석 보너스·용돈, 통장에 그냥 두면 손해예요 (짧게 굴리는 법)</h1>
+    <p class="byline">오늘의 지식 · 명절 재테크</p>
+    <p class="lead">명절엔 상여금도 들어오고, 어른들께 용돈도 받고(?) 목돈이 잠깐 생기잖아요. 근데 그 돈, <span class="hi">보통 통장에 그냥 두죠.</span> 며칠~몇 주만 굴려도 이자가 붙는데 말이에요. 오늘은 명절에 생긴 목돈을 '짧게' 굴리는 법을 알려드릴게요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/saving%20money/" target="_blank" rel="noopener">"saving money" ↗</a>
+      <a href="https://pixabay.com/images/search/piggy%20bank/" target="_blank" rel="noopener">"piggy bank" ↗</a>
+    </div>
+
+    <h2>왜 잠깐이라도 굴려야 해요?</h2>
+    <p>일반 입출금 통장에 넣어두면 이자가 <strong>거의 0</strong>이에요. 반면 조금만 옮겨두면 하루·며칠 단위로도 이자가 붙어요. 큰돈은 아니어도 <span class="em">"어차피 안 쓸 돈, 놀리느니 굴리는 게 이득"</span>이라는 거죠.</p>
+
+    <h2>상황별로 이렇게 골라요</h2>
+    <ul>
+      <li>곧 쓸 돈(며칠 내) → <strong>파킹통장</strong> (수시입출금, 언제든 빼도 이자)</li>
+      <li>한두 달 안 쓸 돈 → <strong>1·3개월 단기 정기예금</strong></li>
+      <li>반년 이상 묶어도 되는 돈 → <strong>6·12개월 예금</strong> (금리 더 높음)</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>핵심 감각. <span class="hi">"언제 쓸지 모르면 파킹통장, 당분간 안 쓸 거면 예금."</span></span></div>
+
+    <h2>고를 때 체크 3가지</h2>
+    <p>짧게 굴릴 때도 기본은 챙겨야 해요.</p>
+    <ul>
+      <li><strong>예금자보호</strong> — 은행당 1인 1억까지 보호</li>
+      <li><strong>세후 이자</strong> — 이자소득세 15.4% 떼고 들어옴</li>
+      <li>파킹통장은 <strong>'고금리 구간 한도'</strong> 확인 (전액 고금리 아님)</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">명절 목돈은 <strong>'잠깐 맡기기'만 해도</strong> 돼요. 거창하게 투자할 필요 없이, 파킹통장에 옮겨두는 것만으로도 이자가 생기니까요. 저는 명절 목돈 들어오면 일단 파킹통장에 넣어두고, 안 쓸 게 확실해지면 예금으로 옮겨요. 습관 하나가 은근 쏠쏠해요!</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>입출금 통장은 이자 0 → <strong>잠깐이라도 굴리기</strong></li>
+        <li>곧 쓸 돈 <strong>파킹통장</strong> / 당분간 안 쓸 돈 <strong>단기예금</strong></li>
+        <li>체크: <strong>예금자보호·세후·파킹 고금리 한도</strong></li>
+        <li>명절 목돈은 일단 파킹, 확실해지면 예금으로</li>
+      </ul>
+    </div>
+    <p class="tags">#명절재테크 #파킹통장 #단기예금 #추석보너스 #돈굴리기</p>
+  </article>
+
+  <!-- ===== 글 3 : 명절 앱테크 ===== -->
+  <article class="post">
+    <span class="num">글 3</span>
+    <h1>명절 용돈은 폰으로! 공짜돈 버는 앱테크 총정리</h1>
+    <p class="byline">오늘의 지식 · 공짜돈 앱테크</p>
+    <p class="lead">명절엔 이래저래 돈 나갈 데가 많잖아요. 그럴 때 <span class="hi">폰만 있으면 소소하게 용돈을 버는</span> 방법이 있어요. 바로 '앱테크'예요. 큰돈은 아니어도 티끌 모아 명절 커피값은 나와요ㅎㅎ 대표적인 앱테크를 종류별로 정리했어요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/smartphone%20money/" target="_blank" rel="noopener">"smartphone money" ↗</a>
+      <a href="https://pixabay.com/images/search/reward%20app/" target="_blank" rel="noopener">"reward app" ↗</a>
+    </div>
+
+    <h2>대표 앱테크 종류</h2>
+    <p>거창한 거 없어요. 하루 몇 번 툭툭 누르는 게 전부예요.</p>
+    <ul>
+      <li><strong>키우기 이벤트</strong> — 토스 물개·채소 등 키우면 포인트 (며칠 소요)</li>
+      <li><strong>출석체크·행운퀴즈</strong> — 매일 접속·정답 클릭하면 소액 포인트</li>
+      <li><strong>만보기·걷기 앱</strong> — 걸음 수만큼 포인트 (토스·캐시워크 등)</li>
+      <li><strong>광고 보기·미션</strong> — 짧은 광고 시청으로 포인트</li>
+      <li><strong>설문·리뷰</strong> — 간단한 설문 참여로 적립</li>
+    </ul>
+
+    <h2>하루 루틴으로 만들면 쉬워요</h2>
+    <p>따로 시간 내지 말고 <span class="em">자투리 시간에</span> 하는 게 핵심이에요. 아침에 출석체크, 이동하며 만보기, 자기 전 키우기 물 주기… 이렇게 습관처럼 하면 부담 없어요.</p>
+    <div class="callout"><span>💡</span><span>모은 포인트는 대부분 <span class="hi">현금처럼 송금·결제</span>하거나 기프티콘으로 바꿀 수 있어요.</span></div>
+
+    <h2>현실적인 기대치 (솔직히)</h2>
+    <p>앱테크는 <strong>부업이 아니라 '소소한 보너스'</strong>예요. 시간 대비 금액이 크진 않으니, "이걸로 부자 된다"는 기대는 금물이에요. 어차피 쓰는 앱에서 <span class="em">덤으로 챙기는 정도</span>가 딱 맞아요.</p>
+
+    <h2>주의할 점</h2>
+    <ul>
+      <li>과한 <strong>개인정보·권한</strong>을 요구하는 앱은 피하기</li>
+      <li>광고가 너무 많거나 <strong>수상한 리워드 앱</strong> 조심</li>
+      <li>포인트 <strong>사용처·유효기간</strong> 확인</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">앱테크는 <strong>'즐기면서 덤'</strong>으로 생각해야 안 지쳐요. 큰돈 노리고 하면 시간만 아깝거든요. 저는 이미 쓰는 토스·만보기 정도만 가볍게 해요. 명절에 커피 한 잔 값이라도 폰으로 벌면 기분은 좋잖아요?ㅎㅎ</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>앱테크 = <strong>키우기·출석·만보기·광고·설문</strong> 등으로 포인트</li>
+        <li>자투리 시간에 <strong>루틴처럼</strong> 하면 부담 없음</li>
+        <li>포인트는 <strong>현금·기프티콘</strong>으로 사용</li>
+        <li>'부업' 아닌 <strong>소소한 보너스</strong>, 수상한 앱은 주의</li>
+      </ul>
+    </div>
+    <p class="tags">#앱테크 #공짜돈 #토스 #만보기 #명절용돈</p>
+  </article>
+</div>

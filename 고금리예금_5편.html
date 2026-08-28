@@ -1,0 +1,280 @@
+<title>고금리 예금·금리 완성본 5편</title>
+<style>
+  :root{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#b8860b; --accent-soft:#f6edd6; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f7f1e2; --box-accent:#a9760a; --box-soft:#ecdfc4;
+    --q:#eef3f6; --q-accent:#2f6db3; --q-soft:#d8e6ef; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14120c; --surface:#1e1b14; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#e6b84e; --accent-soft:#2a2313; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#221d10; --box-accent:#e6b84e; --box-soft:#342c18;
+    --q:#161f2b; --q-accent:#6ea8e0; --q-soft:#233042; }}
+  :root[data-theme="dark"]{
+    --bg:#14120c; --surface:#1e1b14; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#e6b84e; --accent-soft:#2a2313; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#221d10; --box-accent:#e6b84e; --box-soft:#342c18;
+    --q:#161f2b; --q-accent:#6ea8e0; --q-soft:#233042; }
+  :root[data-theme="light"]{
+    --bg:#f4f1ea; --surface:#fff; --ink:#241f17; --ink-soft:#4f473a; --ink-faint:#8a8272;
+    --line:#e6e0d3; --accent:#b8860b; --accent-soft:#f6edd6; --hi:#ffe08a;
+    --warn-bg:#fdf0e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f7f1e2; --box-accent:#a9760a; --box-soft:#ecdfc4;
+    --q:#eef3f6; --q-accent:#2f6db3; --q-soft:#d8e6ef; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.78}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;margin-bottom:34px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  .num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:2.15rem;line-height:1.34;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.55rem;margin:36px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .qa{background:var(--q);border:1px solid var(--q-soft);border-radius:12px;padding:18px 20px;margin:0 0 16px}
+  .qa .q{font-weight:800;color:var(--q-accent);font-size:1.18rem;margin-bottom:6px}
+  .qa .a{font-size:1.18rem;margin:0}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none;border-bottom:1px solid var(--box-soft)}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:22px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.3rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+</style>
+
+<div class="wrap">
+  <p class="cap">고금리 예금·금리 완성본 5편 · 각 2000~3000자 · 검수 후 발행</p>
+
+  <!-- 글 1 : 고금리 예금 찾는 법 -->
+  <article class="post">
+    <span class="num">글 1</span>
+    <h1>0.1%라도 더! 고금리 예금 찾는 가장 쉬운 방법</h1>
+    <p class="byline">오늘의 지식 · 재테크 꿀팁</p>
+    <p class="lead">같은 1,000만원을 맡겨도 <span class="hi">어디에 넣느냐에 따라 이자가 몇만 원씩 차이</span> 나요. 근데 대부분은 그냥 주거래 은행에 넣죠. 조금만 발품 팔면 더 높은 금리를 받을 수 있는데 말이에요. 오늘은 고금리 예금을 손쉽게 찾는 방법을 알려드릴게요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/interest%20rate/" target="_blank" rel="noopener">"interest rate" ↗</a>
+      <a href="https://pixabay.com/images/search/mobile%20banking/" target="_blank" rel="noopener">"mobile banking" ↗</a>
+    </div>
+
+    <h2>금리 비교는 '한 곳에서' 하세요</h2>
+    <p>은행마다 일일이 들어가 보면 지쳐요. 다행히 <strong>모든 금융사 예적금 금리를 한 번에 비교</strong>할 수 있는 공식 창구가 있어요. 대표적으로 <span class="em">금융감독원 '금융상품 한눈에'(finlife.fss.or.kr)</span>예요. 예금·적금 금리를 순위로 쫙 보여줘요. 은행 앱이나 핀테크 앱에도 비교 기능이 있고요.</p>
+
+    <h2>지금 금리, 대략 어느 정도예요?</h2>
+    <p>2026년 기준으로 대략 이런 수준이에요. (시점마다 달라져요)</p>
+    <ul>
+      <li><strong>시중은행</strong> 정기예금: 약 연 2.9~3.2%</li>
+      <li><strong>저축은행</strong> 정기예금: 약 연 3.4~3.6%대</li>
+      <li><strong>특판 상품</strong>: 연 4%를 넘기도 함</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>같은 예금이어도 <span class="hi">저축은행이 시중은행보다 대체로 높아요.</span> 다만 안전성(예금자보호)은 꼭 함께 챙겨야 해요.</span></div>
+
+    <h2>발품의 순서</h2>
+    <ul>
+      <li>1) '금융상품 한눈에'에서 <strong>최고금리 상품 확인</strong></li>
+      <li>2) 그 은행의 <strong>우대조건</strong>(급여이체·앱·첫거래 등) 체크</li>
+      <li>3) <strong>예금자보호</strong> 되는 상품인지, 한도 내인지 확인</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">"0.3% 차이가 뭐 대수야" 싶지만, 목돈이 커질수록 이게 몇십만 원이 돼요. 딱 <strong>10분만 비교</strong>해도 공짜로 이자를 더 받는 건데, 안 할 이유가 없죠. 저는 예금 들기 전엔 꼭 비교부터 해요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>금리 비교는 <strong>'금융상품 한눈에'</strong>에서 한 번에</li>
+        <li>2026년 기준 저축은행(3.4~3.6%)이 시중은행(2.9~3.2%)보다 높은 편</li>
+        <li>특판은 <strong>연 4%+</strong>도 등장</li>
+        <li>고를 땐 <strong>금리 + 우대조건 + 예금자보호</strong> 3종 세트 확인</li>
+      </ul>
+    </div>
+    <p class="tags">#고금리예금 #예금금리비교 #금융상품한눈에 #정기예금 #재테크</p>
+  </article>
+
+  <!-- 글 2 : 저축은행 고금리 안전한가 -->
+  <article class="post">
+    <span class="num">글 2</span>
+    <h1>저축은행 고금리 예금, 넣어도 안전할까요?</h1>
+    <p class="byline">오늘의 지식 · 안전한 재테크</p>
+    <p class="lead">금리 비교하다 보면 <span class="hi">저축은행이 시중은행보다 금리가 높은</span> 걸 보게 돼요. 그럼 자연스럽게 드는 생각. "근데 저축은행… 넣어도 괜찮나?" 막연히 불안하신 분들 많죠. 오늘은 저축은행 예금이 얼마나 안전한지, 어떻게 이용하면 되는지 정리했어요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/bank%20building/" target="_blank" rel="noopener">"bank building" ↗</a>
+      <a href="https://pixabay.com/images/search/safe%20money/" target="_blank" rel="noopener">"safe money" ↗</a>
+    </div>
+
+    <h2>핵심: 저축은행도 예금자보호 돼요</h2>
+    <p>많은 분이 오해하는데, 저축은행 예적금도 <strong>예금자보호 대상</strong>이에요. 2025년 9월부터 상향된 <span class="em">1인당 1억원 한도</span>가 저축은행에도 똑같이 적용돼요. 원금+이자 합쳐서요.</p>
+    <div class="callout"><span>💡</span><span>포인트는 <span class="hi">'각 저축은행마다 따로 1억'</span>이라는 거예요. A저축은행 1억, B저축은행 1억이면 둘 다 보호돼요.</span></div>
+
+    <h2>그럼 어떻게 이용하면 되나요?</h2>
+    <p>안전성과 금리를 둘 다 챙기는 방법은 간단해요.</p>
+    <ul>
+      <li><strong>한 곳에 1억 이내</strong>로 예치 (원금+이자 합쳐 넘지 않게)</li>
+      <li>목돈이 크면 <strong>여러 저축은행에 나눠서</strong> 예치</li>
+      <li>금리 높다고 <strong>재무상태가 불안한 곳에 몰빵</strong>은 지양</li>
+    </ul>
+
+    <h2>저축은행 고를 때 참고</h2>
+    <p>금리만 보지 말고, 그 저축은행의 <span class="em">건전성 지표(BIS비율 등)</span>도 한 번 확인하면 더 안심돼요. 저축은행중앙회 공시나 관련 정보에서 볼 수 있어요. 어차피 1억까지 보호되지만, 심리적으로도 튼튼한 곳이 편하잖아요.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">저축은행을 무조건 무서워할 필요는 없어요. <strong>예금자보호 한도만 지키면</strong> 시중은행 예금만큼 안전하니까요. 오히려 금리 차이를 활용 못 하는 게 더 아까운 일이에요. 한도 내에서 똑똑하게 나눠 담으면 이득만 챙길 수 있어요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>저축은행 예적금도 <strong>예금자보호 O</strong> (1인당 1억)</li>
+        <li>한도는 <strong>저축은행별로 각각 1억</strong></li>
+        <li>목돈은 <strong>여러 곳에 나눠</strong> 넣으면 안전+금리 다 챙김</li>
+        <li>건전성 지표(BIS 등)도 참고하면 더 안심</li>
+      </ul>
+    </div>
+    <p class="tags">#저축은행 #고금리예금 #예금자보호 #분산예치 #안전한재테크</p>
+  </article>
+
+  <!-- 글 3 : 기준금리 vs 예금금리 -->
+  <article class="post">
+    <span class="num">글 3</span>
+    <h1>예금 지금 들까, 기다릴까? 기준금리와 예금금리의 관계</h1>
+    <p class="byline">오늘의 지식 · 금리 이해</p>
+    <p class="lead">"금리 더 오를 것 같은데 지금 예금 넣으면 손해 아닐까?" 반대로 "더 내리기 전에 얼른 넣어야 하나?" 예금 들 때 이 고민 다들 하잖아요. 이걸 판단하려면 <span class="hi">기준금리와 예금금리가 어떻게 움직이는지</span>만 알면 돼요. 어렵지 않아요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/interest%20rate%20chart/" target="_blank" rel="noopener">"interest rate chart" ↗</a>
+      <a href="https://pixabay.com/images/search/bank%20of%20korea/" target="_blank" rel="noopener">"finance graph" ↗</a>
+    </div>
+
+    <h2>기준금리가 뭐예요?</h2>
+    <p><strong>기준금리</strong>는 한국은행이 정하는 '나라의 대표 금리'예요. 이게 오르면 은행들이 주는 <span class="em">예금금리도 대체로 따라 오르고</span>, 내리면 예금금리도 대체로 내려가요. 즉 예금금리의 큰 방향을 정하는 기준점이라고 보면 돼요.</p>
+
+    <h2>그래서 언제 예금 드는 게 유리해요?</h2>
+    <p>딱 잘라 말하긴 어렵지만, 이렇게 생각하면 편해요.</p>
+    <ul>
+      <li>금리가 <strong>고점 근처(더 안 오를 듯)</strong> → 지금 장기 예금으로 묶어두면 유리</li>
+      <li>금리가 <strong>계속 오르는 중</strong> → 짧게 굴리며 갈아타는 것도 방법</li>
+      <li>금리가 <strong>내려가는 추세</strong> → 높을 때 미리 장기로 묶어두면 이득</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>핵심 감각 하나. <span class="hi">"앞으로 금리가 내릴 것 같으면 지금 금리를 오래 묶어라."</span> 반대면 짧게 굴려라!</span></div>
+
+    <h2>완벽한 타이밍은 없어요</h2>
+    <p>솔직히 아무도 금리 바닥·천장을 정확히 못 맞혀요. 그러니 <span class="em">타이밍에 너무 목매지 말고</span>, 지금 나쁘지 않은 금리면 일단 굴리는 게 놀리는 것보단 나아요. '완벽한 때'를 기다리다 몇 달 그냥 흘려보내는 게 더 손해거든요.</p>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">저는 예금은 <strong>'타이밍'보다 '습관'</strong>이라고 봐요. 금리 방향만 대충 참고하고, 나머지는 그냥 꾸준히 굴리는 거죠. 예금으로 대박 나긴 어렵지만, 안 굴리면 물가에 밀려요. 완벽을 노리기보단 꾸준함이 답이에요.</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>기준금리 = 예금금리의 <strong>큰 방향</strong>을 정하는 기준</li>
+        <li>금리 내릴 듯 → <strong>지금 장기로 묶기</strong> / 오를 듯 → 짧게 굴리기</li>
+        <li><strong>완벽한 타이밍은 없다</strong> — 놀리는 것보단 굴리는 게 낫다</li>
+        <li>예금은 타이밍보다 <strong>꾸준함</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#기준금리 #예금금리 #금리전망 #재테크 #정기예금</p>
+  </article>
+
+  <!-- 글 4 : 특판 예금 -->
+  <article class="post">
+    <span class="num">글 4</span>
+    <h1>연 4%가 실화? '특판 예금' 놓치지 않는 법</h1>
+    <p class="byline">오늘의 지식 · 고금리 특판</p>
+    <p class="lead">가끔 "연 4% 특판!" 이런 문구 보신 적 있죠? 일반 예금보다 훨씬 높은 금리라 눈이 번쩍 뜨이는데, <span class="hi">순식간에 마감</span>돼서 놓치기 일쑤예요. 오늘은 이 '특판 예금'이 뭔지, 어떻게 하면 남들보다 먼저 잡을 수 있는지 알려드릴게요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/limited%20offer/" target="_blank" rel="noopener">"limited offer" ↗</a>
+      <a href="https://pixabay.com/images/search/money%20growth/" target="_blank" rel="noopener">"money growth" ↗</a>
+    </div>
+
+    <h2>특판 예금이 뭐예요?</h2>
+    <p><strong>특판(특별판매)</strong>은 은행이 <span class="em">기간·금액·인원을 한정</span>해서 평소보다 높은 금리로 파는 예금이에요. 신규 고객 유치나 기념 이벤트로 내놓는 경우가 많아요. 한정판이라 <strong>조기 마감</strong>되는 게 특징이고요.</p>
+    <div class="callout"><span>⏰</span><span>특판은 <span class="hi">"선착순 ○○억 한정"</span> 같은 조건이 흔해요. 좋다 싶으면 고민하는 사이에 마감돼요.</span></div>
+
+    <h2>특판, 어떻게 미리 잡나요?</h2>
+    <ul>
+      <li>가고 싶은 <strong>은행·저축은행 앱 알림</strong> 켜두기</li>
+      <li><strong>금리 비교 앱/커뮤니티</strong>에서 특판 정보 빠르게 캐치</li>
+      <li>미리 <strong>계좌·인증 세팅</strong> 해두기 (막상 가입 때 시간 끌면 마감)</li>
+    </ul>
+
+    <h2>특판 가입 전 체크</h2>
+    <p>높은 금리에 혹해서 놓치는 것들이 있어요.</p>
+    <ul>
+      <li><strong>우대조건</strong> — "최고 4%"가 우대 다 채워야 나오는 경우 많음</li>
+      <li><strong>가입 한도</strong> — 1인당 넣을 수 있는 금액 제한</li>
+      <li><strong>예금자보호</strong> — 한도(1억) 내인지</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">특판은 <strong>"준비된 사람"만 잡아요.</strong> 알림 켜두고 계좌 미리 만들어둔 사람이 뜨자마자 가입하거든요. 저도 예전에 좋은 특판 보고 "내일 해야지" 했다가 마감돼서 아쉬웠던 적 있어요ㅠ 관심 있으면 미리 세팅해두세요!</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>특판 = <strong>기간·금액·인원 한정 고금리</strong> 예금</li>
+        <li>조기 마감 잦음 → <strong>앱 알림·미리 세팅</strong>이 관건</li>
+        <li>"최고 ○%"는 <strong>우대조건</strong> 다 채워야 하는 경우 많음</li>
+        <li>가입 전 <strong>한도·예금자보호</strong> 확인</li>
+      </ul>
+    </div>
+    <p class="tags">#특판예금 #고금리 #예금특판 #재테크 #선착순</p>
+  </article>
+
+  <!-- 글 5 : 금리 속지 않는 법 -->
+  <article class="post">
+    <span class="num">글 5</span>
+    <h1>"최고 연 5%"에 속지 마세요 — 금리 제대로 보는 법</h1>
+    <p class="byline">오늘의 지식 · 금리 함정</p>
+    <p class="lead">광고에 큼지막하게 <span class="hi">"최고 연 5%!"</span> 적혀 있어서 가입했는데, 막상 만기에 받아보면 생각보다 적어서 당황한 적 없으세요? 사실 금리 표시엔 <strong>알아야 속지 않는 포인트</strong>가 몇 개 있어요. 오늘 이것만 알면 앞으로 안 당해요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/reading%20contract/" target="_blank" rel="noopener">"reading contract" ↗</a>
+      <a href="https://pixabay.com/images/search/magnifying%20money/" target="_blank" rel="noopener">"magnifying money" ↗</a>
+    </div>
+
+    <h2>함정 1) '최고금리'는 조건 다 채워야 나와요</h2>
+    <p>광고의 <strong>'최고 연 5%'</strong>는 대부분 <span class="em">기본금리 + 우대금리</span>를 합친 숫자예요. 급여이체, 카드 사용, 앱 가입, 마케팅 동의… 이 우대조건을 전부 채워야 최고금리가 되고, 하나라도 빠지면 뚝 떨어져요. <strong>내가 실제로 받을 금리(기본금리)</strong>부터 봐야 해요.</p>
+
+    <h2>함정 2) 단리 vs 복리</h2>
+    <p>같은 금리라도 <strong>단리</strong>는 원금에만, <strong>복리</strong>는 이자에도 이자가 붙어요. 장기·목돈일수록 복리가 유리하죠. 광고 금리가 단리 기준인지 복리 기준인지도 봐야 정확해요.</p>
+
+    <h2>함정 3) 세전이냐 세후냐</h2>
+    <div class="callout"><span>💡</span><span>표시 금리는 대부분 <span class="hi">'세전'</span>이에요. 실제론 이자소득세 15.4%를 뗀 <strong>'세후'</strong>가 내 손에 들어와요. 비교할 땐 세후로!</span></div>
+
+    <h2>그래서 이렇게 보세요</h2>
+    <ul>
+      <li>큰 글씨 최고금리 말고 <strong>기본금리부터</strong> 확인</li>
+      <li>우대조건이 <strong>내가 실제로 채울 수 있는 것</strong>인지 따지기</li>
+      <li>단리/복리, 세전/세후 <strong>기준 통일</strong>해서 비교</li>
+    </ul>
+
+    <div class="opinion"><div class="h">💬 개인적인 생각</div>
+    <p style="margin:0">금리는 <strong>'큰 숫자'가 아니라 '내가 실제로 받는 숫자'</strong>가 중요해요. 광고는 늘 제일 좋은 조건을 앞세우거든요. 딱 3개 — 기본금리·우대조건·세후 — 만 챙겨봐도 후회할 일이 확 줄어요. 아는 게 돈이에요!</p></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>'최고금리' = <strong>우대조건 다 채웠을 때</strong> 숫자 → 기본금리부터 확인</li>
+        <li><strong>단리/복리</strong> 구분 (장기·목돈은 복리 유리)</li>
+        <li>표시금리는 세전 → <strong>세후로 비교</strong></li>
+        <li>기억할 3개: <strong>기본금리·우대조건·세후</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#예금금리 #우대금리 #단리복리 #금리비교 #재테크꿀팁</p>
+  </article>
+</div>

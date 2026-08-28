@@ -1,0 +1,204 @@
+<title>블로그 초안 4편 — 미리보기</title>
+<style>
+  :root{
+    --bg:#f3f1ec; --surface:#fff; --ink:#23201b; --ink-soft:#565049; --ink-faint:#8a8478;
+    --line:#e4dfd4; --accent:#c0392b; --accent-soft:#fbeae7; --hi:#fff3b0;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f4f8f6; --box-accent:#1f7a63; --box-soft:#e4efe9; --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#17150f; --surface:#201d17; --ink:#ece8df; --ink-soft:#b3ac9e; --ink-faint:#857f72;
+    --line:#332f26; --accent:#e8786b; --accent-soft:#33201d; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#1a2420; --box-accent:#6bbfa4; --box-soft:#22332c; }}
+  :root[data-theme="dark"]{
+    --bg:#17150f; --surface:#201d17; --ink:#ece8df; --ink-soft:#b3ac9e; --ink-faint:#857f72;
+    --line:#332f26; --accent:#e8786b; --accent-soft:#33201d; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#1a2420; --box-accent:#6bbfa4; --box-soft:#22332c; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ec; --surface:#fff; --ink:#23201b; --ink-soft:#565049; --ink-faint:#8a8478;
+    --line:#e4dfd4; --accent:#c0392b; --accent-soft:#fbeae7; --hi:#fff3b0;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#f4f8f6; --box-accent:#1f7a63; --box-soft:#e4efe9; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 20px 90px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:36px 38px 42px;margin-bottom:34px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  .num{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:2.1rem;line-height:1.32;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.5rem;margin:34px 0 13px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  ul{margin:0 0 19px;padding:0;list-style:none}
+  ul li{position:relative;padding:9px 0 9px 28px;font-size:1.22rem;border-bottom:1px dashed var(--line)}
+  ul li:last-child{border-bottom:none}
+  ul li::before{content:"✅";position:absolute;left:0;top:9px;font-size:.95rem}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.18rem;font-weight:600}
+  .imgslot{margin:8px 0 24px;border:2px dashed var(--box-accent);border-radius:12px;background:var(--box-soft);padding:20px 16px;text-align:center}
+  .imgslot .t{display:block;font-weight:700;margin-bottom:6px}
+  .imgslot a{display:inline-block;margin:2px 6px;font-size:.95rem;color:var(--box-accent);font-weight:700;text-decoration:none;border-bottom:1px solid var(--box-soft)}
+  .imgslot a:hover{border-bottom-color:var(--box-accent)}
+  .summary{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:19px 22px;margin:24px 0}
+  .summary .h{font-weight:800;font-size:1.28rem;color:var(--box-accent);margin-bottom:11px}
+  .summary ul li::before{content:"📌"}
+  .tags{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:1.12rem}
+  .disc{margin-top:14px;color:var(--ink-faint);font-size:1rem}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+</style>
+
+<div class="wrap">
+  <p class="cap">블로그 초안 4편 · 웹 최신정보 기반 · 검수 후 네이버 발행</p>
+
+  <!-- 글 1 -->
+  <article class="post">
+    <span class="num">글 1</span>
+    <h1>고유가 피해지원금, 8월 31일까지 안 쓰면 사라져요! (사용처·잔액 확인)</h1>
+    <p class="byline">오늘의 지식 · 마감 임박 정보</p>
+    <p class="lead">혹시 카드에 들어온 <span class="hi">고유가 피해지원금</span>, 아직 안 쓰고 계신 분 있으세요? 이거 <strong>8월 31일까지</strong> 안 쓰면 그냥 <span class="em">소멸</span>돼요. 아까운 돈 날리기 전에 오늘 꼭 확인해요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/gas%20station/" target="_blank" rel="noopener">"gas station" ↗</a>
+      <a href="https://pixabay.com/images/search/credit%20card%20payment/" target="_blank" rel="noopener">"credit card payment" ↗</a>
+    </div>
+
+    <h2>고유가 피해지원금이 뭐였죠?</h2>
+    <p>고유가로 부담이 커진 걸 덜어주려고 정부가 지급한 지원금이에요. <strong>취약계층은 1인당 최대 60만원</strong>, 소득 하위 70% 일반 가구는 지역에 따라 <strong>10만~25만원</strong>이 차등 지급됐어요.</p>
+    <div class="callout"><span>⏰</span><span>핵심은 <span class="hi">사용 기한이 8월 31일(월)까지</span>라는 것! 그날까지 안 쓴 금액은 소멸돼요.</span></div>
+
+    <h2>어디서 쓸 수 있나요? (사용처 주의!)</h2>
+    <p>아무 데서나 되는 게 아니에요. <strong>대형마트·백화점·온라인 쇼핑몰은 안 되고</strong>, 연 매출 30억원 이하 <strong>우리 동네 소상공인 가게</strong>에서만 쓸 수 있어요. 동네 식당, 마트, 카페, 약국 같은 곳이요.</p>
+
+    <h2>내 잔액은 어떻게 확인하죠?</h2>
+    <p>충전받은 카드사 앱이나 홈페이지에서 잔액을 확인할 수 있어요. 지역사랑상품권·선불카드로 받은 분도 잔액을 꼭 체크해서 <span class="em">31일 전에 다 쓰는 게 이득</span>이에요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>사용 기한 <strong>8월 31일(월)</strong> — 지나면 소멸!</li>
+        <li>취약계층 최대 60만원 / 일반 가구 10~25만원</li>
+        <li>대형마트·온라인 ❌ → <strong>동네 소상공인 가게에서만</strong> ⭕</li>
+        <li>카드사 앱에서 <strong>잔액 확인</strong> 먼저</li>
+      </ul>
+    </div>
+    <p>얼마 안 남았어요. 오늘 잔액 확인하고 동네에서 알뜰하게 다 쓰세요!</p>
+    <p class="tags">#고유가피해지원금 #지원금 #8월마감 #소상공인 #민생지원</p>
+    <p class="disc">※ AI 초안입니다. 지급 대상·금액·사용처·기한은 발행 전 각 카드사·지자체·정부24에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 2 -->
+  <article class="post">
+    <span class="num">글 2</span>
+    <h1>2026 하반기, 지금 신청 가능한 정부 지원금 총정리 (놓치지 마세요)</h1>
+    <p class="byline">오늘의 지식 · 지원금 모아보기</p>
+    <p class="lead">"내가 받을 수 있는 지원금이 있는지도 모르고 그냥 지나쳤다"… 이런 분들 정말 많거든요. 그래서 <span class="hi">2026년 하반기에 챙길 만한 지원금</span>을 한 번에 정리해봤어요. 해당되는 거 있는지 쭉 훑어보세요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/money%20support/" target="_blank" rel="noopener">"money support" ↗</a>
+      <a href="https://pixabay.com/images/search/calendar%20checklist/" target="_blank" rel="noopener">"calendar checklist" ↗</a>
+    </div>
+
+    <h2>지금 바로 챙길 것 (마감 임박)</h2>
+    <ul>
+      <li><strong>고유가 피해지원금</strong> — 8월 31일까지 사용, 안 쓰면 소멸</li>
+      <li><strong>근로·자녀장려금</strong> — 8월 말(27일 예정) 지급, 금액 조회 가능</li>
+    </ul>
+
+    <h2>하반기 내내 챙길 것</h2>
+    <ul>
+      <li><strong>청년월세 지원</strong> — 2026년부터 상시 사업으로 전환 (조건 되면 언제든)</li>
+      <li><strong>청년문화예술패스</strong> — 만 19세 20만원 바우처</li>
+      <li>지자체별 <strong>결혼·출산·육아 지원금</strong> — 우리 동네 것 확인 필수</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>지원금은 대부분 <span class="hi">'신청해야' 주는</span> 거예요. 가만히 있으면 안 챙겨줘요!</span></div>
+
+    <h2>어디서 한 번에 확인하나요?</h2>
+    <p><span class="em">복지로(bokjiro.go.kr)</span>와 <span class="em">정부24(gov.kr)</span>에서 내 상황에 맞는 지원을 검색할 수 있어요. "맞춤형 급여안내" 같은 기능을 쓰면 내가 받을 수 있는 걸 골라줘요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>마감 임박: <strong>고유가 지원금(8/31)</strong>, <strong>근로·자녀장려금(8월말)</strong></li>
+        <li>하반기 계속: 청년월세·문화예술패스·지자체 지원금</li>
+        <li>지원금은 <strong>신청해야</strong> 받는다 — 가만있으면 손해</li>
+        <li>확인은 <strong>복지로·정부24</strong>에서 한 번에</li>
+      </ul>
+    </div>
+    <p class="tags">#정부지원금 #2026하반기 #지원금총정리 #복지로 #정부24</p>
+    <p class="disc">※ AI 초안입니다. 각 지원금의 대상·기간·금액은 발행 전 복지로·정부24·소관 기관에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 3 -->
+  <article class="post">
+    <span class="num">글 3</span>
+    <h1>2026 청년정책, 이건 꼭 챙기세요 (적금·월세·문화패스)</h1>
+    <p class="byline">오늘의 지식 · 청년 필독</p>
+    <p class="lead">청년이라면 <span class="hi">몰라서 못 받으면 진짜 손해</span>인 정책들이 있어요. 2026년에 달라지거나 새로 생긴 청년 지원 중 <strong>돈 되는 것 3가지</strong>만 딱 골라 정리했어요!</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/young%20people%20city/" target="_blank" rel="noopener">"young people city" ↗</a>
+      <a href="https://pixabay.com/images/search/savings%20money/" target="_blank" rel="noopener">"savings money" ↗</a>
+    </div>
+
+    <h2>1. 목돈 만들기 — 청년미래적금 (도약계좌 후속)</h2>
+    <p>기존 <strong>청년도약계좌가 올해 말 사실상 종료</strong>되고, 내년부터 <span class="em">청년미래적금</span>이 새로 나와요. 정부 기여금 + 은행 우대금리 + 비과세로 <strong>3년간 최대 2,200만원</strong> 목돈을 모을 수 있다고 해요.</p>
+
+    <h2>2. 월세 부담 줄이기 — 청년월세 지원</h2>
+    <p>2026년부터 <strong>상시 사업으로 전환</strong>돼 더 안정적으로 지원해요. 부모와 따로 사는 무주택 청년(청년가구 중위소득 60% 이하 등) 대상, <span class="hi">매월 최대 20만원 · 최장 24개월(총 480만원)</span>까지 지원돼요.</p>
+
+    <h2>3. 문화생활 공짜로 — 문화예술패스</h2>
+    <p><strong>만 19세 청년 전원</strong>에게 공연·전시·영화에 쓰는 <strong>20만원 바우처</strong>를 줘요. <span class="em">소득 조건이 아예 없어서</span> 19세면 누구나 받아요.</p>
+    <div class="callout"><span>⚠️</span><span>각 정책마다 <span class="hi">나이·소득·신청기간 조건</span>이 있어요. 해당되는지 꼭 확인하고 신청하세요!</span></div>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li><strong>청년미래적금</strong> — 3년 최대 2,200만원 목돈 (도약계좌 후속)</li>
+        <li><strong>청년월세</strong> — 월 최대 20만원 · 총 480만원, 상시 전환</li>
+        <li><strong>문화예술패스</strong> — 만 19세 20만원, 소득조건 없음</li>
+        <li>조건·신청기간은 각자 <strong>확인 필수</strong></li>
+      </ul>
+    </div>
+    <p class="tags">#청년정책 #청년월세지원 #문화예술패스 #청년미래적금 #2026청년</p>
+    <p class="disc">※ AI 초안입니다. 청년미래적금은 시행 예정 단계일 수 있어요. 대상·금액·기간은 발행 전 공식 채널에서 꼭 확인하세요.</p>
+  </article>
+
+  <!-- 글 4 -->
+  <article class="post">
+    <span class="num">글 4</span>
+    <h1>근로·자녀장려금, 8월 27일 지급! 내 금액 조회하는 법</h1>
+    <p class="byline">오늘의 지식 · 지급일 정보</p>
+    <p class="lead">5월에 근로·자녀장려금 신청하신 분들, 드디어 <span class="hi">8월 27일에 지급 예정</span>이에요! 원래 9월 말인데 한 달 넘게 앞당겨졌대요. 내 금액이 얼마인지, 왜 깎일 수 있는지 정리했어요.</p>
+
+    <div class="imgslot"><span class="t">🖼️ 대표 이미지</span>
+      <a href="https://pixabay.com/images/search/family%20money/" target="_blank" rel="noopener">"family money" ↗</a>
+      <a href="https://pixabay.com/images/search/tax%20refund/" target="_blank" rel="noopener">"tax refund" ↗</a>
+    </div>
+
+    <h2>언제, 얼마 받나요?</h2>
+    <p>법정 기한은 9월 말이지만 <strong>올해는 8월 27일로 조기 지급</strong> 예정이에요. 금액은 <span class="em">자녀장려금은 부양자녀 1인당 최소 50만~최대 100만원</span>이라, 자녀 3명이면 최대 300만원까지도 가능해요. 근로장려금은 소득 구간에 따라 달라져요.</p>
+
+    <h2>⚠️ 예상 금액 그대로 다 받는 건 아니에요</h2>
+    <div class="callout"><span>⚠️</span><span>처음 조회한 <span class="hi">예상 산정액 100%를 그대로 받는 게 아니에요.</span> 심사에서 절반이 깎이거나 제외될 수도 있어요.</span></div>
+    <p>체납한 국세가 있거나 자녀세액공제 차감액이 있으면 그만큼 빼고 지급돼요. 그래서 미리 조회해두는 게 좋아요.</p>
+
+    <h2>내 금액 조회하는 법</h2>
+    <p><strong>홈택스(또는 손택스) → 장려금·연말정산·기부금 → 근로장려금 정기/반기 신청 → 심사진행상황 조회</strong> 순서로 확인하면 돼요.</p>
+
+    <div class="summary"><div class="h">📌 정리하면</div>
+      <ul>
+        <li>지급일 <strong>8월 27일</strong> 예정 (조기 지급)</li>
+        <li>자녀장려금 <strong>1인당 50만~100만원</strong> / 근로장려금 소득별</li>
+        <li>심사로 <strong>감액·제외</strong>될 수 있음 (체납·차감 주의)</li>
+        <li>금액은 <strong>홈택스·손택스</strong>에서 조회</li>
+      </ul>
+    </div>
+    <p class="tags">#근로장려금 #자녀장려금 #장려금지급일 #홈택스 #8월지급</p>
+    <p class="disc">※ AI 초안입니다. 지급일·금액·조건은 발행 전 국세청 홈택스에서 꼭 확인하세요.</p>
+  </article>
+</div>

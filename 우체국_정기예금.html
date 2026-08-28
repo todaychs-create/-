@@ -1,0 +1,119 @@
+<title>우체국 정기예금, 목돈은 이렇게 굴리는 분들 많아요</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">우체국 정기예금 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>목돈 1억 넘으면 우체국을 찾는 이유, 여기 있어요</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>우체국 예금이 특별한 이유</li>
+        <li>정기예금 금리는 어느 정도인지</li>
+        <li>누구에게 잘 맞는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">퇴직금이나 목돈을 굴리시는 분들 사이에서 <strong>우체국 정기예금</strong>이 꾸준히 언급되는 이유가 있어요. 바로 <span class="hi">보호 한도 없이 국가가 예금 전액을 책임진다</span>는 점이에요. 오늘은 우체국 예금이 왜 목돈 굴리기에 자주 언급되는지, 금리는 어느 정도인지 정리해드릴게요.</p>
+
+    <h2>우체국 예금이 특별한 이유</h2>
+    <p>일반 은행이나 저축은행은 <strong>예금보험공사</strong>를 통해 1인당 금융회사별 1억원까지만 보호돼요. 반면 우체국은 <span class="em">우체국예금·보험에 관한 법률</span>에 따라 국가가 지급을 직접 책임지기 때문에, <strong>보호 한도라는 개념 자체가 없어요.</strong></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>일반 은행·저축은행</th><th>우체국</th></tr></thead>
+        <tbody>
+          <tr><td>보호 주체</td><td>예금보험공사</td><td class="v">국가(대한민국 정부)</td></tr>
+          <tr><td>보호 한도</td><td>1인당 금융회사별 1억원</td><td class="v">한도 없음(전액)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><span>💡</span><span>즉 <span class="hi">1억원을 훌쩍 넘는 목돈</span>을 굴리셔야 하는 분이라면, 여러 은행에 나눠 넣는 번거로움 없이 우체국 한 곳에만 맡겨도 전액이 안전하게 보호돼요.</span></div>
+
+    <h2>정기예금 금리는 어느 정도인가요?</h2>
+    <p>2026년 기준으로 우체국 정기예금 금리는 <strong>1년 3.20%, 2년 3.30%, 3년 3.35%</strong> 수준이고, <span class="em">비대면(온라인) 가입 시 최대 0.2%p 우대금리</span>가 추가로 붙어요. 시중 은행 대비 눈에 띄게 높은 편은 아니지만, 안정성을 최우선으로 두시는 분들께는 충분히 매력적인 수준이에요.</p>
+    <ul class="plain">
+      <li>가까운 우체국 창구 또는 우체국 스마트뱅킹 앱으로 가입 가능해요</li>
+      <li>정확한 금리는 가입 시점마다 바뀔 수 있으니, 가입 전 우정사업본부 홈페이지나 창구에서 최신 금리를 꼭 확인하세요</li>
+    </ul>
+
+    <h2>누구에게 잘 맞나요?</h2>
+    <ul class="plain">
+      <li><strong>퇴직금 등 1억원이 넘는 목돈</strong>을 한 번에 안전하게 맡기고 싶으신 분</li>
+      <li>여러 은행에 나눠 넣고 관리하는 게 <strong>번거롭다고 느끼시는 분</strong></li>
+      <li>금리보다 <span class="em">"원금이 무조건 안전한가"</span>를 가장 중요하게 보시는 분</li>
+    </ul>
+    <p>반대로 조금이라도 더 높은 금리를 원하신다면, 저축은행 특판 예금이나 앞서 소개해드린 고금리 상품들과 비교해보시고 선택하시는 게 좋아요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 우체국 예금도 이자소득세를 내나요?</p><p class="a">네, 일반 예금과 동일하게 이자소득세(15.4%)가 부과돼요. 다만 만 65세 이상이시라면 세금우대종합저축 등 절세 상품 가입 자격이 될 수 있으니 창구에서 함께 문의해보시는 걸 추천해요.</p></div>
+    <div class="qa"><p class="q">Q. 스마트폰으로도 가입할 수 있나요?</p><p class="a">네, 우체국 스마트뱅킹 앱을 통해 비대면으로 가입 가능하고, 비대면 가입 시 우대금리도 추가로 받을 수 있어요. 앱 사용이 어려우시면 가까운 우체국 창구를 방문하셔도 동일한 상품에 가입하실 수 있어요.</p></div>
+    <div class="qa"><p class="q">Q. 중도에 해지하면 손해가 큰가요?</p><p class="a">정기예금을 만기 전에 해지하면 약정금리보다 낮은 중도해지 금리가 적용돼요. 목돈을 넣으실 때는 당분간 쓰지 않을 자금인지 먼저 확인하고 가입하시는 게 좋아요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">저는 금리 몇 푼 더 받으려고 위험을 감수하기보다, <strong>목돈일수록 안전을 최우선</strong>으로 생각하시라고 말씀드리고 싶어요. 우체국 예금이 최고 금리를 주는 상품은 아니지만, "무조건 떼일 걱정 없다"는 확실함이 있다는 게 큰 장점이에요. 목돈 규모와 성향에 맞게 은행·저축은행·우체국을 적절히 나눠 활용하시는 걸 권해드려요.</p></div>
+
+    <p>정확한 금리와 우대조건은 가입 시점마다 바뀔 수 있으니, 실제 가입 전에는 우체국 창구나 우정사업본부 홈페이지에서 최신 정보를 꼭 확인하시길 바라요.</p>
+
+    <p class="kw">#우체국정기예금 #우체국예금금리 #목돈굴리기 #안전한예금 #국가보장예금 #시니어재테크 #퇴직금운용 #우체국스마트뱅킹</p>
+  </article>
+</div>

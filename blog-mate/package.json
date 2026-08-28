@@ -1,0 +1,10 @@
+{
+  "name": "blog-mate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "주제를 넣으면 AI가 블로그 초안과 이미지를 준비해주는 웹앱 (발행은 사용자가 직접)",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0"
+  }
+}

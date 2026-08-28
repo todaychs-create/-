@@ -1,0 +1,118 @@
+<title>파킹통장 vs 정기예금, 목돈은 어디에 넣어야 할까</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">파킹통장 vs 정기예금 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>목돈 생겼는데, 파킹통장이 나을까요 정기예금이 나을까요</h1>
+    <p class="byline">오늘의 지식 · 예금·재테크</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>둘의 가장 큰 차이</li>
+        <li>어떤 상황에 뭐가 유리한지</li>
+        <li>둘 다 활용하는 방법</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">퇴직금이나 목돈이 생기면 가장 먼저 하는 고민이 <strong>"파킹통장에 넣을까, 정기예금에 넣을까"</strong>일 거예요. 둘 다 예금자보호가 되는 안전한 상품이지만, 구조가 완전히 달라요. 오늘 각각의 장단점을 정리해드릴게요.</p>
+
+    <h2>둘의 가장 큰 차이</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>파킹통장</th><th>정기예금</th></tr></thead>
+        <tbody>
+          <tr><td>자금 인출</td><td>언제든 자유롭게</td><td>만기 전 인출 시 불이익</td></tr>
+          <tr><td>금리</td><td>변동금리(대체로 낮음)</td><td>확정금리(대체로 높음)</td></tr>
+          <tr><td>이자 지급</td><td>매일 또는 매월</td><td>만기 시 일괄 지급</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>파킹통장</strong>은 차를 잠깐 주차(파킹)하듯 <span class="em">언제든 넣고 뺄 수 있는 통장</span>이에요. 반면 <strong>정기예금</strong>은 정해진 기간 동안 자금을 묶어두는 대신 <span class="em">더 높은 확정금리</span>를 받는 구조예요.</p>
+
+    <h2>어떤 상황에 뭐가 유리한가요?</h2>
+    <ul class="plain">
+      <li><strong>파킹통장이 유리한 경우</strong> — 언제 쓸지 모르는 비상자금, 곧 다른 곳에 투자할 계획이 있는 대기자금</li>
+      <li><strong>정기예금이 유리한 경우</strong> — 최소 몇 개월~1년은 쓸 계획이 없는 여윳돈, 확정된 금리로 안정적으로 불리고 싶은 목돈</li>
+    </ul>
+    <div class="callout"><span>💡</span><span>일반적으로 <span class="hi">같은 시기 기준 정기예금 금리가 파킹통장보다 높아요.</span> 다만 파킹통장은 언제든 자유롭게 인출 가능하다는 유동성 장점이 있으니, 단순히 금리만 비교하기보다 <strong>자금을 언제 쓸지</strong>를 먼저 따져보세요.</span></div>
+
+    <h2>둘 다 활용하는 방법</h2>
+    <p>목돈이 크시다면, <strong>한 가지만 고르기보다 나눠서 활용</strong>하시는 것도 좋은 방법이에요.</p>
+    <ul class="plain">
+      <li>당장 3~6개월 안에 쓸 가능성이 있는 자금은 <strong>파킹통장</strong>에</li>
+      <li>1년 이상 안 쓸 것이 확실한 자금은 <strong>정기예금</strong>에</li>
+      <li>이렇게 나누면 유동성과 수익률, 두 마리 토끼를 함께 잡으실 수 있어요</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 파킹통장 금리도 자주 바뀌나요?</p><p class="a">네, 파킹통장은 변동금리라서 시장금리나 은행 정책에 따라 수시로 바뀔 수 있어요. 가입 후에도 주기적으로 금리를 확인하시는 게 좋아요.</p></div>
+    <div class="qa"><p class="q">Q. 정기예금을 급하게 해지하면 손해가 큰가요?</p><p class="a">네, 중도해지 시 약정금리보다 훨씬 낮은 중도해지이율이 적용돼요. 급하게 자금이 필요할 가능성이 있다면, 처음부터 파킹통장을 활용하시는 게 나아요.</p></div>
+    <div class="qa"><p class="q">Q. 둘 다 예금자보호가 되나요?</p><p class="a">네, 파킹통장과 정기예금 모두 예금자보호법 적용 대상이면 1인당 1억원까지 원금과 이자가 보호돼요. 가입 전 예금보험공사 가입 기관인지만 확인하시면 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">저는 목돈이 생기면 <strong>일단 전체 금액을 파킹통장에 넣어두고, 자금 계획을 정리한 뒤 필요한 만큼만 정기예금으로 옮기시라</strong>고 말씀드려요. 급하게 정기예금부터 가입했다가 중도에 급전이 필요해지면 손해를 보는 경우가 은근히 많거든요.</p></div>
+
+    <p>파킹통장과 정기예금 금리는 은행마다, 그리고 시기마다 다르니, 실제 활용 전 각 상품의 최신 금리를 비교해보시길 바라요.</p>
+
+    <p class="kw">#파킹통장정기예금비교 #목돈굴리기 #파킹통장추천 #정기예금추천 #예금유동성 #비상자금관리 #파킹통장금리 #예금자보호한도</p>
+  </article>
+</div>

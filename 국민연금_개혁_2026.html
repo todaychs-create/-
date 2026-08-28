@@ -1,0 +1,117 @@
+<title>2026년 국민연금 개혁, 보험료 얼마나 오를까</title>
+<style>
+  :root{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; --radius:14px;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }}
+  :root[data-theme="dark"]{
+    --bg:#14130d; --surface:#1e1c15; --ink:#ece7db; --ink-soft:#bcb4a2; --ink-faint:#877f6c;
+    --line:#302c20; --accent:#3fc39a; --accent-2:#5fd08a; --accent-soft:#12271a; --hi:#4a3f18;
+    --warn-bg:#2e2312; --warn-line:#b07f38; --warn-ink:#e3b878;
+    --box:#13211a; --box-accent:#3fc39a; --box-soft:#1e3327; }
+  :root[data-theme="light"]{
+    --bg:#f3f1ea; --surface:#fff; --ink:#23201a; --ink-soft:#4f4a3f; --ink-faint:#8a8272;
+    --line:#e5e0d2; --accent:#1f7a63; --accent-2:#145544; --accent-soft:#e4efe9; --hi:#ffe08a;
+    --warn-bg:#fdf3e3; --warn-line:#c98a3c; --warn-ink:#8a5a1a;
+    --box:#eef6f2; --box-accent:#1f7a63; --box-soft:#d5ebe2; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.8}
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 90px}
+  .cap{text-align:center;color:var(--ink-faint);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 22px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 44px;overflow-x:auto}
+  @media(max-width:540px){.post{padding:26px 20px 32px}}
+  h1{font-size:2.05rem;line-height:1.36;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance;font-weight:800}
+  .byline{color:var(--ink-faint);font-size:1rem;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .post p{font-size:1.22rem;margin:0 0 17px}
+  .lead{font-size:1.3rem;color:var(--ink-soft)}
+  h2{font-size:1.48rem;margin:34px 0 12px;letter-spacing:-.01em;font-weight:800;padding-left:12px;border-left:5px solid var(--accent)}
+  strong{font-weight:800}
+  .hi{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px;font-weight:800}
+  .em{color:var(--accent);font-weight:800}
+  .toc{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:18px 20px;margin:0 0 24px;font-size:1.08rem}
+  .toc b{display:block;margin-bottom:8px;color:var(--box-accent)}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin-bottom:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:0 0 20px}
+  table{width:100%;border-collapse:collapse;font-size:1.1rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--box);font-weight:800;color:var(--box-accent)}
+  tr:last-child td{border-bottom:none}
+  td.v{font-weight:800;color:var(--accent)}
+  ul.plain{margin:0 0 20px;padding-left:22px;font-size:1.22rem}
+  ul.plain li{margin-bottom:8px}
+  .callout{display:flex;gap:12px;background:var(--warn-bg);border-left:4px solid var(--warn-line);
+    border-radius:0 10px 10px 0;padding:16px 18px;margin:0 0 21px;color:var(--warn-ink);font-size:1.16rem;font-weight:600}
+  .qa{background:var(--box);border:1px solid var(--box-soft);border-radius:12px;padding:16px 20px;margin:0 0 14px}
+  .qa .q{font-weight:800;color:var(--box-accent);font-size:1.16rem;margin-bottom:6px}
+  .qa .a{margin:0;font-size:1.14rem}
+  .opinion{background:var(--accent-soft);border-radius:12px;padding:18px 20px;margin:24px 0}
+  .opinion .h{font-weight:800;color:var(--box-accent);margin-bottom:8px;font-size:1.2rem}
+  .kw{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:var(--accent);font-size:1.05rem;line-height:1.9}
+</style>
+
+<div class="wrap">
+  <p class="cap">2026년 국민연금 개혁 · 정보 전달형 · 검수 후 발행</p>
+  <article class="post">
+    <h1>국민연금 보험료, 2026년부터 매년 오릅니다</h1>
+    <p class="byline">오늘의 지식 · 연금·경제</p>
+
+    <div class="toc">
+      <b>📋 오늘 정리해드릴 내용</b>
+      <ol>
+        <li>보험료율이 어떻게 오르는지</li>
+        <li>받는 돈(소득대체율)도 늘었는지</li>
+        <li>육아·군복무 크레딧은 어떻게 바뀌었는지</li>
+        <li>자주 묻는 질문</li>
+      </ol>
+    </div>
+
+    <p class="lead">국민연금법 개정안이 국회를 통과하면서, <strong>2026년부터 보험료가 매년 조금씩 오릅니다.</strong> "더 내고 더 받는" 구조로 바뀌었다고 하는데, 정확히 얼마나 더 내고 얼마나 더 받게 되는 건지 오늘 정리해드릴게요.</p>
+
+    <h2>보험료율이 어떻게 오르나요?</h2>
+    <p>2025년 기준 <strong>9%</strong>였던 보험료율이, 2026년부터 <span class="hi">매년 0.5%p씩 8년에 걸쳐</span> 올라 2033년에는 <span class="em">13%</span>가 돼요.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>연도</th><th>보험료율</th></tr></thead>
+        <tbody>
+          <tr><td>2025년(개정 전)</td><td>9%</td></tr>
+          <tr><td>2026년</td><td class="v">9.5%</td></tr>
+          <tr><td>...(매년 0.5%p씩 인상)</td><td>...</td></tr>
+          <tr><td>2033년</td><td class="v">13%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>보험료는 직장가입자의 경우 회사와 절반씩 부담하기 때문에, 실제 본인이 체감하는 인상 폭은 <strong>절반 수준</strong>이에요.</p>
+
+    <h2>받는 돈(소득대체율)도 늘었나요?</h2>
+    <p>네, <strong>소득대체율</strong>도 함께 조정됐어요. 2025년 41.5%였던 소득대체율이 2026년부터 <span class="em">한 번에 43%로</span> 올랐어요. 소득대체율이란 평생 평균소득 대비 받게 되는 연금액의 비율을 뜻해요.</p>
+    <div class="callout"><span>💡</span><span>이번 개혁으로 <span class="hi">국민연금 기금 소진 시점이 기존 2056년에서 2064년으로 8년 연장</span>됐어요. 여기에 기금투자수익률까지 개선되면 2071년까지 늘어날 수 있다는 전망도 나오고 있어요.</span></div>
+
+    <h2>육아·군복무 크레딧은 어떻게 바뀌었나요?</h2>
+    <ul class="plain">
+      <li><strong>군복무 크레딧</strong> — 기존 6개월 인정에서 <span class="em">전체 군복무 기간(최대 24개월)</span>까지 확대됐어요</li>
+      <li><strong>출산 크레딧</strong> — 기존엔 둘째 아이부터 인정됐지만, 이제 <span class="em">첫째 아이부터 12개월</span>이 인정돼요</li>
+    </ul>
+    <p>크레딧은 해당 기간만큼 국민연금 가입 기간으로 추가 인정해주는 제도라, 나중에 받는 연금액을 늘리는 데 도움이 돼요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <div class="qa"><p class="q">Q. 연금 받는 나이(수급 개시 연령)도 올랐나요?</p><p class="a">아니요, 이번 개혁에서는 수급 개시 연령의 추가 상향은 이루어지지 않았어요. 보험료율과 소득대체율만 조정됐어요.</p></div>
+    <div class="qa"><p class="q">Q. 이미 연금을 받고 있는 사람도 보험료가 오르나요?</p><p class="a">아니요, 보험료 인상은 현재 국민연금에 가입해 보험료를 납부 중인 분들께 적용돼요. 이미 연금을 수령 중이신 분들의 수령액에는 직접적인 영향이 없어요.</p></div>
+    <div class="qa"><p class="q">Q. 자영업자(지역가입자)도 똑같이 오르나요?</p><p class="a">네, 지역가입자도 동일한 보험료율 인상 일정이 적용돼요. 다만 지역가입자는 본인이 보험료 전액을 부담하기 때문에, 인상분을 온전히 체감하시게 돼요.</p></div>
+
+    <div class="opinion"><div class="h">💬 삼촌 한마디</div>
+    <p style="margin:0">보험료가 오른다고 하면 부담스럽게만 느껴지실 텐데, <strong>기금 고갈 시점을 늦추고 받는 연금액도 늘리기 위한 조정</strong>이라는 점도 함께 봐주시면 좋겠어요. 다만 매년 조금씩 오르는 만큼, 특히 자영업자분들은 미리 가계 계획에 반영해두시길 권해드려요.</p></div>
+
+    <p>정확한 인상 일정과 세부 내용은 국민연금공단 공지사항을 통해 계속 업데이트되니, 궁금하신 부분은 국민연금공단 홈페이지나 콜센터(1355)로 확인해보시길 바라요.</p>
+
+    <p class="kw">#국민연금개혁2026 #국민연금보험료율 #소득대체율43 #국민연금인상 #출산크레딧 #군복무크레딧 #국민연금공단 #연금개혁2026</p>
+  </article>
+</div>
