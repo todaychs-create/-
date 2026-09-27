@@ -40,13 +40,27 @@
   .hint{font-size:12px;color:var(--muted);margin:4px 2px 0;}
   #status{font-size:13px;color:var(--accent);min-height:18px;margin:6px 2px;}
   a{color:var(--info);}
+  .sync{display:flex;gap:8px;flex-wrap:wrap;}
+  .sync button{flex:1 1 45%;}
+  #qrBox{display:none;text-align:center;margin:10px 0 4px;}
+  #qrBox img{background:#fff;padding:8px;border-radius:10px;max-width:220px;width:100%;image-rendering:pixelated;}
+  #syncLink{font-size:12px;word-break:break-all;}
+  @media (max-width:900px){
+    .wrap{padding:14px 12px 40px;}
+    header h1{font-size:18px;}
+    .preview{order:-1;}
+    #canvas{max-width:240px;}
+    input[type="text"],input[type="password"],textarea,select{font-size:16px !important;}
+    .nav button{padding:10px 18px;font-size:16px;}
+    .sbtn,.aibtn{padding:9px 12px !important;font-size:14px !important;}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>썰 슬라이드 숏폼 생성기 <span style="font-size:13px;color:var(--muted)">· 자동 자막 + 이미지 분리</span></h1>
-    <p>음성을 넣으면 자막이 자동으로(빠른 1줄) 생기고, 이미지는 원하는 개수만 넣습니다. 내 컴퓨터에서 직접 열어야 동작해요.</p>
+    <p>음성을 넣으면 자막이 자동으로(빠른 1줄) 생기고, 이미지는 원하는 개수만 넣습니다. PC·휴대폰 모두 동작하며, 작업 내용은 자동 저장됩니다.</p>
   </header>
   <div class="layout">
     <section class="panel">
@@ -94,6 +108,23 @@
       <fieldset>
         <legend>하단 채널명</legend>
         <div class="field"><input type="text" id="channelName" value="오늘의경제학" /></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>📱 휴대폰 연동</legend>
+        <div class="sync">
+          <button type="button" class="fetchbtn" id="sendPhone">📱 휴대폰으로 보내기 (QR·링크)</button>
+          <button type="button" class="fetchbtn" id="saveProj" style="background:transparent;border:1px solid var(--info);color:var(--info)">💾 프로젝트 파일 저장</button>
+          <button type="button" class="fetchbtn" id="loadProjBtn" style="background:transparent;border:1px solid var(--info);color:var(--info)">📂 프로젝트 파일 열기</button>
+        </div>
+        <input type="file" id="loadProj" accept=".json,application/json" style="display:none" />
+        <div id="qrBox"><img id="qrImg" alt="휴대폰 연동 QR" /><div class="hint">휴대폰 카메라로 스캔하면 지금 작업(제목·대본·자막·프롬프트·AI/URL 이미지)이 그대로 열려요.</div></div>
+        <div id="syncLink" class="hint"></div>
+        <details style="margin:6px 0 10px"><summary class="hint" style="cursor:pointer">휴대폰에서 열 주소 설정</summary>
+          <div class="field" style="margin-top:6px"><input type="text" id="appUrl" placeholder="https://.../pixabay-local.html" /></div>
+          <p class="hint">PC에서 파일로 열었을 때 QR이 가리킬 인터넷 주소예요. 이 페이지가 올라가 있는 주소(Vercel 등)를 넣으세요.</p>
+        </details>
+        <p class="hint">QR/링크에는 음성·직접 올린 사진이 빠집니다. 전부 옮기려면 <b>프로젝트 파일 저장</b> → 카톡/드라이브로 휴대폰에 보내고 <b>프로젝트 파일 열기</b>.</p>
       </fieldset>
 
       <div id="status"></div>
@@ -189,7 +220,7 @@
     for(var i=0;i<N;i++){ addSlot(old[i]||null, i*sd, (i+1)*sd); }
     if(subs.length)refillPrompts();
     $("slotInfo").textContent="이미지 "+N+"칸 · 각 약 "+sd.toFixed(1)+"초씩 (총 "+Math.round(totalDur())+"초)";
-    previewIdx=0; renderPreview();
+    previewIdx=0; renderPreview(); scheduleSave();
   }
   function addSlot(existingImg,t0,t1){
     var idx=imgSlots.length;
@@ -204,7 +235,8 @@
       '<button type="button" class="sbtn">이 칸만 픽사베이 검색</button>';
     $("slots").appendChild(el);
     var obj={el:el,img:existingImg||null,t0:(t0||0),t1:(t1||totalDur()),query:function(){return el.querySelector(".s-q").value.trim();},prompt:function(){return el.querySelector(".s-p").value.trim();},style:function(){return el.querySelector(".s-style").value;},
-      setImg:function(im){obj.img=im;var th=el.querySelector(".thumb");th.src=im.src;th.style.display="block";renderPreview();}};
+      src:null,
+      setImg:function(im,srcUrl){obj.img=im;obj.src=(srcUrl&&/^https?:/.test(srcUrl))?srcUrl:null;var th=el.querySelector(".thumb");th.src=im.src;th.style.display="block";renderPreview();scheduleSave();}};
     if(existingImg){var th=el.querySelector(".thumb");th.src=existingImg.src;th.style.display="block";}
     el.querySelector(".s-img").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;var im=new Image();im.onload=function(){obj.setImg(im);};im.src=URL.createObjectURL(f);});
     el.querySelector(".sbtn").addEventListener("click",function(){fetchForSlot(obj);});
@@ -235,7 +267,7 @@
       var seed=Math.floor(Math.random()*100000);
       var url="https://image.pollinations.ai/prompt/"+encodeURIComponent(full)+"?width=768&height=1344&nologo=true&model=flux&seed="+seed;
       status("AI 이미지 생성중... (몇 초 걸려요)");
-      return loadImage(url).then(function(im){obj.setImg(im);status("생성 완료");});
+      return loadImage(url).then(function(im){obj.setImg(im,url);status("생성 완료");});
     }).catch(function(e){status("생성 실패: "+e.message);});
   }
   function genAll(){
@@ -293,7 +325,7 @@
   }
   function fetchForSlot(obj){
     var q=obj.query(); if(!q){status("이 칸의 검색어를 입력하세요(영어 권장).");return Promise.resolve();}
-    status("'"+q+"' 검색중..."); return pixabaySearch(q).then(function(url){if(!url){status("'"+q+"' 결과 없음");return;}return loadImage(url).then(function(im){obj.setImg(im);status("완료: "+q);});})
+    status("'"+q+"' 검색중..."); return pixabaySearch(q).then(function(url){if(!url){status("'"+q+"' 결과 없음");return;}return loadImage(url).then(function(im){obj.setImg(im,url);status("완료: "+q);});})
       .catch(function(e){status(e.message==="NO_KEY"?"픽사베이 API 키를 입력하세요.":"오류: "+e.message);});
   }
   function fetchAll(){
@@ -304,13 +336,14 @@
     var urls=$("imgUrls").value.split("\n").map(function(s){return s.trim();}).filter(Boolean);
     if(!imgSlots.length){status("먼저 '이 개수로 칸 만들기'를 누르세요.");return;}
     if(!urls.length){status("붙여넣은 URL이 없습니다.");return;}
-    var i=0;(function next(){ if(i>=urls.length||i>=imgSlots.length){status("이미지 URL 적용 완료 ✅");return;} status("("+(i+1)+") 로딩..."); loadImage(urls[i]).then(function(im){imgSlots[i].setImg(im);i++;setTimeout(next,150);}).catch(function(e){status("일부 실패("+(i+1)+"): "+e.message);i++;setTimeout(next,150);}); })();
+    var i=0;(function next(){ if(i>=urls.length||i>=imgSlots.length){status("이미지 URL 적용 완료 ✅");return;} status("("+(i+1)+") 로딩..."); loadImage(urls[i]).then(function(im){imgSlots[i].setImg(im,urls[i]);i++;setTimeout(next,150);}).catch(function(e){status("일부 실패("+(i+1)+"): "+e.message);i++;setTimeout(next,150);}); })();
   }
 
   // ---- 오디오 & Whisper ----
   function fmt(s){s=Math.round(s);return Math.floor(s/60)+"분 "+(s%60)+"초";}
   function updateInfo(){ if(imgSlots.length){var sd=totalDur()/imgSlots.length;$("slotInfo").textContent="이미지 "+imgSlots.length+"칸 · 각 약 "+sd.toFixed(1)+"초 (총 "+Math.round(totalDur())+"초)";} }
-  $("audioInput").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;audioFile=f;audioEl=new Audio();audioEl.src=URL.createObjectURL(f);audioEl._wired=false;audioEl.addEventListener("loadedmetadata",function(){updateInfo();renderPreview();});});
+  function setAudio(f){audioFile=f;audioEl=new Audio();audioEl.playsInline=true;audioEl.src=URL.createObjectURL(f);audioEl._wired=false;audioEl.addEventListener("loadedmetadata",function(){updateInfo();renderPreview();});}
+  $("audioInput").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(!f)return;setAudio(f);});
 
   function splitPieces(text,max){
     var words=text.split(" "),groups=[],cur="";
@@ -349,7 +382,7 @@
     }
     if(wi<totalW&&out.length)out[out.length-1].text+=" "+words.slice(wi).join(" ");
     if(!out.length){status("배치 실패 — 대본/음성을 확인하세요.");return;}
-    subs=out; subsToBox(); refillPrompts(); renderPreview();
+    subs=out; subsToBox(); refillPrompts(); renderPreview(); scheduleSave();
     status("✅ 대본으로 자막 교체 완료! (음성 타이밍 유지, 오타 없음)");
   }
   function subsToBox(){ $("subsBox").value=subs.map(function(x){return x.text;}).join("\n"); $("subsInfo").textContent="자막 "+subs.length+"개 · 총 "+fmt(totalDur()); }
@@ -369,10 +402,10 @@
       var data=dec.getChannelData(0);
       status("자막 추출중... (음성 길이에 따라 걸립니다)");
       var out=await transcriber(data,{return_timestamps:true,chunk_length_s:30,stride_length_s:5,language:"korean",task:"transcribe"});
-      rawChunks=out.chunks||[];
+      rawChunks=(out.chunks||[]).map(function(c){return {timestamp:c.timestamp,text:c.text};});
       subs=buildSubs(out);
       if(!subs.length){status("자막을 못 뽑았어요. 음성이 또렷한지 확인하세요.");btn.disabled=false;return;}
-      subsToBox();
+      subsToBox(); scheduleSave();
       if(!imgSlots.length)buildSlots(); else { updateInfo(); refillPrompts(); }
       renderPreview();
       if($("scriptBox").value.trim()){
@@ -403,16 +436,18 @@
         var vs=canvas.captureStream(30), tracks=vs.getVideoTracks();
         if(useAudio){var at=wireAudio();if(at)tracks.push(at);}
         var stream=new MediaStream(tracks);
-        var mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")?"video/webm;codecs=vp9,opus":"video/webm";
-        recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8000000});
+        var mime=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm","video/mp4;codecs=avc1,mp4a","video/mp4"].filter(function(m){return MediaRecorder.isTypeSupported(m);})[0]||"";
+        recorder=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:8000000}:{videoBitsPerSecond:8000000});
         recorder.ondataavailable=function(e){if(e.data.size)chunks.push(e.data);};
-        recorder.onstop=function(){var blob=new Blob(chunks,{type:"video/webm"});var a=document.createElement("a");a.download="ssul-short.webm";a.href=URL.createObjectURL(blob);a.click();};
+        recorder.onstop=function(){var type=recorder.mimeType||mime||"video/webm";var ext=/mp4/.test(type)?"mp4":"webm";var blob=new Blob(chunks,{type:type.split(";")[0]});downloadBlob(blob,"ssul-short."+ext,"💾 영상 저장 완료 — 안 받아졌으면 여기를 눌러 저장");};
         recorder.start();
       }catch(err){status("저장 시작 실패: "+err.message);}
     } else if(useAudio){ wireAudio(); }
     if(useAudio){try{audioEl.currentTime=0;audioEl.play();}catch(e){}}
+    var wake=null; try{if(navigator.wakeLock)navigator.wakeLock.request("screen").then(function(w){wake=w;}).catch(function(){});}catch(e){}
+    if(record)status("⏺ 녹화중... (휴대폰은 화면을 켜둔 채 기다려주세요)");
     var start=performance.now();
-    function stop(){if(recorder)try{recorder.stop();}catch(e){} if(useAudio)try{audioEl.pause();}catch(e){} playing=false;exporting=false;rb.disabled=false;pb.disabled=false;renderPreview();}
+    function stop(){if(wake)try{wake.release();}catch(e){} if(recorder)try{recorder.stop();}catch(e){} if(useAudio)try{audioEl.pause();}catch(e){} playing=false;exporting=false;rb.disabled=false;pb.disabled=false;renderPreview();}
     function loop(now){var t=(now-start)/1000; if(t>=dur||(useAudio&&audioEl.ended)){stop();return;} renderAt(t); requestAnimationFrame(loop);}
     requestAnimationFrame(loop);
   }
@@ -431,7 +466,127 @@
   $("recordBtn").addEventListener("click",function(){run(true);});
   $("pngBtn").addEventListener("click",function(){exporting=true;renderPreview();try{var a=document.createElement("a");a.download="frame.png";a.href=canvas.toDataURL("image/png");a.click();status("이미지 저장 완료 ✅");}catch(e){status("PNG 저장 실패: "+e.message);}exporting=false;renderPreview();});
 
-  buildSlots(); // 초기 8칸
+  // ---- 다운로드 (휴대폰에서 자동 저장이 막히면 눌러서 받을 수 있는 링크 표시) ----
+  function downloadBlob(blob,name,msg){
+    var u=URL.createObjectURL(blob), a=document.createElement("a");
+    a.download=name; a.href=u; a.click();
+    var st=$("status"); st.textContent=""; var l=document.createElement("a"); l.href=u; l.download=name; l.textContent=msg||("💾 "+name+" 저장"); st.appendChild(l);
+  }
+
+  // ---- 작업 상태 (자동 저장 · 휴대폰 연동 공용) ----
+  function r2(x){return Math.round((x||0)*100)/100;}
+  function getState(){
+    return {v:1,t1:$("titleLine1").value,t2:$("titleLine2").value,ch:$("channelName").value,st:$("aiStyle").value,
+      sc:$("scriptBox").value,n:imgSlots.length,
+      subs:subs.map(function(x){return [r2(x.start),r2(x.end),x.text];}),
+      raw:rawChunks.map(function(c){var ts=c.timestamp||[];return [r2(ts[0]),ts[1]==null?null:r2(ts[1]),c.text||""];}),
+      slots:imgSlots.map(function(o){return {p:o.prompt(),q:o.query(),s:o.style(),u:o.src||""};})};
+  }
+  function applyState(o){
+    if(!o||o.v!==1)return false;
+    $("titleLine1").value=o.t1||""; $("titleLine2").value=o.t2||""; $("channelName").value=o.ch||""; $("aiStyle").value=o.st||""; $("scriptBox").value=o.sc||"";
+    subs=(o.subs||[]).map(function(x){return {start:x[0],end:x[1],text:x[2]};});
+    rawChunks=(o.raw||[]).map(function(x){return {timestamp:[x[0],x[1]],text:x[2]};});
+    if(subs.length)subsToBox(); else {$("subsBox").value="";$("subsInfo").textContent="";}
+    var sl=o.slots||[]; $("imgCount").value=String(o.n||sl.length||8);
+    imgSlots.forEach(function(s){s.img=null;}); buildSlots();
+    sl.forEach(function(d,i){ var s=imgSlots[i]; if(!s)return;
+      s.el.querySelector(".s-p").value=d.p||""; s.el.querySelector(".s-q").value=d.q||""; if(d.s)s.el.querySelector(".s-style").value=d.s; });
+    var jobs=sl.map(function(d,i){return {i:i,u:d.u};}).filter(function(j){return j.u&&imgSlots[j.i];});
+    (function next(k){ if(k>=jobs.length){renderPreview();return;} var j=jobs[k];
+      loadImage(j.u).then(function(im){imgSlots[j.i].setImg(im,j.u);}).catch(function(){}).then(function(){next(k+1);}); })(0);
+    renderPreview(); return true;
+  }
+  var saveTimer=null, restoring=true;
+  function scheduleSave(){ if(restoring)return; clearTimeout(saveTimer); saveTimer=setTimeout(function(){ try{localStorage.setItem("ssulState",JSON.stringify(getState()));}catch(e){} },600); }
+  document.addEventListener("input",function(e){ if(e.target&&e.target.id!=="pixKey"&&e.target.id!=="appUrl")scheduleSave(); });
+  document.addEventListener("change",function(e){ if(e.target&&e.target.classList&&e.target.classList.contains("s-style"))scheduleSave(); });
+
+  // ---- 링크 압축 (base64url) ----
+  function b64u(bytes){ var s="",CH=0x8000; for(var i=0;i<bytes.length;i+=CH)s+=String.fromCharCode.apply(null,bytes.subarray(i,i+CH)); return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+  function unb64u(t){ t=t.replace(/-/g,"+").replace(/_/g,"/"); while(t.length%4)t+="="; var s=atob(t),b=new Uint8Array(s.length); for(var i=0;i<s.length;i++)b[i]=s.charCodeAt(i); return b; }
+  function pack(o){
+    var bytes=new TextEncoder().encode(JSON.stringify(o));
+    if(!window.CompressionStream)return Promise.resolve("j"+b64u(bytes));
+    return new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer().then(function(b){return "z"+b64u(new Uint8Array(b));});
+  }
+  function unpack(t){
+    var bytes=unb64u(t.slice(1));
+    var p=t[0]==="z"?new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer().then(function(b){return new Uint8Array(b);}):Promise.resolve(bytes);
+    return p.then(function(b){return JSON.parse(new TextDecoder().decode(b));});
+  }
+
+  // ---- 📱 휴대폰으로 보내기 ----
+  var DEFAULT_APP_URL="https://five-green-11.vercel.app/pixabay-local.html";
+  try{$("appUrl").value=localStorage.getItem("appUrl")||(/^https?:/.test(location.protocol)?location.origin+location.pathname:DEFAULT_APP_URL);}catch(e){$("appUrl").value=DEFAULT_APP_URL;}
+  $("appUrl").addEventListener("input",function(){try{localStorage.setItem("appUrl",$("appUrl").value.trim());}catch(e){}});
+  var qrLib=null;
+  function loadQr(){ if(qrLib)return qrLib; qrLib=new Promise(function(res,rej){var sc=document.createElement("script");sc.src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js";sc.onload=function(){res(window.qrcode);};sc.onerror=function(){qrLib=null;rej(new Error("QR 라이브러리 로딩 실패"));};document.head.appendChild(sc);}); return qrLib; }
+  function sendPhone(){
+    var base=$("appUrl").value.trim().split("#")[0];
+    if(!/^https?:/.test(base)){status("'휴대폰에서 열 주소'를 먼저 입력하세요.");return;}
+    status("연동 링크 만드는 중...");
+    pack(getState()).then(function(code){
+      var link=base+"#p="+code;
+      $("syncLink").innerHTML=""; var a=document.createElement("a"); a.href=link; a.target="_blank"; a.textContent="🔗 연동 링크 (길이 "+link.length+"자)"; $("syncLink").appendChild(a);
+      var cp=document.createElement("button"); cp.type="button"; cp.className="sbtn"; cp.style.marginLeft="8px"; cp.textContent="복사/공유";
+      cp.addEventListener("click",function(){ if(navigator.share){navigator.share({title:"숏폼 작업 이어하기",url:link}).catch(function(){});} else if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){status("링크 복사됨 — 카톡 '나와의 채팅'에 붙여넣어 휴대폰에서 여세요.");});} });
+      $("syncLink").appendChild(cp);
+      return loadQr().then(function(qrcode){
+        try{ var q=qrcode(0,"L"); q.addData(link,"Byte"); q.make(); $("qrImg").src=q.createDataURL(4,2); $("qrBox").style.display="block"; status("✅ 휴대폰 카메라로 QR을 스캔하세요."); }
+        catch(e){ $("qrBox").style.display="none"; status("내용이 길어 QR에 안 들어가요 → '복사/공유'로 링크를 휴대폰에 보내세요."); }
+      });
+    }).catch(function(e){status("연동 실패: "+e.message+" → 링크 복사/공유를 이용하세요.");});
+  }
+
+  // ---- 💾 프로젝트 파일 (이미지·음성 포함, 기기 간 완전 이동) ----
+  function imgToData(im){ try{ var M=1280,r=Math.min(1,M/Math.max(im.width,im.height)),c=document.createElement("canvas"); c.width=Math.round(im.width*r); c.height=Math.round(im.height*r); c.getContext("2d").drawImage(im,0,0,c.width,c.height); return c.toDataURL("image/jpeg",0.85);}catch(e){return null;} }
+  function fileToData(f){ return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result);};fr.onerror=function(){rej(fr.error);};fr.readAsDataURL(f);}); }
+  function saveProject(){
+    status("프로젝트 파일 만드는 중...");
+    var st=getState();
+    var imgs=imgSlots.map(function(o){return o.img?imgToData(o.img):null;});
+    (audioFile?fileToData(audioFile):Promise.resolve(null)).then(function(ad){
+      var proj={app:"ssul-short",v:1,state:st,images:imgs,audio:ad?{name:audioFile.name,data:ad}:null};
+      var file=new File([JSON.stringify(proj)],"ssul-project.json",{type:"application/json"});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        return navigator.share({files:[file],title:"숏폼 프로젝트"}).then(function(){status("✅ 공유 완료 — 휴대폰에서 '프로젝트 파일 열기'로 불러오세요.");})
+          .catch(function(){downloadBlob(file,"ssul-project.json","💾 프로젝트 파일 저장됨 (안 받아졌으면 여기)");});
+      }
+      downloadBlob(file,"ssul-project.json","💾 프로젝트 파일 저장됨 — 카톡/드라이브로 휴대폰에 보내세요 (안 받아졌으면 여기)");
+    }).catch(function(e){status("저장 실패: "+e.message);});
+  }
+  function loadProject(f){
+    status("프로젝트 불러오는 중...");
+    f.text().then(function(t){
+      var proj=JSON.parse(t); if(!proj||proj.app!=="ssul-short")throw new Error("이 프로그램의 프로젝트 파일이 아니에요");
+      var p=Promise.resolve();
+      if(proj.audio&&proj.audio.data){ p=fetch(proj.audio.data).then(function(r){return r.blob();}).then(function(b){ setAudio(new File([b],proj.audio.name||"audio",{type:b.type})); return new Promise(function(res){ audioEl.addEventListener("loadedmetadata",res,{once:true}); setTimeout(res,3000); }); }); }
+      return p.then(function(){
+        var st=proj.state||{}; (st.slots||[]).forEach(function(d,i){ if(proj.images&&proj.images[i])d.u=""; });
+        applyState(st);
+        (proj.images||[]).forEach(function(d,i){ if(!d||!imgSlots[i])return; var im=new Image(); im.onload=function(){imgSlots[i].setImg(im,((st.slots||[])[i]||{}).u);}; im.src=d; });
+        scheduleSave(); status("✅ 프로젝트 불러오기 완료"+(proj.audio?" (음성 포함)":""));
+      });
+    }).catch(function(e){status("불러오기 실패: "+e.message);});
+  }
+  $("sendPhone").addEventListener("click",sendPhone);
+  $("saveProj").addEventListener("click",saveProject);
+  $("loadProjBtn").addEventListener("click",function(){$("loadProj").click();});
+  $("loadProj").addEventListener("change",function(e){var f=e.target.files&&e.target.files[0];if(f)loadProject(f);e.target.value="";});
+
+  // ---- 시작: 링크(#p=) → 자동 저장본 → 기본 8칸 ----
+  var m=/[#&]p=([^&]+)/.exec(location.hash);
+  if(m){
+    buildSlots();
+    unpack(m[1]).then(function(o){ applyState(o); try{history.replaceState(null,"",location.pathname+location.search);}catch(e){} status("📱 PC 작업을 불러왔어요. (음성은 이 기기에서 다시 넣어주세요)"); })
+      .catch(function(){ status("연동 링크를 읽지 못했어요. 링크가 잘렸는지 확인하세요."); })
+      .then(function(){ restoring=false; scheduleSave(); });
+  } else {
+    var saved=null; try{saved=JSON.parse(localStorage.getItem("ssulState")||"null");}catch(e){}
+    if(!(saved&&applyState(saved)))buildSlots(); // 초기 8칸
+    restoring=false;
+  }
 })();
 </script>
 </body>
